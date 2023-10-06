@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserTableSeeder extends Seeder
 {
+
     /**
      * Run the database seeds.
      */
@@ -25,6 +26,7 @@ class UserTableSeeder extends Seeder
                 'password' => Hash::make('111'),
                 'role' => 'superadmin',
                 'status' => 'active',
+                'slag' => uniqid('sa'.rand()),
             ],
                 // Admin Data
             [
@@ -35,6 +37,7 @@ class UserTableSeeder extends Seeder
                 'password' => Hash::make('111'),
                 'role' => 'admin',
                 'status' => 'active',
+                'slag' => uniqid('a'.rand()),
             ],
 
             // Vendor Data
@@ -46,6 +49,7 @@ class UserTableSeeder extends Seeder
                 'password' => Hash::make('111'),
                 'role' => 'vendor',
                 'status' => 'active',
+                'slag' => uniqid('v'.rand()),
             ],
 
             // User Data
@@ -57,6 +61,7 @@ class UserTableSeeder extends Seeder
                 'password' => Hash::make('111'),
                 'role' => 'user',
                 'status' => 'active',
+                'slag' => uniqid('u'.rand()),
             ],
         ]);
     }
