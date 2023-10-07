@@ -24,11 +24,17 @@ Route::middleware(['auth','role:superadmin','verified'])->group(function(){
     Route::get('/supper/admin/dashboard', [SuperadminController::class, 'index'])->name('supper.admin.dashboard');
 });
 
+
+
+
 // all admin route here
 Route::middleware(['auth','role:admin','verified'])->group(function(){
 
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
 });
+// admin login route
+Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
 
 // all vendor route here
 Route::middleware(['auth','role:vendor','verified'])->group(function(){
