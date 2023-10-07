@@ -36,14 +36,14 @@ Route::middleware(['auth','role:vendor','verified'])->group(function(){
     Route::get('/vendor/dashboard', [VendorController::class, 'index'])->name('vendor.dashboard');
 });
 
-// all user route
-Route::middleware(['auth','role:user','verified'])->group(function(){
-    Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
-});
+// // all user route
+// Route::middleware(['auth','role:user','verified'])->group(function(){
+//     Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
+// });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
