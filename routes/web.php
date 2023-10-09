@@ -31,8 +31,13 @@ Route::middleware(['auth','role:superadmin','verified'])->group(function(){
 Route::middleware(['auth','role:admin','verified'])->group(function(){
 
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
     Route::get('/admin/logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
+
+    Route::get('/admin/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
 });
+
+
 // admin login route
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
 

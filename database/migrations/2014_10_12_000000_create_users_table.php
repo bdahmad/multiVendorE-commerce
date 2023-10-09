@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('slag')->unique()->nullable();
             $table->string('photo')->nullable();
             $table->string('phone')->nullable();
+            $table->string('designation')->nullable();
             $table->text('address')->nullable();
             $table->enum('role',['superadmin','admin', 'vendor', 'user'])->default('user');
             $table->enum('status',['active', 'inactive','processing'])->default('active');

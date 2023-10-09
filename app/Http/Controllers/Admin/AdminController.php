@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,7 +37,15 @@ class AdminController extends Controller
         return redirect('/admin/login');
     }
 
+    // admin profile page show
+    public function adminProfile(){
 
+        // fin all data
+        $id = Auth::user()->id;
+        $adminData = User::find($id);
+        // print_r($adminData);
+        return view('admin.admin_profile', compact('adminData'));
+    }
     /**
      * Show the form for creating a new resource.
      */

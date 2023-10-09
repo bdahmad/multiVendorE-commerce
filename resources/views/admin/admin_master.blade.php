@@ -13,13 +13,12 @@
         <div class="page-wrapper">
 
             {{-- start content  --}}
-            <div class="page-content">
 
                 {{-- main content here  --}}
                  @yield('content')
 
             {{-- end content  --}}
-            </div>
+
 
         </div>
         <!--end page wrapper -->
