@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // all supper admin route here
-Route::middleware(['auth','role:superadmin','verified'])->group(function(){
+Route::middleware(['auth','role:1','verified'])->group(function(){
 
     Route::get('/supper/admin/dashboard', [SuperadminController::class, 'index'])->name('supper.admin.dashboard');
 });
@@ -28,7 +28,7 @@ Route::middleware(['auth','role:superadmin','verified'])->group(function(){
 
 
 // all admin route here
-Route::middleware(['auth','role:admin','verified'])->group(function(){
+Route::middleware(['auth','role:2','verified'])->group(function(){
 
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
@@ -37,12 +37,12 @@ Route::middleware(['auth','role:admin','verified'])->group(function(){
     Route::get('/admin/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
 });
 
-
 // admin login route
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
 
+
 // all vendor route here
-Route::middleware(['auth','role:vendor','verified'])->group(function(){
+Route::middleware(['auth','role:3','verified'])->group(function(){
 
     Route::get('/vendor/dashboard', [VendorController::class, 'index'])->name('vendor.dashboard');
 });

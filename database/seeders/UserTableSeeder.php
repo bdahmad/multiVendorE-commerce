@@ -63,6 +63,18 @@ class UserTableSeeder extends Seeder
                 'status_id' => 1,
                 'slag' => uniqid('u'.rand()),
             ],
+
+            // Demo User Data
+            // [
+            //     'name' => 'Demo User',
+            //     'username' => 'demouser',
+            //     'email' => 'demouser@gmail.com',
+            //     'phone' => '01718022217',
+            //     'password' => Hash::make('111'),
+            //     'role_id' => '',
+            //     'status_id' => '',
+            //     'slag' => uniqid('u'.rand()),
+            // ],
         ]);
     }
 }
