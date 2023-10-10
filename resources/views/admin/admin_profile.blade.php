@@ -119,12 +119,12 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row mb-3">
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-3 flex">
                                         <h6 class="mb-0">Full Name:</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        {{-- <h6 for="">{{$adminData->name}}</h6> --}}
-                                        <input type="text" class="form-control" id="name" name="name" value="{{$adminData->name}}"/>
+                                        <h6>{{$adminData->name}}</h6>
+                                        {{-- <input type="text" class="form-control" id="name" name="name" value="{{$adminData->name}}"/> --}}
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -132,8 +132,8 @@
                                         <h6 class="mb-0">Email:</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        {{-- <h6 for="">{{$adminData->email}}</h6> --}}
-                                        <input type="text" class="form-control" id="email" name="email" value="{{$adminData->email}}"/>
+                                        <h6 for="">{{$adminData->email}}</h6>
+                                        {{-- <input type="text" class="form-control" id="email" name="email" value="{{$adminData->email}}"/> --}}
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -141,8 +141,8 @@
                                         <h6 class="mb-0">Phone</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        {{-- <h6 for="">{{$adminData->phone}}</h6> --}}
-                                        <input type="text" class="form-control" id="phone" name="phone" value="{{$adminData->phone}}"/>
+                                        <h6 for="">{{$adminData->phone}}</h6>
+                                        {{-- <input type="text" class="form-control" id="phone" name="phone" value="{{$adminData->phone}}"/> --}}
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -158,14 +158,8 @@
                                         <h6 class="mb-0">Address</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        {{-- <h6 for="">{{$adminData->address}}</h6> --}}
-                                        <input type="text" class="form-control" id="address" name="address" value="{{$adminData->address}}"/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3"></div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <button class="btn btn-info" type="submit">Save Change</button>
+                                        <h6 for="">{{$adminData->address}}</h6>
+                                        {{-- <input type="text" class="form-control" id="address" name="address" value="{{$adminData->address}}"/> --}}
                                     </div>
                                 </div>
                             </div>

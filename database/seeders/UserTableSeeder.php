@@ -24,8 +24,8 @@ class UserTableSeeder extends Seeder
                 'email' => 'superadmin@gmail.com',
                 'phone' => '01718022214',
                 'password' => Hash::make('111'),
-                'role' => 'superadmin',
-                'status' => 'active',
+                'role_id' => 1,
+                'status_id' => 1,
                 'slag' => uniqid('sa'.rand()),
             ],
                 // Admin Data
@@ -35,8 +35,8 @@ class UserTableSeeder extends Seeder
                 'email' => 'admin@gmail.com',
                 'phone' => '01718022215',
                 'password' => Hash::make('111'),
-                'role' => 'admin',
-                'status' => 'active',
+                'role_id' => 2,
+                'status_id' => 1,
                 'slag' => uniqid('a'.rand()),
             ],
 
@@ -47,8 +47,8 @@ class UserTableSeeder extends Seeder
                 'email' => 'vendor@gmail.com',
                 'phone' => '01718022216',
                 'password' => Hash::make('111'),
-                'role' => 'vendor',
-                'status' => 'active',
+                'role_id' => 3,
+                'status_id' => 2,
                 'slag' => uniqid('v'.rand()),
             ],
 
@@ -59,8 +59,8 @@ class UserTableSeeder extends Seeder
                 'email' => 'user@gmail.com',
                 'phone' => '01718022217',
                 'password' => Hash::make('111'),
-                'role' => 'user',
-                'status' => 'active',
+                'role_id' => 4,
+                'status_id' => 1,
                 'slag' => uniqid('u'.rand()),
             ],
         ]);
