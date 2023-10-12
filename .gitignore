@@ -1,4 +1,3 @@
-/.phpunit.cache
 /node_modules
 /public/build
 /public/hot
@@ -17,13 +16,3 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-* .jpg
-* .png
-* .png
-* .jpeg
-* .svg
-* .mp3
-* .mp4
-* .avi
-* .mkv
-* .webm
