@@ -28,10 +28,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $graded = [];
 
     /**
      * The attributes that should be cast.
