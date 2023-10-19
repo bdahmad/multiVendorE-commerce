@@ -46,6 +46,43 @@ class AdminController extends Controller
         // print_r($adminData);
         return view('admin.admin_profile', compact('adminData'));
     }
+
+    // admin profile update
+    public function adminProfileUpdate(Request $request){
+
+
+        $this-> validate($request,[
+            'name' => 'required|max:50',
+            'email' => 'required|email|unique:users,email|max:100',
+            'phone' => 'required|numeric|unique:users,phone|min:10',
+            'address' => 'required|max:100',
+
+        ]);
+
+        $id = Auth::user()->id;
+
+        $user = User::find($id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address= $request->address;
+
+        $message = "";
+
+        if ($user->update()) {
+            # code...
+           $message = "User Update Successfully";
+        }else{
+
+            $message = "Opps, Something Is Wrong";
+
+        }
+
+        return redirect()->back()->with($message);
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */

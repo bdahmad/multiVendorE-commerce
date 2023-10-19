@@ -120,7 +120,8 @@
                             {{-- <div class="text-end">
                                 <i class="fa fa-pencil btn btn-info m-2" style="font-size: larger" id="input_toggle_btn" onclick="edit_form()"></i>
                             </div> --}}
-                            <form action="" method="post">
+                            <form action="{{route('admin.profile.update')}}" method="post">
+                                @csrf
                                 <div class="card-body">
                                     <div class="row mb-3">
                                         <div class="col-sm-3 flex">
@@ -128,7 +129,15 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             {{-- <h6 class = "admin_data_show">{{$adminData->name}}</h6> --}}
-                                            <input type="text" class="form-control" id="name" name="name" value="{{$adminData->name}}" onkeydown="show_update_button()"/>
+                                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
+
+                                            value="@if($adminData->name){{$adminData->name}}@else{{old('name')}}@endif"
+
+                                            onkeydown="show_update_button()"/>
+
+                                            @error('name')
+                                            <span class="text-danger"></span>{{$message}}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -137,7 +146,10 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             {{-- <h6 class = "admin_data_show" for="">{{$adminData->email}}</h6> --}}
-                                            <input type="text" class="form-control" id="email" name="email" value="{{$adminData->email}}" onkeydown="show_update_button()"/>
+                                            <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="@if($adminData->email){{$adminData->email}}@else{{old('email')}}@endif" onkeydown="show_update_button()"/>
+                                            @error('email')
+                                            <span class="text-danger"></span>{{$message}}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -146,7 +158,10 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             {{-- <h6 class = "admin_data_show" for="">{{$adminData->phone}}</h6> --}}
-                                            <input type="text" class="form-control" id="phone" name="phone" value="{{$adminData->phone}}" onkeydown="show_update_button()"/>
+                                            <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" value="@if($adminData->phone){{$adminData->phone}}@else{{old('phone')}}@endif" onkeydown="show_update_button()"/>
+                                            @error('phone')
+                                            <span class="text-danger"></span>{{$message}}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -163,12 +178,15 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             {{-- <h6 class = "admin_data_show" for="">{{$adminData->address}}</h6> --}}
-                                            <input type="text" class="form-control" id="address" name="address" value="{{$adminData->address}}" onkeydown="show_update_button()"/>
+                                            <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="@if($adminData->address){{$adminData->address}}@else{{old('address')}}@endif" onkeydown="show_update_button()"/>
+                                            @error('address')
+                                            <span class="text-danger"></span>{{$message}}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="mb-3 mt-3" id="admin_data_update_btn_block" style="display: none">
                                         <input type="reset" class="btn btn-info" id="admin_data_reset_btn"></input>
-                                        <button class="btn btn-success" id="admin_data_update_btn">Save Changes</button>
+                                        <button type="submit" class="btn btn-success" id="admin_data_update_btn">Save Changes</button>
                                     </div>
                                 </div>
                             </form>
