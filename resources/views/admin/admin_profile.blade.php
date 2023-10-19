@@ -117,51 +117,61 @@
                     </div>
                     <div class="col-lg-8">
                         <div class="card">
-                            <div class="card-body">
-                                <div class="row mb-3">
-                                    <div class="col-sm-3 flex">
-                                        <h6 class="mb-0">Full Name:</h6>
+                            {{-- <div class="text-end">
+                                <i class="fa fa-pencil btn btn-info m-2" style="font-size: larger" id="input_toggle_btn" onclick="edit_form()"></i>
+                            </div> --}}
+                            <form action="" method="post">
+                                <div class="card-body">
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3 flex">
+                                            <h6 class="mb-0">Full Name:</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{-- <h6 class = "admin_data_show">{{$adminData->name}}</h6> --}}
+                                            <input type="text" class="form-control" id="name" name="name" value="{{$adminData->name}}" onkeydown="show_update_button()"/>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <h6>{{$adminData->name}}</h6>
-                                        {{-- <input type="text" class="form-control" id="name" name="name" value="{{$adminData->name}}"/> --}}
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Email:</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{-- <h6 class = "admin_data_show" for="">{{$adminData->email}}</h6> --}}
+                                            <input type="text" class="form-control" id="email" name="email" value="{{$adminData->email}}" onkeydown="show_update_button()"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Phone</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{-- <h6 class = "admin_data_show" for="">{{$adminData->phone}}</h6> --}}
+                                            <input type="text" class="form-control" id="phone" name="phone" value="{{$adminData->phone}}" onkeydown="show_update_button()"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Username</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <h6 class = "admin_data_show" for="">{{$adminData->username}}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Address</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{-- <h6 class = "admin_data_show" for="">{{$adminData->address}}</h6> --}}
+                                            <input type="text" class="form-control" id="address" name="address" value="{{$adminData->address}}" onkeydown="show_update_button()"/>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 mt-3" id="admin_data_update_btn_block" style="display: none">
+                                        <input type="reset" class="btn btn-info" id="admin_data_reset_btn"></input>
+                                        <button class="btn btn-success" id="admin_data_update_btn">Save Changes</button>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Email:</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <h6 for="">{{$adminData->email}}</h6>
-                                        {{-- <input type="text" class="form-control" id="email" name="email" value="{{$adminData->email}}"/> --}}
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Phone</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <h6 for="">{{$adminData->phone}}</h6>
-                                        {{-- <input type="text" class="form-control" id="phone" name="phone" value="{{$adminData->phone}}"/> --}}
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Username</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <h6 for="">{{$adminData->username}}</h6>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Address</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <h6 for="">{{$adminData->address}}</h6>
-                                        {{-- <input type="text" class="form-control" id="address" name="address" value="{{$adminData->address}}"/> --}}
-                                    </div>
-                                </div>
+                            </form>
                             </div>
                         </div>
 
@@ -211,4 +221,6 @@
         </div>
     </div>
 
+
 @endsection
+

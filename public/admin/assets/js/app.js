@@ -69,7 +69,7 @@ $(function() {
 	})
 
 
-   // sidebar colors 
+   // sidebar colors
 
 
 
@@ -97,11 +97,11 @@ $(function() {
     function theme4() {
       $('html').attr('class', 'color-sidebar sidebarcolor4');
     }
-	
+
 	function theme5() {
       $('html').attr('class', 'color-sidebar sidebarcolor5');
     }
-	
+
 	function theme6() {
       $('html').attr('class', 'color-sidebar sidebarcolor6');
     }
@@ -115,10 +115,19 @@ $(function() {
     }
 
 
-
-
-
-
+    // admin profile
 
 
 });
+
+// admin data update button
+
+let admin_data_update_btn_block = document.getElementById('admin_data_update_btn_block');
+let admin_data_reset_btn = document.getElementById('admin_data_reset_btn');
+admin_data_reset_btn.addEventListener('click', ()=>{
+    document.getElementById('admin_data_update_btn_block').style.display = "none";
+});
+
+function show_update_button(){
+    document.getElementById('admin_data_update_btn_block').style.display = "block";
+}
