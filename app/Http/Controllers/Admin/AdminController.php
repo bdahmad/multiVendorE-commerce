@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use File;
+use Image;
 
 class AdminController extends Controller
 {
@@ -68,20 +70,68 @@ class AdminController extends Controller
         $user->phone = $request->phone;
         $user->address= $request->address;
 
-        $message = "";
-
+        // notification set here
         if ($user->update()) {
-            # code...
-           $message = "User Update Successfully";
+            $notification = array(
+                'message' => "Admin Profile Update Successfully",
+                'alert_type' => "success",
+            );
         }else{
-
-            $message = "Opps, Something Is Wrong";
-
+            $notification = array(
+                'message' => "Opps, Admin Profile Not Update",
+                'alert_type' => "error",
+            );
         }
+        return back()->with($notification);
 
-        return redirect()->back()->with($message);
     }
 
+    // admin profile Pic Update
+    public function adminProfilePicUpdate(Request $request){
+
+        // fin all data
+        $id = Auth::user()->id;
+        $adminData = User::find($id);
+
+        // check image here
+        if($request->image){
+
+            if(File::exists(public_path('uploads/admin/'.$adminData->photo))){
+                File::delete(public_path('uploads/admin/'.$adminData->photo));
+            }
+            $image = $request->file('image');
+            $customeName = $id.".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/admin/'.$customeName);
+            Image::make($image)->resize(250,250)->save($path);
+
+            $adminData->photo = $customeName;
+
+            if ($adminData->update()) {
+                $notification = array(
+                    'message' => "Admin Profile Photo Update Successfully",
+                    'alert_type' => "success",
+                );
+            }else{
+                $notification = array(
+                    'message' => "Opps, Admin Profile Photo Not Update",
+                    'alert_type' => "error",
+                );
+            }
+            return back()->with($notification);
+
+        }else{
+            $notification = array(
+                'message' => "Please Select Your Photo",
+                'alert_type' => "error",
+            );
+            return back()->with($notification);
+        }
+
+        // notification set here
+
+
+
+    }
 
     /**
      * Show the form for creating a new resource.

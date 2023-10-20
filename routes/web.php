@@ -37,6 +37,8 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
     Route::get('/admin/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
 
     Route::post('/admin/profile/update', [AdminController::class, 'adminProfileUpdate'])->name('admin.profile.update');
+
+    Route::post('/admin/profile/pic/update', [AdminController::class, 'adminProfilePicUpdate'])->name('admin.profile.pic.update');
 });
 
 // admin login route

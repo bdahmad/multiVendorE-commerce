@@ -131,3 +131,15 @@ admin_data_reset_btn.addEventListener('click', ()=>{
 function show_update_button(){
     document.getElementById('admin_data_update_btn_block').style.display = "block";
 }
+
+// admin profile photo update btn
+
+let admin_img_block = document.getElementById('admin_img_block');
+let admin_img_overlay = document.getElementById('admin_img_overlay');
+
+admin_img_block.addEventListener('mouseover',  ()=> {
+    admin_img_overlay.style.display = 'block';
+})
+admin_img_block.addEventListener('mouseout',  ()=> {
+    admin_img_overlay.style.display = 'none';
+})
