@@ -133,6 +133,11 @@ class AdminController extends Controller
 
     }
 
+    // admin social link update
+    public function adminSocialLinkUpdate(){
+
+    }
+
     /**
      * Show the form for creating a new resource.
      */

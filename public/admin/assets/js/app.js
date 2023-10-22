@@ -126,6 +126,7 @@ let admin_data_update_btn_block = document.getElementById('admin_data_update_btn
 let admin_data_reset_btn = document.getElementById('admin_data_reset_btn');
 admin_data_reset_btn.addEventListener('click', ()=>{
     document.getElementById('admin_data_update_btn_block').style.display = "none";
+
 });
 
 function show_update_button(){
@@ -143,3 +144,48 @@ admin_img_block.addEventListener('mouseover',  ()=> {
 admin_img_block.addEventListener('mouseout',  ()=> {
     admin_img_overlay.style.display = 'none';
 })
+
+// admin social link add
+
+// website link
+let admin_web_edit_btn = document.getElementById('admin_web_edit_btn');
+let admin_web_link_input_form = document.getElementById('admin_web_link_input_form');
+let admin_web_input_from_close = document.getElementById('admin_web_input_from_close');
+admin_web_link_input_form.style.display = "none";
+
+admin_web_edit_btn.addEventListener("click", function(){
+    if(admin_web_link_input_form.style.display == "none"){
+
+        admin_web_link_input_form.setAttribute('class', 'd-flex justify-content-between align-items-center flex-wrap');
+        admin_web_edit_btn.style.display = "none";
+    }else{
+        admin_web_link_input_form.setAttribute('class', ' ');
+    }
+});
+
+admin_web_input_from_close.addEventListener("click", function(){
+    admin_web_edit_btn.style.display = "block";
+    admin_web_link_input_form.setAttribute('class', ' ');
+})
+
+// github link
+let admin_github_edit_btn = document.getElementById('admin_github_edit_btn');
+let admin_github_link_input_form = document.getElementById('admin_github_link_input_form');
+let admin_github_input_from_close = document.getElementById('admin_github_input_from_close');
+admin_github_link_input_form.style.display = "none";
+
+admin_github_edit_btn.addEventListener("click", function(){
+    if(admin_github_link_input_form.style.display == "none"){
+
+        admin_github_link_input_form.setAttribute('class', 'd-flex justify-content-between align-items-center flex-wrap');
+        admin_github_edit_btn.style.display = "none";
+    }else{
+        admin_github_link_input_form.setAttribute('class', ' ');
+    }
+});
+
+admin_github_input_from_close.addEventListener("click", function(){
+    admin_github_edit_btn.style.display = "block";
+    admin_github_link_input_form.setAttribute('class', ' ');
+})
+
