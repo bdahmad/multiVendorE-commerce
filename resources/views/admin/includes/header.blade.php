@@ -1,3 +1,13 @@
+@php
+
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
+$id = Auth::user()->id;
+$adminData = User::find($id);
+
+@endphp
+
 <header>
     <div class="topbar d-flex align-items-center">
         <nav class="navbar navbar-expand">
@@ -379,7 +389,7 @@
             <div class="user-box dropdown">
                 <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret"
                     href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ asset('admin') }}/assets/images/avatars/avatar-2.png" class="user-img"
+                    <img src="{{ !empty($adminData->photo) ? url('uploads/admin/'.$adminData->photo) : url('uploads/no_image.jpg') }}" class="user-img"
                         alt="user avatar">
                     <div class="user-info ps-3">
                         <p class="user-name mb-0">{{Auth::User()->name}}</p>

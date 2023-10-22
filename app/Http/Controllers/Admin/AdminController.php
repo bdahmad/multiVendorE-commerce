@@ -74,12 +74,12 @@ class AdminController extends Controller
         if ($user->update()) {
             $notification = array(
                 'message' => "Admin Profile Update Successfully",
-                'alert_type' => "success",
+                'alert-type' => "success",
             );
         }else{
             $notification = array(
                 'message' => "Opps, Admin Profile Not Update",
-                'alert_type' => "error",
+                'alert-type' => "error",
             );
         }
         return back()->with($notification);
@@ -109,12 +109,12 @@ class AdminController extends Controller
             if ($adminData->update()) {
                 $notification = array(
                     'message' => "Admin Profile Photo Update Successfully",
-                    'alert_type' => "success",
+                    'alert-type' => "success",
                 );
             }else{
                 $notification = array(
                     'message' => "Opps, Admin Profile Photo Not Update",
-                    'alert_type' => "error",
+                    'alert-type' => "error",
                 );
             }
             return back()->with($notification);
@@ -122,7 +122,7 @@ class AdminController extends Controller
         }else{
             $notification = array(
                 'message' => "Please Select Your Photo",
-                'alert_type' => "error",
+                'alert-type' => "error",
             );
             return back()->with($notification);
         }
