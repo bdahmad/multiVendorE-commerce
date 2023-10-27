@@ -29,10 +29,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//admin 
+//admin with auth
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'admin_dashboard'])->name('admin.dashboard');
+    Route::get('/admin/logout', [AdminController::class, 'adminDestroy'])->name('admin.logout');
 });
+//admin without auth
+Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
 //vendor
 Route::middleware(['auth', 'role:vendor'])->group(function () {
     Route::get('/vendor/dashboard', [vendorController::class, 'Vendor_dashboard'])->name('vendor.dashboard');
