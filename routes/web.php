@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'admin_dashboard'])->name('admin.dashboard');
     Route::get('/admin/logout', [AdminController::class, 'adminDestroy'])->name('admin.logout');
+    Route::get('/admin/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
 });
 //admin without auth
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
