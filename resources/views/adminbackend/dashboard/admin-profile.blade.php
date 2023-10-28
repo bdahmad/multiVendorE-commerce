@@ -1,5 +1,6 @@
 @extends('layouts.adminbackend')
 @section('content')
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 <div class="page-content">
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -102,7 +103,15 @@
                                     <h6 class="mb-0">Photo</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="file" class="form-control" />
+                                    <input type="file" class="form-control" id="image" />
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0"></h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <img src="{{(!empty($adminData->photo))? url('uploads/image/admin/'.$adminData->photo):url('uploads/no_image.jpg') }}" alt="Admin" style=" width: 100px; height: 100px;" id="showImg">
                                 </div>
                             </div>
                             <div class="row">
@@ -119,6 +128,9 @@
     </div>
 </div>
 
+<script>
+    
+</script>
 
 
 @endsection

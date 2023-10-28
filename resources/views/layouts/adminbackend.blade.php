@@ -702,6 +702,20 @@
     <script src="{{asset('adminbackend')}}/assets/js/index.js"></script>
     <!--app JS-->
     <script src="{{asset('adminbackend')}}/assets/js/app.js"></script>
+
+
+    <script>
+        jQuery(document).ready(function() {
+            jQuery('#image').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    jQuery('#showImg').attr('src', e.target.result);
+
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            });
+        });
+    </script>
 </body>
 
 </html>
