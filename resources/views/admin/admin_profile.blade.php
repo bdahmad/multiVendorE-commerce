@@ -83,15 +83,22 @@
 
                                     {{-- for website link  --}}
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                        {{-- find data here  --}}
+                                        @php
+                                            $webinfo = 'App\Models\SocialMedia'::where('user_id',2)->where('social_media_slug', 'website')->firstOrFail();
+                                        @endphp
+
                                         <h6 class="mb-0"><i class="fa fa-globe fs-5 me-2"></i> Website</h6>
-                                        <a href="#" class="text-secondary" id="adnim_web_link_show" style="width: 100px; height:20px; overflow-y:hidden">https://codervent.com</a>
+                                        <a href="#" class="text-secondary" id="adnim_web_link_show" style="width: 100px; height:20px; overflow-y:hidden">{{$webinfo->social_media_link}}</a>
 
                                         <a class="fs-5 m-1" id="admin_web_edit_btn"><i class="fa fa-pencil"></i></a>
 
                                         <div class="" id="admin_web_link_input_form">
-                                            <form action="" method="post">
+                                            <form action="{{route('admin.social.link.update')}}" method="post">
                                                 @csrf
-                                                <input type="text" class="form-control my-3" placeholder="Give Your Website Link">
+
+                                                <input type="text" class="form-control my-3" placeholder="Give Your Website Link" name="link">
+                                                <input type="hidden" class="form-control my-3" value="{{$webinfo->social_media_slug}}" name="slug">
                                                 <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check"></i></button>
                                                 <button type="reset" class="btn btn-danger btn-sm" id="admin_web_input_from_close"><i class="fa fa-close"></i></button>
                                             </form>
@@ -101,15 +108,22 @@
 
                                     {{-- for facebook link  --}}
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                        {{-- find data here  --}}
+                                        @php
+                                            $facebookInfo = 'App\Models\SocialMedia'::where('user_id',2)->where('social_media_slug', 'facebook')->firstOrFail();
+                                        @endphp
+
                                         <h6 class="mb-0"><i class="fa fa-facebook fs-5 me-2"></i> Facebook</h6>
-                                        <a href="#" class="text-secondary" id="adnim_facebook_link_show" style="width: 100px; height:20px; overflow-y:hidden">https://codervent.com</a>
+                                        <a href="#" class="text-secondary" id="adnim_facebook_link_show" style="width: 100px; height:20px; overflow-y:hidden">{{$facebookInfo->social_media_link}}</a>
 
                                         <a class="fs-5 m-1" id="admin_facebook_edit_btn"><i class="fa fa-pencil"></i></a>
 
-                                        <div class="" id="admin_facebook_link_input_form">
-                                            <form action="" method="post">
+                                        <div class="{{route('admin.social.link.update')}}" id="admin_facebook_link_input_form">
+                                            <form action="{{route('admin.social.link.update')}}" method="post">
                                                 @csrf
-                                                <input type="text" class="form-control my-3" placeholder="Give Your facebook Link">
+
+                                                 <input type="hidden" class="form-control my-3" value="{{$facebookInfo->social_media_slug}}" name="slug">
+                                                <input type="text" class="form-control my-3" placeholder="Give Your facebook Link" name="link">
                                                 <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check"></i></button>
                                                 <button type="reset" class="btn btn-danger btn-sm" id="admin_facebook_input_from_close"><i class="fa fa-close"></i></button>
                                             </form>
@@ -120,15 +134,20 @@
 
                                     {{-- for linkedin link  --}}
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                        @php
+                                            $linkedinInfo = 'App\Models\SocialMedia'::where('user_id',2)->where('social_media_slug', 'linkedin')->firstOrFail();
+                                        @endphp
                                         <h6 class="mb-0"><i class="fa fa-linkedin fs-5 me-2"></i> linkedin</h6>
-                                        <a href="#" class="text-secondary" id="adnim_linkedin_link_show" style="width: 100px; height:20px; overflow-y:hidden">https://codervent.com</a>
+                                        <a href="#" class="text-secondary" id="adnim_linkedin_link_show" style="width: 100px; height:20px; overflow-y:hidden">{{$linkedinInfo->social_media_link}}</a>
 
                                         <a class="fs-5 m-1" id="admin_linkedin_edit_btn"><i class="fa fa-pencil"></i></a>
 
                                         <div class="" id="admin_linkedin_link_input_form">
-                                            <form action="" method="post">
+                                            <form action="{{route('admin.social.link.update')}}" method="post">
                                                 @csrf
-                                                <input type="text" class="form-control my-3" placeholder="Give Your linkedin Link">
+
+                                                <input type="hidden" class="form-control my-3" value="{{$linkedinInfo->social_media_slug}}" name="slug">
+                                                <input type="text" class="form-control my-3" placeholder="Give Your linkedin Link" name="link">
                                                 <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check"></i></button>
                                                 <button type="reset" class="btn btn-danger btn-sm" id="admin_linkedin_input_from_close"><i class="fa fa-close"></i></button>
                                             </form>
@@ -229,7 +248,7 @@
                         </div>
                     </div>
 
-                    {{-- <div class="row">
+                    <div class="row">
                             <div class="col-sm-12">
                                 <div class="card">
                                     <div class="card-body">
@@ -267,7 +286,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
 
                 </div>
             </div>

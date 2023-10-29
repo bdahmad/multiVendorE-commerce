@@ -60,7 +60,7 @@ class SocialMediaTableSeeder extends Seeder
                 'user_id' => 1,
                 'social_media_name' => 'Linkedin',
                 'social_media_link' => 'www.example.com',
-                'social_media_slug' => 'facebook',
+                'social_media_slug' => 'linkedin',
                 'status_id' => 1
 
             ],
@@ -108,10 +108,10 @@ class SocialMediaTableSeeder extends Seeder
 
             ],
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'social_media_name' => 'Linkedin',
                 'social_media_link' => 'www.example.com',
-                'social_media_slug' => 'facebook',
+                'social_media_slug' => 'linkedin',
                 'status_id' => 1
 
             ],

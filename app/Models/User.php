@@ -41,7 +41,5 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function adminSocialMedia(){
-        return $this->hasMany('App\Models\SocialMedia', 'user_id', 2);
-    }
+    
 }

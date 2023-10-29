@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\SocialMedia;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,7 +55,7 @@ class AdminController extends Controller
 
         $id = Auth::user()->id;
 
-        $this-> validate($request,[
+        $this->validate($request,[
             'name' => 'required|max:50',
             'email' => 'required|max:100|email|unique:users,email,'.$id.'email',
             'phone' => 'required|numeric|min:10|unique:users,phone,'.$id.'phone',
@@ -135,8 +136,73 @@ class AdminController extends Controller
     }
 
     // admin social link update
-    public function adminSocialLinkUpdate(){
+    public function adminSocialLinkUpdate(Request $request){
 
+        $this->validate($request,[
+            'link' => 'required',
+        ]);
+
+        $slug = $request['slug'];
+
+        if ($slug == 'website') {
+            // update website link
+            $webinfo = SocialMedia::where('user_id',2)->where('social_media_slug', 'website')->update([
+                'social_media_link' => $request['link']
+            ]);
+
+            if ($webinfo) {
+                $notification = array(
+                    'message' => "Admin Website Link Updated",
+                    'alert-type' => "success",
+                );
+            }else{
+                $notification = array(
+                    'message' => "Opps, Something Is Wrong",
+                    'alert-type' => "error",
+                );
+            }
+            return back()->with($notification);
+        }
+        elseif($slug == 'facebook')
+        {
+            // update facebook link
+            $facebookinfo = SocialMedia::where('user_id',2)->where('social_media_slug', 'facebook')->update([
+                'social_media_link' => $request['link']
+            ]);
+
+            if ($facebookinfo) {
+                $notification = array(
+                    'message' => "Admin Facebook Link Updated",
+                    'alert-type' => "success",
+                );
+            }else{
+                $notification = array(
+                    'message' => "Opps, Something Is Wrong",
+                    'alert-type' => "error",
+                );
+            }
+            return back()->with($notification);
+        }
+        elseif($slug == 'linkedin')
+        {
+            // update linkedin link
+            $linkedininfo = SocialMedia::where('user_id',2)->where('social_media_slug', 'linkedin')->update([
+                'social_media_link' => $request['link']
+            ]);
+
+            if ($linkedininfo) {
+                $notification = array(
+                    'message' => "Admin Linkedin Link Updated",
+                    'alert-type' => "success",
+                );
+            }else{
+                $notification = array(
+                    'message' => "Opps, Something Is Wrong",
+                    'alert-type' => "error",
+                );
+            }
+            return back()->with($notification);
+        }
     }
 
     /**
