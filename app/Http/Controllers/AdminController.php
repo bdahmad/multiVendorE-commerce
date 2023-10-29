@@ -33,4 +33,24 @@ class AdminController extends Controller
         $adminData = User::where('id', $id)->firstOrfail();
         return view('adminbackend.dashboard.admin-profile', compact('adminData'));
     }
+    public function adminProfileUpdate(Request $request)
+    {
+        $id = Auth::user()->id;
+        $data = User::find($id);
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->address = $request->address;
+
+        if ($request->file('photo')) {
+            $file = $request->file('photo');
+            @unlink(public_path('uploads/images/admin/' . $data->photo));
+            $fileName = date('YmdHi') . $file->getClientOriginalName();
+            $file->move(public_path('uploads/images/admin'), $fileName);
+            $data['photo'] = $fileName;
+        }
+
+        $data->save();
+        return redirect()->back();
+    }
 }
