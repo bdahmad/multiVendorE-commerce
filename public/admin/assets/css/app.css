@@ -2196,7 +2196,8 @@ input.search-control-2::placeholder {
 	cursor: pointer
 }
 
-/* my custome css  */
+/* my custom css  */
+
 #admin_img_block{
     position: relative;
 }
@@ -2216,8 +2217,8 @@ input.search-control-2::placeholder {
     top: 40%;
     font-size: large;
     color: black;
-}
 
+}
 
 
 

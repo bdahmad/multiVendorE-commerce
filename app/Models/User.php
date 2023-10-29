@@ -40,4 +40,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function adminSocialMedia(){
+        return $this->hasMany('App\Models\SocialMedia', 'user_id', 2);
+    }
 }

@@ -120,8 +120,8 @@ $(function() {
 
 });
 
-// admin data update button
 
+// admin data update button
 let admin_data_update_btn_block = document.getElementById('admin_data_update_btn_block');
 let admin_data_reset_btn = document.getElementById('admin_data_reset_btn');
 admin_data_reset_btn.addEventListener('click', ()=>{
@@ -133,8 +133,8 @@ function show_update_button(){
     document.getElementById('admin_data_update_btn_block').style.display = "block";
 }
 
-// admin profile photo update btn
 
+// admin profile photo update btn
 let admin_img_block = document.getElementById('admin_img_block');
 let admin_img_overlay = document.getElementById('admin_img_overlay');
 
@@ -144,6 +144,8 @@ admin_img_block.addEventListener('mouseover',  ()=> {
 admin_img_block.addEventListener('mouseout',  ()=> {
     admin_img_overlay.style.display = 'none';
 })
+
+
 
 // admin social link add
 
@@ -168,24 +170,44 @@ admin_web_input_from_close.addEventListener("click", function(){
     admin_web_link_input_form.setAttribute('class', ' ');
 })
 
-// github link
-let admin_github_edit_btn = document.getElementById('admin_github_edit_btn');
-let admin_github_link_input_form = document.getElementById('admin_github_link_input_form');
-let admin_github_input_from_close = document.getElementById('admin_github_input_from_close');
-admin_github_link_input_form.style.display = "none";
+// facebook link
+let admin_facebook_edit_btn = document.getElementById('admin_facebook_edit_btn');
+let admin_facebook_link_input_form = document.getElementById('admin_facebook_link_input_form');
+let admin_facebook_input_from_close = document.getElementById('admin_facebook_input_from_close');
+admin_facebook_link_input_form.style.display = "none";
 
-admin_github_edit_btn.addEventListener("click", function(){
-    if(admin_github_link_input_form.style.display == "none"){
+admin_facebook_edit_btn.addEventListener("click", function(){
+    if(admin_facebook_link_input_form.style.display == "none"){
 
-        admin_github_link_input_form.setAttribute('class', 'd-flex justify-content-between align-items-center flex-wrap');
-        admin_github_edit_btn.style.display = "none";
+        admin_facebook_link_input_form.setAttribute('class', 'd-flex justify-content-between align-items-center flex-wrap');
+        admin_facebook_edit_btn.style.display = "none";
     }else{
-        admin_github_link_input_form.setAttribute('class', ' ');
+        admin_facebook_link_input_form.setAttribute('class', ' ');
     }
 });
 
-admin_github_input_from_close.addEventListener("click", function(){
-    admin_github_edit_btn.style.display = "block";
-    admin_github_link_input_form.setAttribute('class', ' ');
+admin_facebook_input_from_close.addEventListener("click", function(){
+    admin_facebook_edit_btn.style.display = "block";
+    admin_facebook_link_input_form.setAttribute('class', ' ');
 })
 
+// facebook link
+let admin_linkedin_edit_btn = document.getElementById('admin_linkedin_edit_btn');
+let admin_linkedin_link_input_form = document.getElementById('admin_linkedin_link_input_form');
+let admin_linkedin_input_from_close = document.getElementById('admin_linkedin_input_from_close');
+admin_linkedin_link_input_form.style.display = "none";
+
+admin_linkedin_edit_btn.addEventListener("click", function(){
+    if(admin_linkedin_link_input_form.style.display == "none"){
+
+        admin_linkedin_link_input_form.setAttribute('class', 'd-flex justify-content-between align-items-center flex-wrap');
+        admin_linkedin_edit_btn.style.display = "none";
+    }else{
+        admin_linkedin_link_input_form.setAttribute('class', ' ');
+    }
+});
+
+admin_linkedin_input_from_close.addEventListener("click", function(){
+    admin_linkedin_edit_btn.style.display = "block";
+    admin_linkedin_link_input_form.setAttribute('class', ' ');
+})

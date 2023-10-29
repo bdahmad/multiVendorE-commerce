@@ -52,11 +52,12 @@ class AdminController extends Controller
     // admin profile update
     public function adminProfileUpdate(Request $request){
 
+        $id = Auth::user()->id;
 
         $this-> validate($request,[
             'name' => 'required|max:50',
-            'email' => 'required|email|unique:users,email|max:100',
-            'phone' => 'required|numeric|unique:users,phone|min:10',
+            'email' => 'required|max:100|email|unique:users,email,'.$id.'email',
+            'phone' => 'required|numeric|min:10|unique:users,phone,'.$id.'phone',
             'address' => 'required|max:100',
 
         ]);
