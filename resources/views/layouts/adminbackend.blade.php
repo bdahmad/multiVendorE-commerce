@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{asset('adminbackend')}}/assets/css/dark-theme.css" />
     <link rel="stylesheet" href="{{asset('adminbackend')}}/assets/css/semi-dark.css" />
     <link rel="stylesheet" href="{{asset('adminbackend')}}/assets/css/header-colors.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 </head>
 
 <body>
@@ -539,7 +540,11 @@
                     </div>
                     <div class="user-box dropdown">
                         <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-9.png" class="user-img" alt="user avatar">
+                            @php
+                            $id = Auth::user()->id;
+                            $adminData = App\Models\User::find($id);
+                            @endphp
+                            <img src="{{(!empty($adminData->photo))? url('uploads/images/admin/'.$adminData->photo):url('uploads/no_image.jpg') }}" class="user-img" alt="user avatar">
                             <div class="user-info ps-3">
                                 <p class="user-name mb-0">{{ Auth::user()->name }}</p>
                                 <p class="designattion mb-0">{{ Auth::user()->username }}</p>
@@ -694,6 +699,7 @@
     <script src="{{asset('adminbackend')}}/assets/plugins/sparkline-charts/jquery.sparkline.min.js"></script>
     <script src="{{asset('adminbackend')}}/assets/plugins/jquery-knob/excanvas.js"></script>
     <script src="{{asset('adminbackend')}}/assets/plugins/jquery-knob/jquery.knob.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $(function() {
             $(".knob").knob();
@@ -715,6 +721,28 @@
                 reader.readAsDataURL(e.target.files['0']);
             });
         });
+    </script>
+    <script>
+        @if(Session::has('message'))
+        var type = "{{ Session::get('alert-type','info') }}"
+        switch (type) {
+            case 'info':
+                toastr.info(" {{ Session::get('message') }} ");
+                break;
+
+            case 'success':
+                toastr.success(" {{ Session::get('message') }} ");
+                break;
+
+            case 'warning':
+                toastr.warning(" {{ Session::get('message') }} ");
+                break;
+
+            case 'error':
+                toastr.error(" {{ Session::get('message') }} ");
+                break;
+        }
+        @endif
     </script>
 </body>
 
