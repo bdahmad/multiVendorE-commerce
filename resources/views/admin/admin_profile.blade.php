@@ -97,7 +97,7 @@
                                             <form action="{{route('admin.social.link.update')}}" method="post">
                                                 @csrf
 
-                                                <input type="text" class="form-control my-3" placeholder="Give Your Website Link" name="link">
+                                                <input type="text" class="form-control my-3" placeholder="Give Your Website Link" name="link" value="{{$webinfo->social_media_link}}">
                                                 <input type="hidden" class="form-control my-3" value="{{$webinfo->social_media_slug}}" name="slug">
                                                 <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check"></i></button>
                                                 <button type="reset" class="btn btn-danger btn-sm" id="admin_web_input_from_close"><i class="fa fa-close"></i></button>
@@ -123,7 +123,7 @@
                                                 @csrf
 
                                                  <input type="hidden" class="form-control my-3" value="{{$facebookInfo->social_media_slug}}" name="slug">
-                                                <input type="text" class="form-control my-3" placeholder="Give Your facebook Link" name="link">
+                                                <input type="text" class="form-control my-3" placeholder="Give Your facebook Link" name="link"  value="{{$facebookInfo->social_media_link}}">
                                                 <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check"></i></button>
                                                 <button type="reset" class="btn btn-danger btn-sm" id="admin_facebook_input_from_close"><i class="fa fa-close"></i></button>
                                             </form>
@@ -146,8 +146,8 @@
                                             <form action="{{route('admin.social.link.update')}}" method="post">
                                                 @csrf
 
-                                                <input type="hidden" class="form-control my-3" value="{{$linkedinInfo->social_media_slug}}" name="slug">
-                                                <input type="text" class="form-control my-3" placeholder="Give Your linkedin Link" name="link">
+                                                <input type="hidden" class="form-control my-3" value="{{$linkedinInfo->social_media_slug}}" name="slug" >
+                                                <input type="text" class="form-control my-3" placeholder="Give Your linkedin Link" name="link" value="{{$linkedinInfo->social_media_link}}">
                                                 <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check"></i></button>
                                                 <button type="reset" class="btn btn-danger btn-sm" id="admin_linkedin_input_from_close"><i class="fa fa-close"></i></button>
                                             </form>

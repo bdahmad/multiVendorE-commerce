@@ -400,7 +400,7 @@ $adminData = User::find($id);
                     <li><a class="dropdown-item" href="{{route('admin.profile')}}"><i
                                 class="bx bx-user"></i><span>Profile</span></a>
                     </li>
-                    <li><a class="dropdown-item" href="javascript:;"><i
+                    <li><a class="dropdown-item" href="{{route('admin.settings')}}"><i
                                 class="bx bx-cog"></i><span>Settings</span></a>
                     </li>
                     <li><a class="dropdown-item" href="javascript:;"><i

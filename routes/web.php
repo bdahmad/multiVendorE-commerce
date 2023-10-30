@@ -36,11 +36,15 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
 
     Route::get('/admin/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
 
+    Route::get('/admin/settings', [AdminController::class, 'adminSettings'])->name('admin.settings');
+
     Route::post('/admin/profile/update', [AdminController::class, 'adminProfileUpdate'])->name('admin.profile.update');
 
     Route::post('/admin/profile/pic/update', [AdminController::class, 'adminProfilePicUpdate'])->name('admin.profile.pic.update');
 
     Route::post('admin/social/link/update', [AdminController::class, 'adminSocialLinkUpdate'])->name('admin.social.link.update');
+
+    Route::post('/admin/password/update', [AdminController::class, 'adminPasswordUpdate'])->name('admin.password.update');
 });
 
 // admin login route

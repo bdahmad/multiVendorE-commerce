@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use File;
+use Illuminate\Support\Facades\Hash;
 use Image;
 
 class AdminController extends Controller
@@ -62,8 +63,6 @@ class AdminController extends Controller
             'address' => 'required|max:100',
 
         ]);
-
-        $id = Auth::user()->id;
 
         $user = User::find($id);
 
@@ -204,6 +203,41 @@ class AdminController extends Controller
             return back()->with($notification);
         }
     }
+
+    // admin settings page show
+    public function adminSettings()
+    {
+        // fin all data
+        $id = Auth::user()->id;
+        $adminData = User::find($id);
+
+        return view('admin.admin_settings', compact('adminData'));
+    }
+
+    // admin Password Update
+    public function adminPasswordUpdate(Request $request)
+    {
+        // form validation
+        $this->validate($request,[
+            'old_password' => 'required',
+            'new_password' => 'required',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+
+        // old password match
+        if (Hash::check($request->old_password, auth()->user()->password)) {
+            User::where('id', auth()->user()->id)->update([
+                'password' => Hash::make($request->new_password),
+            ]);
+
+            return redirect()->route('admin.logout');
+
+        }else{
+            return back()->with('error', "Old Password Doesn't Match");
+        }
+
+    }
+
 
     /**
      * Show the form for creating a new resource.
