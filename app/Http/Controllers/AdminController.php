@@ -35,26 +35,49 @@ class AdminController extends Controller
     }
     public function adminProfileUpdate(Request $request)
     {
-        $id = Auth::user()->id;
-        $data = User::find($id);
-        $data->name = $request->name;
-        $data->email = $request->email;
-        $data->phone = $request->phone;
-        $data->address = $request->address;
+        //way-1
+        // $id = Auth::user()->id;
+        // $data = User::find($id);
+        // $data->name = $request->name;
+        // $data->email = $request->email;
+        // $data->phone = $request->phone;
+        // $data->address = $request->address;
 
-        if ($request->file('photo')) {
-            $file = $request->file('photo');
-            @unlink(public_path('uploads/images/admin/' . $data->photo));
-            $fileName = date('YmdHi') . $file->getClientOriginalName();
-            $file->move(public_path('uploads/images/admin'), $fileName);
-            $data['photo'] = $fileName;
+        // if ($request->file('photo')) {
+        //     $file = $request->file('photo');
+        //     @unlink(public_path('uploads/images/admin/' . $data->photo));
+        //     $fileName = date('YmdHi') . $file->getClientOriginalName();
+        //     $file->move(public_path('uploads/images/admin'), $fileName);
+        //     $data['photo'] = $fileName;
+        // }
+
+        // $data->save();
+        // $notification = array(
+        //     'message' => 'Successfully update Admin Profile',
+        //     'alert-type' => 'success',
+        // );
+        // return redirect()->back()->with($notification);
+
+        //way-2
+        $id = $request['id'];
+        $update = User::where('id', $id)->update([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'phone' => $request['phone'],
+            'address' => $request['address'],
+        ]);
+        if ($update) {
+            $notification = array(
+                'message' => 'Admin Profile update successfully.',
+                'alert-type' => 'success'
+            );
+            return redirect()->back()->with($notification);
+        } else {
+            $notification = array(
+                'message' => 'Oops..Operation Failed.',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
         }
-
-        $data->save();
-        $notification = array(
-            'message' => 'Successfully update Admin Profile',
-            'alert-type' => 'success',
-        );
-        return redirect()->back()->with($notification);
     }
 }
