@@ -44,6 +44,7 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
 
     Route::post('admin/social/link/update', [AdminController::class, 'adminSocialLinkUpdate'])->name('admin.social.link.update');
 
+
     Route::post('/admin/password/update', [AdminController::class, 'adminPasswordUpdate'])->name('admin.password.update');
 });
 
@@ -57,6 +58,18 @@ Route::middleware(['auth','role:3','verified'])->group(function(){
     Route::get('/vendor/dashboard', [VendorController::class, 'index'])->name('vendor.dashboard');
 
     Route::get('/vendor/logout', [VendorController::class, 'vendorLogout'])->name('vendor.logout');
+
+    Route::get('/vendor/profile', [VendorController::class, 'vendorProfile'])->name('vendor.profile');
+
+    Route::post('/vendor/profile/update', [VendorController::class, 'vendorProfileUpdate'])->name('vendor.profile.update');
+
+    Route::get('/vendor/settings', [VendorController::class, 'vendorSettings'])->name('vendor.settings');
+
+    Route::post('/vendor/profile/pic/update', [VendorController::class, 'vendorProfilePicUpdate'])->name('vendor.profile.pic.update');
+
+    Route::post('/vendor/social/link/update', [VendorController::class, 'vendorSocialLinkUpdate'])->name('vendor.social.link.update');
+
+    Route::post('/vendor/password/update', [VendorController::class, 'vendorPasswordUpdate'])->name('vendor.password.update');
 });
 // vendor login route
 Route::get('/vendor/login', [VendorController::class, 'vendorLogin'])->name('vendor.login');

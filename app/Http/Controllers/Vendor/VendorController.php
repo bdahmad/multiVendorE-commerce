@@ -28,7 +28,7 @@ class VendorController extends Controller
     }
 
      /**
-     * Destroy an authenticated session. or admin logout here
+     * Destroy an authenticated session. or vendor logout here
      */
     public function vendorLogout(Request $request)
     {
@@ -39,6 +39,97 @@ class VendorController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/vendor/login');
+    }
+
+
+    // vendor profile page show
+    public function vendorProfile(){
+
+        // fin all data
+        $id = Auth::user()->id;
+        $vendorData = User::find($id);
+        return view('vendor.vendor_profile', compact('vendorData'));
+    }
+
+
+    // vendor settings page show
+    public function vendorSettings()
+    {
+        // fin all data
+        $id = Auth::user()->id;
+        $vendorData = User::find($id);
+
+        return view('vendor.vendor_settings', compact('vendorData'));
+    }
+
+    // vendor social link update
+    public function vendorSocialLinkUpdate(Request $request){
+
+        $this->validate($request,[
+            'link' => 'required',
+        ]);
+
+        $slug = $request['slug'];
+
+        if ($slug == 'website') {
+            // update website link
+            $webinfo = SocialMedia::where('user_id',3)->where('social_media_slug', 'website')->update([
+                'social_media_link' => $request['link']
+            ]);
+
+            if ($webinfo) {
+                $notification = array(
+                    'message' => "vendor Website Link Updated",
+                    'alert-type' => "success",
+                );
+            }else{
+                $notification = array(
+                    'message' => "Opps, Something Is Wrong",
+                    'alert-type' => "error",
+                );
+            }
+            return back()->with($notification);
+        }
+        elseif($slug == 'facebook')
+        {
+            // update facebook link
+            $facebookinfo = SocialMedia::where('user_id',3)->where('social_media_slug', 'facebook')->update([
+                'social_media_link' => $request['link']
+            ]);
+
+            if ($facebookinfo) {
+                $notification = array(
+                    'message' => "vendor Facebook Link Updated",
+                    'alert-type' => "success",
+                );
+            }else{
+                $notification = array(
+                    'message' => "Opps, Something Is Wrong",
+                    'alert-type' => "error",
+                );
+            }
+            return back()->with($notification);
+        }
+        elseif($slug == 'linkedin')
+        {
+            // update linkedin link
+            $linkedininfo = SocialMedia::where('user_id',3)->where('social_media_slug', 'linkedin')->update([
+                'social_media_link' => $request['link']
+            ]);
+
+            if ($linkedininfo) {
+                $notification = array(
+                    'message' => "vendor Linkedin Link Updated",
+                    'alert-type' => "success",
+                );
+            }else{
+                $notification = array(
+                    'message' => "Opps, Something Is Wrong",
+                    'alert-type' => "error",
+                );
+            }
+            return back()->with($notification);
+        }
     }
 
     /**
