@@ -4,6 +4,12 @@ namespace App\Http\Controllers\Vendor;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\SocialMedia;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use File;
+use Illuminate\Support\Facades\Hash;
+use Image;
 
 class VendorController extends Controller
 {
@@ -12,7 +18,27 @@ class VendorController extends Controller
      */
     public function index()
     {
-        return view('vendor/vendor_dashboard');
+        return view('vendor.vendor_dashboard');
+    }
+
+    // vendor log in page view
+    public function vendorLogin()
+    {
+        return view('vendor.vendor_login');
+    }
+
+     /**
+     * Destroy an authenticated session. or admin logout here
+     */
+    public function vendorLogout(Request $request)
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/vendor/login');
     }
 
     /**

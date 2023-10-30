@@ -55,7 +55,13 @@ Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.
 Route::middleware(['auth','role:3','verified'])->group(function(){
 
     Route::get('/vendor/dashboard', [VendorController::class, 'index'])->name('vendor.dashboard');
+
+    Route::get('/vendor/logout', [VendorController::class, 'vendorLogout'])->name('vendor.logout');
 });
+// vendor login route
+Route::get('/vendor/login', [VendorController::class, 'vendorLogin'])->name('vendor.login');
+
+
 
 // // all user route
 // Route::middleware(['auth','role:user','verified'])->group(function(){
