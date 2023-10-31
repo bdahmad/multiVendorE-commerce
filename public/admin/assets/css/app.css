@@ -2198,8 +2198,10 @@ input.search-control-2::placeholder {
 
 /* my custom css  */
 
+/* admin profile pic update  */
 #admin_img_block{
     position: relative;
+    transition: all linear .3s;
 }
 #admin_img_overlay{
     position: absolute;
@@ -2207,11 +2209,50 @@ input.search-control-2::placeholder {
     left: 0;
     right: 0;
     bottom: 0;
+    /* display: none; */
+    transform: scale(0);
     background-color: rgb(218, 232, 238,0.5);
     border-radius: 50%;
 
 }
+#admin_img_block:hover #admin_img_overlay{
+    /* display: block; */
+    transform: scale(1);
+    transition: all linear .3s;
+}
 #admin_pic_edit_btn{
+    position: absolute;
+    left: 30%;
+    top: 40%;
+    font-size: large;
+    color: black;
+
+}
+
+/* vendor profile vendor  */
+#vendor_img_block{
+    position: relative;
+    transition: all linear .3s;
+}
+#vendor_img_overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* display: none; */
+    transform: scale(0);
+    background-color: rgb(218, 232, 238,0.5);
+    border-radius: 50%;
+
+}
+#vendor_img_block:hover #vendor_img_overlay{
+    /* display: block; */
+    transform: scale(1);
+    transition: all linear .3s;
+}
+
+#vendor_pic_edit_btn{
     position: absolute;
     left: 30%;
     top: 40%;

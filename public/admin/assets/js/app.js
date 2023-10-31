@@ -134,19 +134,6 @@ function show_update_button(){
 }
 
 
-// admin profile photo update btn
-let admin_img_block = document.getElementById('admin_img_block');
-let admin_img_overlay = document.getElementById('admin_img_overlay');
-
-admin_img_block.addEventListener('mouseover',  ()=> {
-    admin_img_overlay.style.display = 'block';
-})
-admin_img_block.addEventListener('mouseout',  ()=> {
-    admin_img_overlay.style.display = 'none';
-})
-
-
-
 // admin social link add
 
 // website link
@@ -211,3 +198,16 @@ admin_linkedin_input_from_close.addEventListener("click", function(){
     admin_linkedin_edit_btn.style.display = "block";
     admin_linkedin_link_input_form.setAttribute('class', ' ');
 })
+
+// vendor data update button
+let vendor_data_update_btn_block = document.getElementById('vendor_data_update_btn_block');
+let vendor_data_reset_btn = document.getElementById('vendor_data_reset_btn');
+vendor_data_reset_btn.addEventListener('click', ()=>{
+    document.getElementById('vendor_data_update_btn_block').style.display = "none";
+
+});
+
+function show_vendor_update_button(){
+    document.getElementById('vendor_data_update_btn_block').style.display = "block";
+};
+

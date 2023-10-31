@@ -17,30 +17,37 @@
     {{-- @include('admin.includes.switcher') --}}
     {{-- end switcher  --}}
 
-    <!-- Bootstrap JS -->
-    <script src="{{ asset('admin') }}/assets/js/bootstrap.bundle.min.js"></script>
-    <!--plugins-->
-    <script src="{{ asset('admin') }}/assets/js/jquery.min.js"></script>
-    <script src="{{ asset('admin') }}/assets/plugins/simplebar/js/simplebar.min.js"></script>
-    <script src="{{ asset('admin') }}/assets/plugins/metismenu/js/metisMenu.min.js"></script>
-    <script src="{{ asset('admin') }}/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
-    <script src="{{ asset('admin') }}/assets/plugins/chartjs/js/Chart.min.js"></script>
-    <script src="{{ asset('admin') }}/assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
-    <script src="{{ asset('admin') }}/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="{{ asset('admin') }}/assets/plugins/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
-    <script src="{{ asset('admin') }}/assets/plugins/sparkline-charts/jquery.sparkline.min.js"></script>
-    <script src="{{ asset('admin') }}/assets/plugins/jquery-knob/excanvas.js"></script>
-    <script src="{{ asset('admin') }}/assets/plugins/jquery-knob/jquery.knob.js"></script>
+    	<!--end switcher-->
+	<!-- Bootstrap JS -->
+	<script src="{{asset('admin')}}/assets/js/bootstrap.bundle.min.js"></script>
+	<!--plugins-->
+	<script src="{{asset('admin')}}/assets/js/jquery.min.js"></script>
+	<script src="{{asset('admin')}}/assets/plugins/simplebar/js/simplebar.min.js"></script>
+	<script src="{{asset('admin')}}/assets/plugins/metismenu/js/metisMenu.min.js"></script>
+	<script src="{{asset('admin')}}/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+	<script src="{{asset('admin')}}/assets/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
+	<script src="{{asset('admin')}}/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+	<script src="{{asset('admin')}}/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#Transaction-History').DataTable({
+				lengthMenu: [[6, 10, 20, -1], [6, 10, 20, 'Todos']]
+			});
+		  } );
+	</script>
+	<script src="{{asset('admin')}}/assets/js/dashboard-eCommerce.js"></script>
+	<!--app JS-->
+	<script src="{{asset('admin')}}/assets/js/app.js"></script>
+	<script>
+		new PerfectScrollbar('.product-list');
+		new PerfectScrollbar('.customers-list');
+	</script>
+
     <script>
         $(function() {
             $(".knob").knob();
         });
     </script>
-    {{-- toaster cnd  --}}
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="{{ asset('admin') }}/assets/js/index.js"></script>
-    <!--app JS-->
-    <script src="{{ asset('admin') }}/assets/js/app.js"></script>
 
     <script>
         @if(Session::has('message'))

@@ -30,7 +30,7 @@
                                             src="{{ !empty($adminData->photo) ? url('uploads/admin/'.$adminData->photo) : url('uploads/no_image.jpg') }}"
                                             alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
 
-                                        <div id="admin_img_overlay" style="display: none">
+                                        <div id="admin_img_overlay">
                                             <a href="" type="button" data-bs-toggle="modal"
                                                 data-bs-target="#adminPhotoInput" id="admin_pic_edit_btn"><i
                                                     class="fa fa-camera">Edit</i></a>

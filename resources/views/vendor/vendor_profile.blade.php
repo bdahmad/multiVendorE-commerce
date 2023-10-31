@@ -27,13 +27,13 @@
 
                                     <div id="vendor_img_block">
                                         <img id="vendor_img"
-                                            src="{{ !empty($vendorData->photo) ? url('uploads/vendor/'.$vendorData->photo) : url('uploads/no_image.jpg') }}"
+                                            src="{{ !empty($vendorData->photo) ? url('uploads/vendor/' . $vendorData->photo) : url('uploads/no_image.jpg') }}"
                                             alt="vendor" class="rounded-circle p-1 bg-primary" width="110">
 
-                                        <div id="vendor_img_overlay" style="display: none">
+                                        <div id="vendor_img_overlay">
                                             <a href="" type="button" data-bs-toggle="modal"
                                                 data-bs-target="#vendorPhotoInput" id="vendor_pic_edit_btn"><i
-                                                    class="fa fa-camera">Edit</i></a>
+                                                class="fa fa-camera">Edit</i></a>
                                         </div>
                                     </div>
 
@@ -45,7 +45,8 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="vendorPhotoInputLabel">Choose Your Photo
+                                                    <h1 class="modal-title fs-5" id="vendorPhotoInputLabel">Choose Your Shop
+                                                        Photo
                                                     </h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
@@ -70,15 +71,33 @@
 
                                     <div class="mt-3">
                                         <h4>{{ $vendorData->name }}</h4>
-                                        <p class="text-secondary mb-1">{{ $vendorData->designation }}</p>
-                                        <p class="text-muted font-size-sm">{{ $vendorData->address }}</p>
+                                        <p class="text-secondary mb-1">{{ $vendorData->pay_of_line }}</p>
+                                        <p class="text-secondary mb-1">{{ $vendorData->avg_review }}</p>
                                         <button class="btn btn-primary">Follow</button>
                                         <button class="btn btn-outline-primary">Message</button>
                                     </div>
 
                                 </div>
                                 <hr class="my-4" />
-                              
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                        <h6 class="mb-0"><i class="fa fa-globe fs-5 ms-1"></i> Website</h6>
+                                        <span class="text-secondary">https://codervent.com</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                        <h6 class="mb-0"><i class="fa fa-globe fs-5 ms-1"></i> Website</h6>
+                                        <span class="text-secondary">https://codervent.com</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                        <h6 class="mb-0"><i class="fa fa-globe fs-5 ms-1"></i> Website</h6>
+                                        <span class="text-secondary">https://codervent.com</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                        <h6 class="mb-0"><i class="fa fa-globe fs-5 ms-1"></i> Website</h6>
+                                        <span class="text-secondary">https://codervent.com</span>
+                                    </li>
+
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -92,18 +111,43 @@
                                 <div class="card-body">
                                     <div class="row mb-3">
                                         <div class="col-sm-3 flex">
-                                            <h6 class="mb-0">Full Name:</h6>
+                                            <h6 class="mb-0">Shop Name:</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             {{-- <h6 class = "vendor_data_show">{{$vendorData->name}}</h6> --}}
                                             <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                                id="name" name="name"
-                                                value="@if ($vendorData->name) {{ $vendorData->name }}@else{{ old('name') }} @endif"
-                                                onkeydown="show_update_button()" />
+                                                id="name" name="shop_name"
+                                                value="@if ($vendorData->shop_name) {{ $vendorData->shop_name }}@else{{ old('shop_name') }} @endif"
+                                                onkeydown="show_vendor_update_button()" />
 
-                                            @error('name')
+                                            @error('shop_name')
                                                 <span class="text-danger"></span>{{ $message }}</span>
                                             @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3 flex">
+                                            <h6 class="mb-0">Pay Of Line:</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            {{-- <h6 class = "vendor_data_show">{{$vendorData->pay_of_line}}</h6> --}}
+                                            <input type="text"
+                                                class="form-control @error('pay_of_line') is-invalid @enderror"
+                                                id="pay_of_line" name="pay_of_line"
+                                                value="@if ($vendorData->pay_of_line) {{ $vendorData->pay_of_line }}@else{{ old('pay_of_line') }} @endif"
+                                                onkeydown="show_vendor_update_button()" />
+
+                                            @error('pay_of_line')
+                                                <span class="text-danger"></span>{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3 flex">
+                                            <h6 class="mb-0">Short Description:</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <textarea class="form-control" id="short_description" placeholder="Address..." rows="3" name="short_description" onkeydown="show_vendor_update_button()"></textarea>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -116,7 +160,7 @@
                                                 class="form-control @error('email') is-invalid @enderror" id="email"
                                                 name="email"
                                                 value="@if ($vendorData->email) {{ $vendorData->email }}@else{{ old('email') }} @endif"
-                                                onkeydown="show_update_button()" />
+                                                onkeydown="show_vendor_update_button()" />
                                             @error('email')
                                                 <span class="text-danger"></span>{{ $message }}</span>
                                             @enderror
@@ -132,7 +176,7 @@
                                                 class="form-control @error('phone') is-invalid @enderror" id="phone"
                                                 name="phone"
                                                 value="@if ($vendorData->phone) {{ $vendorData->phone }}@else{{ old('phone') }} @endif"
-                                                onkeydown="show_update_button()" />
+                                                onkeydown="show_vendor_update_button()" />
                                             @error('phone')
                                                 <span class="text-danger"></span>{{ $message }}</span>
                                             @enderror
@@ -143,7 +187,17 @@
                                             <h6 class="mb-0">Username</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <h6 class = "vendor_data_show" for="">{{ $vendorData->username }}</h6>
+                                            <h6 class = "vendor_data_show" for="">{{ $vendorData->username }}
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Join Date</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <h6 class = "vendor_data_show" for="">{{ $vendorData->created_at }}
+                                            </h6>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -156,7 +210,7 @@
                                                 class="form-control @error('address') is-invalid @enderror" id="address"
                                                 name="address"
                                                 value="@if ($vendorData->address) {{ $vendorData->address }}@else{{ old('address') }} @endif"
-                                                onkeydown="show_update_button()" />
+                                                onkeydown="show_vendor_update_button()" />
                                             @error('address')
                                                 <span class="text-danger"></span>{{ $message }}</span>
                                             @enderror
@@ -173,44 +227,39 @@
                     </div>
 
                     <div class="row">
-                            <div class="col-sm-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="d-flex align-items-center mb-3">Project Status</h5>
-                                        <p>Web Design</p>
-                                        <div class="progress mb-3" style="height: 5px">
-                                            <div class="progress-bar bg-primary" role="progressbar"
-                                                style="width: 80%" aria-valuenow="80" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                        </div>
-                                        <p>Website Markup</p>
-                                        <div class="progress mb-3" style="height: 5px">
-                                            <div class="progress-bar bg-danger" role="progressbar"
-                                                style="width: 72%" aria-valuenow="72" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                        </div>
-                                        <p>One Page</p>
-                                        <div class="progress mb-3" style="height: 5px">
-                                            <div class="progress-bar bg-success" role="progressbar"
-                                                style="width: 89%" aria-valuenow="89" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                        </div>
-                                        <p>Mobile Template</p>
-                                        <div class="progress mb-3" style="height: 5px">
-                                            <div class="progress-bar bg-warning" role="progressbar"
-                                                style="width: 55%" aria-valuenow="55" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                        </div>
-                                        <p>Backend API</p>
-                                        <div class="progress" style="height: 5px">
-                                            <div class="progress-bar bg-info" role="progressbar"
-                                                style="width: 66%" aria-valuenow="66" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                        </div>
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="d-flex align-items-center mb-3">Project Status</h5>
+                                    <p>Web Design</p>
+                                    <div class="progress mb-3" style="height: 5px">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%"
+                                            aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <p>Website Markup</p>
+                                    <div class="progress mb-3" style="height: 5px">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 72%"
+                                            aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <p>One Page</p>
+                                    <div class="progress mb-3" style="height: 5px">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 89%"
+                                            aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <p>Mobile Template</p>
+                                    <div class="progress mb-3" style="height: 5px">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 55%"
+                                            aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <p>Backend API</p>
+                                    <div class="progress" style="height: 5px">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 66%"
+                                            aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
                 </div>
             </div>
