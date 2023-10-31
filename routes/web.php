@@ -50,6 +50,7 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
     Route::get('/vendor/dashboard', [vendorController::class, 'Vendor_dashboard'])->name('vendor.dashboard');
     Route::get('/vendor/profile', [vendorController::class, 'vendorProfile'])->name('vendor.profile');
     Route::get('/vendor/logout', [vendorController::class, 'vendorLogout'])->name('vendor.logout');
+    Route::get('/vendor/change/password', [vendorController::class, 'vendorChangePassword'])->name('vendor.change.password');
 });
 
 
