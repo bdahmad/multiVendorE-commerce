@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,7 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->insert([
 
-                //Super Admin Data
+            //Super Admin Data
             [
                 'name' => 'Superadmin',
                 'username' => 'superadmin',
@@ -26,9 +27,19 @@ class UserTableSeeder extends Seeder
                 'password' => Hash::make('111'),
                 'role_id' => 1,
                 'status_id' => 1,
-                'slag' => uniqid('sa'.rand()),
+                'slag' => uniqid('sa' . rand()),
+
+                // this data related with super admin just for seed null value
+                'vendor_shop_name' => null,
+                'vendor_shop_slug' => null,
+                'vendor_pay_of_line' => null,
+                'vendor_short_description' => null,
+                'vendor_join' => null,
+                'vendor_avg_review' => null,
+                'vendor_status_id' => null,
+                'vendor_shop_address' => null,
             ],
-                // Admin Data
+            // Admin Data
             [
                 'name' => 'Admin',
                 'username' => 'admin',
@@ -37,7 +48,17 @@ class UserTableSeeder extends Seeder
                 'password' => Hash::make('111'),
                 'role_id' => 2,
                 'status_id' => 1,
-                'slag' => uniqid('a'.rand()),
+                'slag' => uniqid('a' . rand()),
+
+                // this data related with admin just for seed null value
+                'vendor_shop_name' => null,
+                'vendor_shop_slug' => null,
+                'vendor_pay_of_line' => null,
+                'vendor_short_description' => null,
+                'vendor_join' => null,
+                'vendor_avg_review' => null,
+                'vendor_status_id' => null,
+                'vendor_shop_address' => null,
             ],
 
             // Vendor Data
@@ -48,8 +69,18 @@ class UserTableSeeder extends Seeder
                 'phone' => '01718022216',
                 'password' => Hash::make('111'),
                 'role_id' => 3,
-                'status_id' => 2,
-                'slag' => uniqid('v'.rand()),
+                'status_id' => 1,
+                'slag' => uniqid('v' . rand()),
+
+                // for vendor fake data
+                'vendor_shop_name' => 'TFC',
+                'vendor_shop_slug' => 'tfc',
+                'vendor_pay_of_line' => 'Eat Healthy, Be Healthy',
+                'vendor_short_description' => 'We are trying to best',
+                'vendor_join' => Carbon::now(),
+                'vendor_avg_review' => 4,
+                'vendor_status_id' => 1,
+                'vendor_shop_address' => "Dhaka",
             ],
 
             // User Data
@@ -61,22 +92,20 @@ class UserTableSeeder extends Seeder
                 'password' => Hash::make('111'),
                 'role_id' => 4,
                 'status_id' => 1,
-                'slag' => uniqid('u'.rand()),
+                'slag' => uniqid('u' . rand()),
+
+                // this data not use on user admin just for seed null value
+                'vendor_shop_name' => null,
+                'vendor_shop_slug' => null,
+                'vendor_pay_of_line' => null,
+                'vendor_short_description' => null,
+                'vendor_join' => null,
+                'vendor_avg_review' => null,
+                'vendor_status_id' => null,
+                'vendor_shop_address' => null,
             ],
 
-            // Demo User Data
-            // [
-            //     'name' => 'Demo User',
-            //     'username' => 'demouser',
-            //     'email' => 'demouser@gmail.com',
-            //     'phone' => '01718022217',
-            //     'password' => Hash::make('111'),
-            //     'role_id' => '',
-            //     'status_id' => '',
-            //     'slag' => uniqid('u'.rand()),
-            // ],
+
         ]);
-
-
     }
 }

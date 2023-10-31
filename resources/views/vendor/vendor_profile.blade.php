@@ -27,7 +27,7 @@
 
                                     <div id="vendor_img_block">
                                         <img id="vendor_img"
-                                            src="{{ !empty($vendorData->photo) ? url('uploads/vendor/' . $vendorData->photo) : url('uploads/no_image.jpg') }}"
+                                            src="{{ !empty($vendorData->vendor_profile_pic) ? url('uploads/vendor/' . $vendorData->vendor_profile_pic) : url('uploads/no_image.jpg') }}"
                                             alt="vendor" class="rounded-circle p-1 bg-primary" width="110">
 
                                         <div id="vendor_img_overlay">
@@ -56,7 +56,7 @@
                                                     @csrf
                                                     <div class="modal-body">
 
-                                                        <input type="file" name="image" id="vendor_photo">
+                                                        <input type="file" name="vendor_profile_pic" id="vendor_photo">
 
                                                     </div>
                                                     <div class="modal-footer">
@@ -70,9 +70,9 @@
                                     </div>
 
                                     <div class="mt-3">
-                                        <h4>{{ $vendorData->name }}</h4>
-                                        <p class="text-secondary mb-1">{{ $vendorData->pay_of_line }}</p>
-                                        <p class="text-secondary mb-1">{{ $vendorData->avg_review }}</p>
+                                        <h4>{{ $vendorData->vendor_shop_name }}</h4>
+                                        <p class="text-secondary mb-1">{{ $vendorData->vendor_pay_of_line }}</p>
+                                        <p class="text-secondary mb-1">{{ $vendorData->vendor_avg_review }}</p>
                                         <button class="btn btn-primary">Follow</button>
                                         <button class="btn btn-outline-primary">Message</button>
                                     </div>
@@ -115,12 +115,12 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             {{-- <h6 class = "vendor_data_show">{{$vendorData->name}}</h6> --}}
-                                            <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                                id="name" name="shop_name"
-                                                value="@if ($vendorData->shop_name) {{ $vendorData->shop_name }}@else{{ old('shop_name') }} @endif"
+                                            <input type="text" class="form-control @error('vendor_shop_name') is-invalid @enderror"
+                                                id="name" name="vendor_shop_name"
+                                                value="@if ($vendorData->vendor_shop_name) {{ $vendorData->vendor_shop_name }}@else{{ old('vendor_shop_name') }} @endif"
                                                 onkeydown="show_vendor_update_button()" />
 
-                                            @error('shop_name')
+                                            @error('vendor_shop_name')
                                                 <span class="text-danger"></span>{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -132,12 +132,12 @@
                                         <div class="col-sm-9 text-secondary">
                                             {{-- <h6 class = "vendor_data_show">{{$vendorData->pay_of_line}}</h6> --}}
                                             <input type="text"
-                                                class="form-control @error('pay_of_line') is-invalid @enderror"
-                                                id="pay_of_line" name="pay_of_line"
-                                                value="@if ($vendorData->pay_of_line) {{ $vendorData->pay_of_line }}@else{{ old('pay_of_line') }} @endif"
+                                                class="form-control @error('vendor_pay_of_line') is-invalid @enderror"
+                                                id="vendor_pay_of_line" name="vendor_pay_of_line"
+                                                value="@if ($vendorData->vendor_pay_of_line) {{ $vendorData->vendor_pay_of_line }}@else{{ old('vendor_pay_of_line') }} @endif"
                                                 onkeydown="show_vendor_update_button()" />
 
-                                            @error('pay_of_line')
+                                            @error('vendor_pay_of_line')
                                                 <span class="text-danger"></span>{{ $message }}</span>
                                             @enderror
                                         </div>
@@ -147,7 +147,7 @@
                                             <h6 class="mb-0">Short Description:</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <textarea class="form-control" id="short_description" placeholder="Address..." rows="3" name="short_description" onkeydown="show_vendor_update_button()"></textarea>
+                                            <textarea class="form-control" id="vendor_short_description"  rows="3" name="vendor_short_description" onkeydown="show_vendor_update_button()">{{$vendorData->vendor_short_description}}</textarea>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -193,11 +193,18 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">Join Date</h6>
+                                            <h6 class="mb-0">Vendor Join</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <h6 class = "vendor_data_show" for="">{{ $vendorData->created_at }}
-                                            </h6>
+                                            {{-- <h6 class = "vendor_data_show" for="">{{$vendorData->phone}}</h6> --}}
+                                            <input type="date"
+                                                class="form-control @error('vendor_join') is-invalid @enderror" id="vendor_join"
+                                                name="vendor_join"
+                                                value="@if ($vendorData->vendor_join) {{ $vendorData->vendor_join }}@else{{ old('vendor_join') }} @endif"
+                                                onkeydown="show_vendor_update_button()" />
+                                            @error('vendor_join')
+                                                <span class="text-danger"></span>{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -207,11 +214,11 @@
                                         <div class="col-sm-9 text-secondary">
                                             {{-- <h6 class = "vendor_data_show" for="">{{$vendorData->address}}</h6> --}}
                                             <input type="text"
-                                                class="form-control @error('address') is-invalid @enderror" id="address"
-                                                name="address"
-                                                value="@if ($vendorData->address) {{ $vendorData->address }}@else{{ old('address') }} @endif"
+                                                class="form-control @error('vendor_shop_address') is-invalid @enderror" id="vendor_shop_address"
+                                                name="vendor_shop_address"
+                                                value="@if ($vendorData->vendor_shop_address) {{ $vendorData->vendor_shop_address }}@else{{ old('vendor_shop_address') }} @endif"
                                                 onkeydown="show_vendor_update_button()" />
-                                            @error('address')
+                                            @error('vendor_shop_address')
                                                 <span class="text-danger"></span>{{ $message }}</span>
                                             @enderror
                                         </div>

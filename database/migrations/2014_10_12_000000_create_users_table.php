@@ -14,6 +14,15 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('vendor_shop_name')->nullable();
+            $table->string('vendor_shop_slug')->nullable();
+            $table->string('vendor_pay_of_line')->nullable();
+            $table->string('vendor_short_description')->nullable();
+            $table->string('vendor_join')->nullable();
+            $table->string('vendor_avg_review')->nullable();
+            $table->string('vendor_profile_pic')->nullable();
+            $table->string('vendor_status_id')->nullable();
+            $table->string('vendor_shop_address')->nullable();
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -27,6 +36,7 @@ return new class extends Migration
             $table->text('status_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
