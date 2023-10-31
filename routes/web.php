@@ -18,12 +18,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// all public route route here
+Route::get('/', function () {
+    return view('index');
+});
+
+
+
+
+
+
 // all supper admin route here
 Route::middleware(['auth','role:1','verified'])->group(function(){
 
     Route::get('/supper/admin/dashboard', [SuperadminController::class, 'index'])->name('supper.admin.dashboard');
 });
-
 
 
 
@@ -91,11 +101,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-// all public route route here
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
 require __DIR__.'/auth.php';
