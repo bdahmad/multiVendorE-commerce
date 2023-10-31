@@ -79,12 +79,12 @@ class VendorController extends Controller
         // notification set here
         if ($user->update()) {
             $notification = array(
-                'message' => "vendor Profile Update Successfully",
+                'message' => "Store Profile Update Successfully",
                 'alert-type' => "success",
             );
         } else {
             $notification = array(
-                'message' => "Opps, vendor Profile Not Update",
+                'message' => "Opps, Store Profile Not Update",
                 'alert-type' => "error",
             );
         }
@@ -100,49 +100,70 @@ class VendorController extends Controller
 
         return view('vendor.vendor_settings', compact('vendorData'));
     }
+
     // vendor profile Pic Update
-    public function vendorProfilePicUpdate(Request $request){
+    public function vendorProfilePicUpdate(Request $request)
+    {
 
         // fin all data
         $id = Auth::user()->id;
         $vendorData = User::find($id);
 
         // check image here
-        if($request->vendor_profile_pic){
+        if ($request->vendor_profile_pic) {
 
-            if(File::exists(public_path('uploads/vendor/'.$vendorData->vendor_profile_pic))){
-                File::delete(public_path('uploads/vendor/'.$vendorData->vendor_profile_pic));
+            if (File::exists(public_path('uploads/vendor/' . $vendorData->vendor_profile_pic))) {
+                File::delete(public_path('uploads/vendor/' . $vendorData->vendor_profile_pic));
             }
             $image = $request->file('vendor_profile_pic');
-            $customeName = $id.".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/vendor/'.$customeName);
-            Image::make($image)->resize(250,250)->save($path);
+            $customeName = $id . "." . $image->getClientOriginalExtension();
+            $path = public_path('uploads/vendor/' . $customeName);
+            Image::make($image)->resize(250, 250)->save($path);
 
             $vendorData->vendor_profile_pic = $customeName;
 
             if ($vendorData->update()) {
                 $notification = array(
-                    'message' => "vendor Profile Photo Update Successfully",
+                    'message' => "Store Profile Photo Update Successfully",
                     'alert-type' => "success",
                 );
-            }else{
+            } else {
                 $notification = array(
-                    'message' => "Opps, vendor Profile Photo Not Update",
+                    'message' => "Opps, Store Profile Photo Not Update",
                     'alert-type' => "error",
                 );
             }
             return back()->with($notification);
-
-        }else{
+        } else {
             $notification = array(
-                'message' => "Please Select Your Photo",
+                'message' => "Please Select Your Store Profile Photo",
                 'alert-type' => "error",
             );
             return back()->with($notification);
         }
-
     }
 
+    // vendor Password Update
+    public function vendorPasswordUpdate(Request $request)
+    {
+        // form validation
+        $this->validate($request, [
+            'old_password' => 'required',
+            'new_password' => 'required',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+
+        // old password match
+        if (Hash::check($request->old_password, auth()->user()->password)) {
+            User::where('id', auth()->user()->id)->update([
+                'password' => Hash::make($request->new_password),
+            ]);
+
+            return redirect()->route('vendor.logout');
+        } else {
+            return back()->with('error', "Old Password Doesn't Match");
+        }
+    }
 
     // vendor social link update
     public function vendorSocialLinkUpdate(Request $request)

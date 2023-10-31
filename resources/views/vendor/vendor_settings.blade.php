@@ -1,4 +1,4 @@
-@extends('admin.admin_master')
+@extends('vendor.vendor_master')
 
 @section('content')
     <div class="page-content">
@@ -32,7 +32,7 @@
                             <div class="card-header">
                                 <h5>Change Password</h5>
                             </div>
-                            <form action="{{ route('admin.password.update') }}" method="post">
+                            <form action="{{ route('vendor.password.update') }}" method="post">
                                 @csrf
                                 <div class="card-body">
                                     {{-- old password  --}}
@@ -85,7 +85,7 @@
 
                                     <div class="mb-3 mt-3">
                                         <input type="reset" class="btn btn-info btn-sm" />
-                                        <button type="submit" class="btn btn-success btn-sm" id="admin_password_change">Change
+                                        <button type="submit" class="btn btn-success btn-sm" id="vendor_password_change">Change
                                             Password</button>
                                     </div>
                                 </div>
