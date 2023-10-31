@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 $id = Auth::user()->id;
-$adminData = User::find($id);
+$vendorData = User::find($id);
 
 @endphp
 
@@ -389,7 +389,7 @@ $adminData = User::find($id);
             <div class="user-box dropdown">
                 <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret"
                     href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ !empty($adminData->photo) ? url('uploads/admin/'.$adminData->photo) : url('uploads/no_image.jpg') }}" class="user-img"
+                    <img src="{{ !empty($vendorData->vendor_profile_pic) ? url('uploads/vendor/'.$vendorData->vendor_profile_pic) : url('uploads/no_image.jpg') }}" class="user-img"
                         alt="user avatar">
                     <div class="user-info ps-3">
                         <p class="user-name mb-0">{{Auth::User()->name}}</p>

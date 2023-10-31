@@ -2201,7 +2201,7 @@ input.search-control-2::placeholder {
 /* admin profile pic update  */
 #admin_img_block{
     position: relative;
-    transition: all linear .3s;
+    transition: all linear .2s;
 }
 #admin_img_overlay{
     position: absolute;
@@ -2218,7 +2218,7 @@ input.search-control-2::placeholder {
 #admin_img_block:hover #admin_img_overlay{
     /* display: block; */
     transform: scale(1);
-    transition: all linear .3s;
+    transition: all linear .2s;
 }
 #admin_pic_edit_btn{
     position: absolute;
@@ -2232,7 +2232,7 @@ input.search-control-2::placeholder {
 /* vendor profile vendor  */
 #vendor_img_block{
     position: relative;
-    transition: all linear .3s;
+    transition: all linear .2s;
 }
 #vendor_img_overlay{
     position: absolute;
@@ -2249,7 +2249,7 @@ input.search-control-2::placeholder {
 #vendor_img_block:hover #vendor_img_overlay{
     /* display: block; */
     transform: scale(1);
-    transition: all linear .3s;
+    transition: all linear .2s;
 }
 
 #vendor_pic_edit_btn{

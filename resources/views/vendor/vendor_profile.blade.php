@@ -72,7 +72,17 @@
                                     <div class="mt-3">
                                         <h4>{{ $vendorData->vendor_shop_name }}</h4>
                                         <h6 class="text-secondary mb-1">{{ $vendorData->vendor_pay_of_line }}</h6>
-                                        <h4 class="text-secondary my-3">{{ $vendorData->vendor_avg_review }}</h4>
+                                        <div class="text-secondary my-3">
+                                            <?php
+                                                for ($i=0; $i <$vendorData->vendor_avg_review ; $i++) {
+                                            ?>
+                                                    <i class="fa fa-star fs-5" aria-hidden="true"></i>
+
+                                            <?php
+                                                }
+                                            ?>
+                                        </div>
+                                        {{-- <h4 class="text-secondary my-3">{{ $vendorData->vendor_avg_review }}</h4> --}}
                                         <button class="btn btn-primary">Follow</button>
                                         <button class="btn btn-outline-primary">Message</button>
                                     </div>
