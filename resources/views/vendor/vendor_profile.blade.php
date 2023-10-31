@@ -71,8 +71,8 @@
 
                                     <div class="mt-3">
                                         <h4>{{ $vendorData->vendor_shop_name }}</h4>
-                                        <p class="text-secondary mb-1">{{ $vendorData->vendor_pay_of_line }}</p>
-                                        <p class="text-secondary mb-1">{{ $vendorData->vendor_avg_review }}</p>
+                                        <h6 class="text-secondary mb-1">{{ $vendorData->vendor_pay_of_line }}</h6>
+                                        <h4 class="text-secondary my-3">{{ $vendorData->vendor_avg_review }}</h4>
                                         <button class="btn btn-primary">Follow</button>
                                         <button class="btn btn-outline-primary">Message</button>
                                     </div>
@@ -196,15 +196,8 @@
                                             <h6 class="mb-0">Vendor Join</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            {{-- <h6 class = "vendor_data_show" for="">{{$vendorData->phone}}</h6> --}}
-                                            <input type="date"
-                                                class="form-control @error('vendor_join') is-invalid @enderror" id="vendor_join"
-                                                name="vendor_join"
-                                                value="@if ($vendorData->vendor_join) {{ $vendorData->vendor_join }}@else{{ old('vendor_join') }} @endif"
-                                                onkeydown="show_vendor_update_button()" />
-                                            @error('vendor_join')
-                                                <span class="text-danger"></span>{{ $message }}</span>
-                                            @enderror
+                                            <h6 class = "vendor_data_show" for="">{{ $vendorData->vendor_join }}
+                                            </h6>
                                         </div>
                                     </div>
                                     <div class="row mb-3">

@@ -27,7 +27,7 @@ class VendorController extends Controller
         return view('vendor.vendor_login');
     }
 
-     /**
+    /**
      * Destroy an authenticated session. or vendor logout here
      */
     public function vendorLogout(Request $request)
@@ -43,7 +43,8 @@ class VendorController extends Controller
 
 
     // vendor profile page show
-    public function vendorProfile(){
+    public function vendorProfile()
+    {
 
         // fin all data
         $id = Auth::user()->id;
@@ -51,6 +52,44 @@ class VendorController extends Controller
         return view('vendor.vendor_profile', compact('vendorData'));
     }
 
+    // vendor profile update
+    public function vendorProfileUpdate(Request $request)
+    {
+
+        $id = Auth::user()->id;
+
+        $this->validate($request, [
+            'vendor_shop_name' => 'required|max:50|unique:users,vendor_shop_name,' . $id . 'vendor_shop_name',
+            'vendor_pay_of_line' => 'required|max:100|',
+            'vendor_short_description' => 'required|max:255|',
+            'email' => 'required|max:100|email|unique:users,email,' . $id . 'email',
+            'phone' => 'required|numeric|min:10|unique:users,phone,' . $id . 'phone',
+            'vendor_shop_address' => 'required|max:100|',
+        ]);
+
+        $user = User::find($id);
+
+        $user->vendor_shop_name = $request->vendor_shop_name;
+        $user->vendor_pay_of_line = $request->vendor_pay_of_line;
+        $user->vendor_short_description = $request->vendor_short_description;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->vendor_shop_address = $request->vendor_shop_address;
+
+        // notification set here
+        if ($user->update()) {
+            $notification = array(
+                'message' => "vendor Profile Update Successfully",
+                'alert-type' => "success",
+            );
+        } else {
+            $notification = array(
+                'message' => "Opps, vendor Profile Not Update",
+                'alert-type' => "error",
+            );
+        }
+        return back()->with($notification);
+    }
 
     // vendor settings page show
     public function vendorSettings()
@@ -63,73 +102,8 @@ class VendorController extends Controller
     }
 
     // vendor social link update
-    public function vendorSocialLinkUpdate(Request $request){
-
-        $this->validate($request,[
-            'link' => 'required',
-        ]);
-
-        $slug = $request['slug'];
-
-        if ($slug == 'website') {
-            // update website link
-            $webinfo = SocialMedia::where('user_id',3)->where('social_media_slug', 'website')->update([
-                'social_media_link' => $request['link']
-            ]);
-
-            if ($webinfo) {
-                $notification = array(
-                    'message' => "vendor Website Link Updated",
-                    'alert-type' => "success",
-                );
-            }else{
-                $notification = array(
-                    'message' => "Opps, Something Is Wrong",
-                    'alert-type' => "error",
-                );
-            }
-            return back()->with($notification);
-        }
-        elseif($slug == 'facebook')
-        {
-            // update facebook link
-            $facebookinfo = SocialMedia::where('user_id',3)->where('social_media_slug', 'facebook')->update([
-                'social_media_link' => $request['link']
-            ]);
-
-            if ($facebookinfo) {
-                $notification = array(
-                    'message' => "vendor Facebook Link Updated",
-                    'alert-type' => "success",
-                );
-            }else{
-                $notification = array(
-                    'message' => "Opps, Something Is Wrong",
-                    'alert-type' => "error",
-                );
-            }
-            return back()->with($notification);
-        }
-        elseif($slug == 'linkedin')
-        {
-            // update linkedin link
-            $linkedininfo = SocialMedia::where('user_id',3)->where('social_media_slug', 'linkedin')->update([
-                'social_media_link' => $request['link']
-            ]);
-
-            if ($linkedininfo) {
-                $notification = array(
-                    'message' => "vendor Linkedin Link Updated",
-                    'alert-type' => "success",
-                );
-            }else{
-                $notification = array(
-                    'message' => "Opps, Something Is Wrong",
-                    'alert-type' => "error",
-                );
-            }
-            return back()->with($notification);
-        }
+    public function vendorSocialLinkUpdate(Request $request)
+    {
     }
 
     /**
