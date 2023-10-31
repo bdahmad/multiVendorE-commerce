@@ -2,19 +2,17 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>Admin Dashboard</title>
-
     <!--favicon-->
     <link rel="icon" href="{{asset('adminbackend')}}/assets/images/favicon-32x32.png" type="image/png" />
     <!--plugins-->
-    <link href="{{asset('adminbackend')}}/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <link href="{{asset('adminbackend')}}/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
     <link href="{{asset('adminbackend')}}/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
     <link href="{{asset('adminbackend')}}/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+    <link href="{{asset('adminbackend')}}/assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <!-- loader-->
     <link href="{{asset('adminbackend')}}/assets/css/pace.min.css" rel="stylesheet" />
     <script src="{{asset('adminbackend')}}/assets/js/pace.min.js"></script>
@@ -26,7 +24,7 @@
     <link rel="stylesheet" href="{{asset('adminbackend')}}/assets/css/dark-theme.css" />
     <link rel="stylesheet" href="{{asset('adminbackend')}}/assets/css/semi-dark.css" />
     <link rel="stylesheet" href="{{asset('adminbackend')}}/assets/css/header-colors.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+    <title>Vendor Dashboard</title>
 </head>
 
 <body>
@@ -39,7 +37,7 @@
                     <img src="{{asset('adminbackend')}}/assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
                 </div>
                 <div>
-                    <h4 class="logo-text">Admin</h4>
+                    <h4 class="logo-text">Vendor</h4>
                 </div>
                 <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
                 </div>
@@ -47,15 +45,15 @@
             <!--navigation-->
             <ul class="metismenu" id="menu">
                 <li>
-                    <a href="{{ route('admin.dashboard') }}">
-                        <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                    <a href="{{ route('vendor.dashboard') }}">
+                        <div class="parent-icon"><i class='bx bx-cookie'></i>
                         </div>
                         <div class="menu-title">Dashboard</div>
                     </a>
                 </li>
                 <li>
                     <a href="javascript:;" class="has-arrow">
-                        <div class="parent-icon"><i class='bx bx-cookie'></i>
+                        <div class="parent-icon"><i class='bx bx-home-circle'></i>
                         </div>
                         <div class="menu-title">Brands</div>
                     </a>
@@ -95,7 +93,9 @@
                         </li>
                     </ul>
                 </li>
+
                 <li class="menu-label">UI Elements</li>
+
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class='bx bx-cart'></i>
@@ -186,6 +186,7 @@
                         </li>
                     </ul>
                 </li>
+
 
                 <li class="menu-label">Charts & Maps</li>
                 <li>
@@ -401,7 +402,7 @@
                                         <a class="dropdown-item" href="javascript:;">
                                             <div class="d-flex align-items-center">
                                                 <div class="user-online">
-                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-9.png" class="msg-avatar" alt="user avatar">
+                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-1.png" class="msg-avatar" alt="user avatar">
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h6 class="msg-name">Daisy Anderson <span class="msg-time float-end">5 sec
@@ -413,7 +414,7 @@
                                         <a class="dropdown-item" href="javascript:;">
                                             <div class="d-flex align-items-center">
                                                 <div class="user-online">
-                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-9.png" class="msg-avatar" alt="user avatar">
+                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-2.png" class="msg-avatar" alt="user avatar">
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h6 class="msg-name">Althea Cabardo <span class="msg-time float-end">14
@@ -425,7 +426,7 @@
                                         <a class="dropdown-item" href="javascript:;">
                                             <div class="d-flex align-items-center">
                                                 <div class="user-online">
-                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-8.png" class="msg-avatar" alt="user avatar">
+                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-3.png" class="msg-avatar" alt="user avatar">
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h6 class="msg-name">Oscar Garner <span class="msg-time float-end">8 min
@@ -437,7 +438,7 @@
                                         <a class="dropdown-item" href="javascript:;">
                                             <div class="d-flex align-items-center">
                                                 <div class="user-online">
-                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-11.png" class="msg-avatar" alt="user avatar">
+                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-4.png" class="msg-avatar" alt="user avatar">
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h6 class="msg-name">Katherine Pechon <span class="msg-time float-end">15
@@ -449,7 +450,7 @@
                                         <a class="dropdown-item" href="javascript:;">
                                             <div class="d-flex align-items-center">
                                                 <div class="user-online">
-                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-24.png" class="msg-avatar" alt="user avatar">
+                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-5.png" class="msg-avatar" alt="user avatar">
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h6 class="msg-name">Amelia Doe <span class="msg-time float-end">22 min
@@ -461,7 +462,7 @@
                                         <a class="dropdown-item" href="javascript:;">
                                             <div class="d-flex align-items-center">
                                                 <div class="user-online">
-                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-9.png" class="msg-avatar" alt="user avatar">
+                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-6.png" class="msg-avatar" alt="user avatar">
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h6 class="msg-name">Cristina Jhons <span class="msg-time float-end">2 hrs
@@ -473,7 +474,7 @@
                                         <a class="dropdown-item" href="javascript:;">
                                             <div class="d-flex align-items-center">
                                                 <div class="user-online">
-                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-8.png" class="msg-avatar" alt="user avatar">
+                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-7.png" class="msg-avatar" alt="user avatar">
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h6 class="msg-name">James Caviness <span class="msg-time float-end">4 hrs
@@ -485,7 +486,7 @@
                                         <a class="dropdown-item" href="javascript:;">
                                             <div class="d-flex align-items-center">
                                                 <div class="user-online">
-                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-11.png" class="msg-avatar" alt="user avatar">
+                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-8.png" class="msg-avatar" alt="user avatar">
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h6 class="msg-name">Peter Costanzo <span class="msg-time float-end">6 hrs
@@ -509,7 +510,7 @@
                                         <a class="dropdown-item" href="javascript:;">
                                             <div class="d-flex align-items-center">
                                                 <div class="user-online">
-                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-11.png" class="msg-avatar" alt="user avatar">
+                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-10.png" class="msg-avatar" alt="user avatar">
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h6 class="msg-name">Thomas Wheeler <span class="msg-time float-end">2 days
@@ -521,7 +522,7 @@
                                         <a class="dropdown-item" href="javascript:;">
                                             <div class="d-flex align-items-center">
                                                 <div class="user-online">
-                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-9.png" class="msg-avatar" alt="user avatar">
+                                                    <img src="{{asset('adminbackend')}}/assets/images/avatars/avatar-11.png" class="msg-avatar" alt="user avatar">
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h6 class="msg-name">Johnny Seitz <span class="msg-time float-end">5 days
@@ -542,18 +543,18 @@
                         <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             @php
                             $id = Auth::user()->id;
-                            $adminData = App\Models\User::find($id);
+                            $vendorData = App\Models\User::find($id);
                             @endphp
-                            <img src="{{(!empty($adminData->photo))? url('uploads/images/admin/'.$adminData->photo):url('uploads/no_image.jpg') }}" class="user-img" alt="user avatar">
+                            <img src="{{(!empty($vendorData->photo))? url('uploads/images/vendor/'.$vendorData->photo):url('uploads/no_image.jpg') }}" class="user-img" alt="user avatar">
                             <div class="user-info ps-3">
                                 <p class="user-name mb-0">{{ Auth::user()->name }}</p>
-                                <p class="designattion mb-0">{{ Auth::user()->name }}</p>
+                                <p class="designattion mb-0">{{ Auth::user()->username }}</p>
                             </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{{ route('admin.profile') }}"><i class="bx bx-user"></i><span>Profile</span></a>
+                            <li><a class="dropdown-item" href="{{ route('vendor.profile') }}"><i class="bx bx-user"></i><span>Profile</span></a>
                             </li>
-                            <li><a class="dropdown-item" href="{{ route('admin.change.password') }}"><i class="bx bx-cog"></i><span>Change Password</span></a>
+                            <li><a class="dropdown-item" href="javascript:;"><i class="bx bx-cog"></i><span>Settings</span></a>
                             </li>
                             <li><a class="dropdown-item" href="javascript:;"><i class='bx bx-home-circle'></i><span>Dashboard</span></a>
                             </li>
@@ -564,7 +565,7 @@
                             <li>
                                 <div class="dropdown-divider mb-0"></div>
                             </li>
-                            <li><a class="dropdown-item" href="{{route('admin.logout')}}"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
+                            <li><a class="dropdown-item" href="{{ route('vendor.logout') }}"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
                             </li>
                         </ul>
                     </div>
@@ -649,9 +650,8 @@
                     </div>
                 </div>
             </div>
-
             <hr />
-            <h6 class="mb-0">Sidebar Backgrounds</h6>
+            <h6 class="mb-0">Sidebar Colors</h6>
             <hr />
             <div class="header-colors-indigators">
                 <div class="row row-cols-auto g-3">
@@ -681,7 +681,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <!--end switcher-->
@@ -692,57 +691,25 @@
     <script src="{{asset('adminbackend')}}/assets/plugins/simplebar/js/simplebar.min.js"></script>
     <script src="{{asset('adminbackend')}}/assets/plugins/metismenu/js/metisMenu.min.js"></script>
     <script src="{{asset('adminbackend')}}/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
-    <script src="{{asset('adminbackend')}}/assets/plugins/chartjs/js/Chart.min.js"></script>
-    <script src="{{asset('adminbackend')}}/assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
-    <script src="{{asset('adminbackend')}}/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="{{asset('adminbackend')}}/assets/plugins/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
-    <script src="{{asset('adminbackend')}}/assets/plugins/sparkline-charts/jquery.sparkline.min.js"></script>
-    <script src="{{asset('adminbackend')}}/assets/plugins/jquery-knob/excanvas.js"></script>
-    <script src="{{asset('adminbackend')}}/assets/plugins/jquery-knob/jquery.knob.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="{{asset('adminbackend')}}/assets/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
+    <script src="{{asset('adminbackend')}}/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="{{asset('adminbackend')}}/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
     <script>
-        $(function() {
-            $(".knob").knob();
-        });
-    </script>
-    <script src="{{asset('adminbackend')}}/assets/js/index.js"></script>
-    <!--app JS-->
-    <script src="{{asset('adminbackend')}}/assets/js/app.js"></script>
-
-
-    <script>
-        jQuery(document).ready(function() {
-            jQuery('#image').change(function(e) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    jQuery('#showImg').attr('src', e.target.result);
-
-                }
-                reader.readAsDataURL(e.target.files['0']);
+        $(document).ready(function() {
+            $('#Transaction-History').DataTable({
+                lengthMenu: [
+                    [6, 10, 20, -1],
+                    [6, 10, 20, 'Todos']
+                ]
             });
         });
     </script>
+    <script src="{{asset('adminbackend')}}/assets/js/dashboard-eCommerce.js"></script>
+    <!--app JS-->
+    <script src="{{asset('adminbackend')}}/assets/js/app.js"></script>
     <script>
-        @if(Session::has('message'))
-        var type = "{{ Session::get('alert-type','info') }}"
-        switch (type) {
-            case 'info':
-                toastr.info(" {{ Session::get('message') }} ");
-                break;
-
-            case 'success':
-                toastr.success(" {{ Session::get('message') }} ");
-                break;
-
-            case 'warning':
-                toastr.warning(" {{ Session::get('message') }} ");
-                break;
-
-            case 'error':
-                toastr.error(" {{ Session::get('message') }} ");
-                break;
-        }
-        @endif
+        new PerfectScrollbar('.product-list');
+        new PerfectScrollbar('.customers-list');
     </script>
 </body>
 

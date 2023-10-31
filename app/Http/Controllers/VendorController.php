@@ -14,6 +14,7 @@ class VendorController extends Controller
     }
     public function vendorProfile()
     {
+        return view('vendor.vendor-profile');
     }
     public function vendorLogout(Request $request)
     {
