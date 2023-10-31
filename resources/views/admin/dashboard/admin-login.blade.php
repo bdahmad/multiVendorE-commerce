@@ -41,20 +41,20 @@
 									</div>
 									<div class="d-grid">
 										<a class="btn my-4 shadow-sm btn-white" href="javascript:;"> <span class="d-flex justify-content-center align-items-center">
-                          <img class="me-2" src="{{asset('adminbackend')}}/assets/images/icons/search.svg" width="16" alt="Image Description">
-                          <span>Sign in with Google</span>
+												<img class="me-2" src="{{asset('adminbackend')}}/assets/images/icons/search.svg" width="16" alt="Image Description">
+												<span>Sign in with Google</span>
 											</span>
 										</a> <a href="javascript:;" class="btn btn-facebook"><i class="bx bxl-facebook"></i>Sign in with Facebook</a>
 									</div>
 									<div class="login-separater text-center mb-4"> <span>OR SIGN IN WITH EMAIL</span>
-										<hr/>
+										<hr />
 									</div>
 									<div class="form-body">
-										<form  class="row g-3" method="POST" action="{{ route('login') }}" >
-                                        @csrf
+										<form class="row g-3" method="POST" action="{{ route('login') }}">
+											@csrf
 											<div class="col-12">
 												<label for="inputEmailAddress" class="form-label">Email Address</label>
-												<input type="email" id="email" name="email" :value="old('email')" class="form-control" id="inputEmailAddress" placeholder="Email Address">
+												<input type="email" id="email" name="email" value="{{old('email')}}" class="form-control" id="inputEmailAddress" placeholder="Email Address">
 											</div>
 											<div class="col-12">
 												<label for="inputChoosePassword" class="form-label">Enter Password</label>
@@ -68,7 +68,7 @@
 													<label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
 												</div>
 											</div>
-											<div class="col-md-6 text-end">	<a href="authentication-forgot-password.html">Forgot Password ?</a>
+											<div class="col-md-6 text-end"> <a href="authentication-forgot-password.html">Forgot Password ?</a>
 											</div>
 											<div class="col-12">
 												<div class="d-grid">
@@ -96,8 +96,8 @@
 	<script src="{{asset('adminbackend')}}/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
 	<!--Password show & hide js -->
 	<script>
-		$(document).ready(function () {
-			$("#show_hide_password a").on('click', function (event) {
+		$(document).ready(function() {
+			$("#show_hide_password a").on('click', function(event) {
 				event.preventDefault();
 				if ($('#show_hide_password input').attr("type") == "text") {
 					$('#show_hide_password input').attr('type', 'password');
@@ -116,5 +116,3 @@
 </body>
 
 </html>
-
-

@@ -27,7 +27,7 @@
                                 @csrf
 
                                 @if(session('status'))
-                                <div class="alert alert-danger" role="alert">
+                                <div class="alert alert-success" role="alert">
                                     {{ session('status') }}
                                 </div>
                                 @elseif(session('error'))
@@ -41,7 +41,7 @@
                                         <h6 class="mb-0">Old Password</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" class="form-control @error('old_password') is-invalid @enderror" name="old_password" placeholder="Old Password" id="current_password" />
+                                        <input type="password" class="form-control @error('old_password') is-invalid @enderror" name="old_password" placeholder="Old Password" id="current_password" />
 
                                         @error('old_password')
                                         <span class="text-danger">{{ $message }}</span>
@@ -54,7 +54,7 @@
                                         <h6 class="mb-0">New Password</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="new_password" class="form-control  @error('new_password') is-invalid @enderror" id="new_password" placeholder="New Password" />
+                                        <input type="password" name="new_password" class="form-control  @error('new_password') is-invalid @enderror" id="new_password" placeholder="New Password" />
                                         @error('new_password')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -65,7 +65,10 @@
                                         <h6 class="mb-0">Confirm New Password</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" name="confirmNewPassword" class="form-control" placeholder="Confirm new password" />
+                                        <input type="password" name="confirmNewPassword" class="form-control @error('new_password') is-invalid @enderror" placeholder="Confirm new password" />
+                                        @error('new_password')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
 

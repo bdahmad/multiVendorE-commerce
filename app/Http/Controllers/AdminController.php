@@ -12,7 +12,7 @@ class AdminController extends Controller
 {
     public function admin_dashboard()
     {
-        return view('adminbackend.dashboard.admin-dashboard');
+        return view('admin.dashboard.admin-dashboard');
     }
     public function adminDestroy(Request $request): RedirectResponse
     {
@@ -26,13 +26,13 @@ class AdminController extends Controller
     }
     public function adminLogin()
     {
-        return view('adminbackend.dashboard.admin-login');
+        return view('admin.dashboard.admin-login');
     }
     public function adminProfile()
     {
         $id = Auth::user()->id;
         $adminData = User::where('id', $id)->firstOrfail();
-        return view('adminbackend.dashboard.admin-profile', compact('adminData'));
+        return view('admin.dashboard.admin-profile', compact('adminData'));
     }
     public function adminProfileUpdate(Request $request)
     {
@@ -83,22 +83,27 @@ class AdminController extends Controller
     }
     public function adminChangePassword()
     {
-        return view('adminbackend.dashboard.admin-change-password');
+        return view('admin.dashboard.admin-change-password');
     }
     public function adminPasswordUpdate(Request $request)
     {
         $request->validate([
             'old_password' => 'required',
-            'new_password' => 'required | confirmed',
+            'new_password' => 'required',
+            'confirmNewPassword' => 'required',
         ]);
 
-        if (!Hash::check($request['old_password'], auth()->user()->password)) {
-            return back()->with("error", "Old password didn't matched.");
+        if (Hash::check($request['old_password'], auth::user()->password)) {
+            if ($request['new_password'] === $request['confirmNewPassword']) {
+                User::whereId(auth()->user()->id)->update([
+                    'password' => Hash::make($request['new_password']),
+                ]);
+            } else {
+                return back()->with("error", "Confirm Password didn't matched.");
+            }
+            return redirect()->route('admin.logout')->with("status", "Successfully changed password.");
+        } else {
+            return back()->with("error", "Old Password didn't matched.");
         }
-
-        User::whereId(auth()->user()->id)->update([
-            'password' => Hash::make($request['new_password']),
-        ]);
-        return back()->with("status", "Successfully changed password.");
     }
 }
