@@ -94,7 +94,7 @@
                     </ul>
                 </li>
 
-            
+
 
                 <li class="menu-label">Charts & Maps</li>
                 <li>
@@ -620,6 +620,16 @@
         new PerfectScrollbar('.customers-list');
     </script>
     <script>
+        jQuery(document).ready(function() {
+            jQuery('#image').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    jQuery('#showImg').attr('src', e.target.result);
+
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            });
+        });
         @if(Session::has('message'))
         var type = "{{ Session::get('alert-type','info') }}"
         switch (type) {
