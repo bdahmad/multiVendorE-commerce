@@ -52,6 +52,7 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
     Route::post('/vendor/profile/update', [vendorController::class, 'vendorProfileUpdate'])->name('vendor.profile.update');
     Route::get('/vendor/logout', [vendorController::class, 'vendorLogout'])->name('vendor.logout');
     Route::get('/vendor/change/password', [vendorController::class, 'vendorChangePassword'])->name('vendor.change.password');
+    Route::post('/vendor/update/password', [vendorController::class, 'vendorUpdatePassword'])->name('vendor.update.password');
 });
 
 //vendor without auth

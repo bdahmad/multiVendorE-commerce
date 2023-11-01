@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class VendorController extends Controller
 {
@@ -62,6 +63,25 @@ class VendorController extends Controller
                 'alert-type' => 'error',
             );
             return redirect()->back()->with($notification);
+        }
+    }
+    public function vendorUpdatePassword(Request $request)
+    {
+        $this->validate($request, [
+            'old_password' => 'required',
+            'new_password' => 'required | min:8',
+            'confirmNewPassword' => 'required | required_with:new_password|same:new_password|min:8',
+        ]);
+
+        if (Hash::check($request['old_password'], auth::user()->password)) {
+
+            User::whereId(auth()->user()->id)->update([
+                'password' => Hash::make($request['new_password']),
+            ]);
+
+            return redirect()->route('vendor.logout')->with("status", "Successfully changed password.");
+        } else {
+            return back()->with("error", "Old Password didn't matched.");
         }
     }
 }

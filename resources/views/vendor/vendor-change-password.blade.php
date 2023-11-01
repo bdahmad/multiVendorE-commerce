@@ -3,7 +3,7 @@
 <div class="page-content">
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Admin Change Password</div>
+        <div class="breadcrumb-title pe-3">Vendor Change Password</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
@@ -23,7 +23,7 @@
                 <div class="col-lg-12">
                     <div class="card mb-3">
                         <div class="card-body ">
-                            <form method="post" action="{{ route('admin.password.update') }}" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('vendor.update.password') }}" enctype="multipart/form-data">
                                 @csrf
 
                                 @if(session('status'))
