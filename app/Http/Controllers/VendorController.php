@@ -27,8 +27,14 @@ class VendorController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/vendor/login');
     }
+
+    public function vendorLogin()
+    {
+        return view('vendor.vendor-login');
+    }
+
     public function vendorChangePassword()
     {
         return view('vendor.vendor-change-password');

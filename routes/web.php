@@ -53,7 +53,8 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
     Route::get('/vendor/change/password', [vendorController::class, 'vendorChangePassword'])->name('vendor.change.password');
 });
 
-
+//vendor without auth
+Route::get('/vendor/login', [VendorController::class, 'vendorLogin'])->name('vendor.login');
 
 
 require __DIR__ . '/auth.php';
