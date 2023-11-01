@@ -22,15 +22,25 @@
                             <div class="padding_eight_all bg-white">
                                 <div class="heading_s1">
                                     <h1 class="mb-5">Login</h1>
-                                    <p class="mb-30">Don't have an account? <a href="#">Create here</a></p>
+                                    <p class="mb-30">Don't have an account? <a href="{{route('register')}}">Create here</a></p>
                                 </div>
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <div class="form-group">
-                                        <input type="email" required="email" id="email" name="email" placeholder="Your Email *" />
+                                        <input class="form-control @error('email')
+                                            is-invalid
+                                        @enderror" type="email"  id="email" name="email" placeholder="Your Email *" />
+                                        @error('email')
+                                            <strong class="text-danger" role="alert">{{$message}}</strong>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
-                                        <input required="" id="password" type="password" name="password" placeholder="Your password *" />
+                                        <input class="form-control  @error('email')
+                                        is-invalid
+                                    @enderror" id="password" type="password" name="password" placeholder="Your password *" />
+                                        @error('password')
+                                            <strong class="text-danger" role="alert">{{$message}}</strong>
+                                        @enderror
                                     </div>
 
                                     <div class="login_footer form-group mb-50">
