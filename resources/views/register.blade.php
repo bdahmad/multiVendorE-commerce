@@ -21,7 +21,7 @@
                                     <h1 class="mb-5">Create an Account</h1>
                                     <p class="mb-30">Already have an account? <a href="{{ route('login') }}">Login</a></p>
                                 </div>
-                                <form method="POST" action="{{ route('register') }}">
+                                <form method="POST" action="{{ route('register.post') }}" enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="form-group">
@@ -75,6 +75,11 @@
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="image">Profile Image</label>
+                                        <input class="form-control" type="file"  name="image" id="image"/>
+                                    </div>
+
                                     <div class="login_footer form-group mb-50">
                                         <div class="chek-form">
                                             <div class="custome-checkbox">
