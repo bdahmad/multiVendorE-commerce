@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\Frontend\FrontendController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +17,7 @@ use App\Http\Controllers\VendorController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.home.home');
 });
 
 
@@ -58,5 +59,6 @@ Route::middleware(['auth', 'role:vendor'])->group(function () {
 //vendor without auth
 Route::get('/vendor/login', [VendorController::class, 'vendorLogin'])->name('vendor.login');
 
-
+//frontend 
+Route::get('/admin/login', [FrontendController::class, 'index'])->name('frontend');
 require __DIR__ . '/auth.php';
