@@ -164,45 +164,70 @@
                                         <h5>Account Details</h5>
                                     </div>
                                     <div class="card-body">
-                                        <p>Already have an account? <a href="page-login.html">Log in instead!</a></p>
-                                        <form method="post" name="enq">
+
+                                        <form method="post" action="{{route('update.profile')}}" enctype="multipart/form-data">
+                                            @csrf
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label>Name <span class="required">*</span></label>
-                                                    <input class="form-control" name="name" type="text" value="{{$userData->name}}" />
+                                                    <input class="form-control @error('name') is-invalid @enderror" name="name" type="text" value="@if ($userData->name) {{ $userData->name }}@else{{ old('name') }} @endif"/>
+                                                    <input class="form-control" name="slug" type="hidden" value="{{$userData->slag}}"/>
+                                                    <input class="form-control" name="id" type="hidden" value="{{$userData->id}}"/>
+
+                                                    @error('name')
+                                                        <span class="text-danger"></span>{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label>Username <span class="required">*</span></label>
-                                                    <input required="" class="form-control" name="username" type="text" value="{{$userData->username}}" />
+                                                    <input required="" class="form-control @error('username') is-invalid @enderror" name="username" type="text"  value="@if ($userData->username) {{ $userData->username }}@else{{ old('username') }} @endif" disabled/>
+{{--
+                                                    @error('username')
+                                                        <span class="text-danger"></span>{{ $message }}</span>
+                                                    @enderror --}}
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label>Email Address <span class="required">*</span></label>
-                                                    <input class="form-control" name="email" type="email" value="{{$userData->email}}"/>
+                                                    <input class="form-control @error('email') is-invalid @enderror" name="email" type="email" value="{{$userData->email}}" value="@if ($userData->email) {{ $userData->email }}@else{{ old('email') }} @endif" />
+
+                                                    @error('email')
+                                                        <span class="text-danger"></span>{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label>Phone <span class="required">*</span></label>
-                                                    <input  class="form-control" name="phone" type="phone" value="{{$userData->phone}}"/>
+                                                    <input  class="form-control @error('phone') is-invalid @enderror" name="phone" type="phone" value="@if ($userData->phone) {{ $userData->phone }}@else{{ old('phone') }} @endif" />
+
+                                                    @error('phone')
+                                                        <span class="text-danger"></span>{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Address <span class="required">*</span></label>
-                                                    <input  class="form-control" name="address" type="text" value="{{$userData->address}}"/>
+                                                    <input  class="form-control @error('address') is-invalid @enderror" name="address" type="text" value="@if ($userData->address) {{ $userData->address }}@else{{ old('address') }} @endif" "/>
+
+                                                    @error('address')
+                                                        <span class="text-danger"></span>{{ $message }}</span>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label class="form-label">Profile Pic <span class="required">*</span></label>
-                                                    <input class="form-control" type="file" required="" name="image"/>
+                                                    <input class="form-control" type="file" name="image"/>
                                                 </div>
 
                                                 <div class="form-group col-md-12">
                                                     <label></span></label>
                                                     @if ($userData->photo)                                            <img src="{{asset('uploads/user/'.$userData->photo)}}" alt="">
                                                     @else
-                                                    <img src="{{asset('uploads/no_image.jpg')}}" alt="" style="width: 200px">
+                                                    <img src="{{asset('uploads/no_image.jpg')}}" alt="" style="width: 150px">
                                                     @endif
                                                 </div>
-                                                <div class="col-md-12">
+
+                                                <div class="col-md-12" id="user_profile_update_block" >
                                                     <button type="submit" class="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Save Change</button>
                                                 </div>
+
                                             </div>
                                         </form>
                                     </div>

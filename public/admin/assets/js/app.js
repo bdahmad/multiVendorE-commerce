@@ -178,7 +178,7 @@ admin_facebook_input_from_close.addEventListener("click", function(){
     admin_facebook_link_input_form.setAttribute('class', ' ');
 })
 
-// facebook link
+// Linkedin link
 let admin_linkedin_edit_btn = document.getElementById('admin_linkedin_edit_btn');
 let admin_linkedin_link_input_form = document.getElementById('admin_linkedin_link_input_form');
 let admin_linkedin_input_from_close = document.getElementById('admin_linkedin_input_from_close');

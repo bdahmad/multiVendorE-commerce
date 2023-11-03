@@ -92,6 +92,7 @@ Route::middleware(['auth','role:4','verified'])->group(function(){
 
     Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
     Route::get('logout', [UserController::class, 'logout'])->name('logout');
+    Route::post('update/profile', [UserController::class, 'update'])->name('update.profile');
 });
 // for register page
 Route::get('register', [UserController::class, 'create'])->name('register');

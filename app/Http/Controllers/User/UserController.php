@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Image;
+use File;
 
 class UserController extends Controller
 {
@@ -84,6 +85,7 @@ class UserController extends Controller
                 'name' => $request->name,
                 'username' => $request->username,
                 'email' => $request->email,
+                'phone' => $request->phone,
                 'photo' => $customeName,
                 'slag' => $slug,
                 'role_id' => 4,
@@ -103,6 +105,7 @@ class UserController extends Controller
                 'name' => $request->name,
                 'username' => $request->username,
                 'email' => $request->email,
+                'phone' => $request->phone,
                 'slag' => $slug,
                 'role_id' => 4,
                 'status_id' => 1,
@@ -138,9 +141,64 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $slug = $request->slug;
+        $id = $request->id;
+
+        $request->validate([
+            'name' => ['required', 'string','max:25'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users,email,'.$id.'email'],
+            'phone' => ['required', 'max:20', 'unique:users,phone,'.$id.'phone'],
+            'address' => ['required', 'max:100'],
+        ]);
+
+
+        // check image here
+        if($request->image){
+
+            $image = $request->file('image');
+            $customeName = "U".".".rand().time().".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/user/'.$customeName);
+            Image::make($image)->resize(250,250)->save($path);
+
+            $update = User::where('status_id', 1)->where('slag', $slug)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'photo' => $customeName,
+                'phone' => $request->phone,
+                'address' => $request->address,
+            ]);
+
+        }else{
+
+            $update = User::where('status_id', 1)->where('slag', $slug)->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'address' => $request->address,
+            ]);
+        }
+
+        if ($update) {
+
+            $notification = array(
+                'message' => "Profile Update Successfully",
+                'alert-type' => "success",
+            );
+            return back()->with($notification);
+
+        }else{
+
+            $notification = array(
+                'message' => "Opps Profile Is Not Updated",
+                'alert-type' => "success",
+            );
+
+            return back()->with($notification);
+        }
+
+
     }
 
     /**
