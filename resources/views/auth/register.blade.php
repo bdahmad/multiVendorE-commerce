@@ -20,18 +20,23 @@
                                     <h1 class="mb-5">Create an Account</h1>
                                     <p class="mb-30">Already have an account? <a href="{{ route('login') }}">Login</a></p>
                                 </div>
-                                <form method="post">
+                                <form method="POST" action="{{ route('register') }}">
+                                    @csrf
                                     <div class="form-group">
-                                        <input type="text" required="" name="username" placeholder="Username" />
+                                        <input type="text" required="" name="name" id="name" value="{{old('name')}}" placeholder="Full Name" />
+                                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" required="" name="email" placeholder="Email" />
+                                        <input type="email" required="" name="email" id="email" value="{{old('email')}}" placeholder="Enter email address" />
+                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                     </div>
                                     <div class="form-group">
-                                        <input required="" type="password" name="password" placeholder="Password" />
+                                        <input type="password" required="" name="password" id="password" placeholder="Enter password " />
+                                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                     </div>
                                     <div class="form-group">
-                                        <input required="" type="password" name="password" placeholder="Confirm password" />
+                                        <input type="password" required="" name="password_confirmation" id="password_confirmation" placeholder="Enter password_confirmation " />
+                                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                                     </div>
                                     <div class="login_footer form-group mb-50">
                                         <div class="chek-form">
@@ -40,7 +45,7 @@
                                                 <label class="form-check-label" for="exampleCheckbox12"><span>I agree to terms &amp; Policy.</span></label>
                                             </div>
                                         </div>
-                                        <a href="page-privacy-policy.html"><i class="fi-rs-book-alt mr-5 text-muted"></i>Lean more</a>
+                                        <!-- <a href="page-privacy-policy.html"><i class="fi-rs-book-alt mr-5 text-muted"></i>Lean more</a> -->
                                     </div>
                                     <div class="form-group mb-30">
                                         <button type="submit" class="btn btn-fill-out btn-block hover-up font-weight-bold" name="login">Submit &amp; Register</button>
