@@ -297,7 +297,7 @@
                                             </li>
                                             <li>
                                                 <a href="page-account.html"><i
-                                                        class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
+                                                        class="fi fi-rs-location-alt mr-10"></i>Order</a>
                                             </li>
                                             <li>
                                                 <a href="page-account.html"><i class="fi fi-rs-label mr-10"></i>My

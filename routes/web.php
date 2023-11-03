@@ -91,8 +91,12 @@ Route::get('/vendor/login', [VendorController::class, 'vendorLogin'])->name('ven
 Route::middleware(['auth','role:4','verified'])->group(function(){
 
     Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
+
     Route::get('logout', [UserController::class, 'logout'])->name('logout');
+
     Route::post('update/profile', [UserController::class, 'update'])->name('update.profile');
+
+    Route::post('password/update', [UserController::class, 'passwordUpdate'])->name('password.update');
 });
 // for register page
 Route::get('register', [UserController::class, 'create'])->name('register');

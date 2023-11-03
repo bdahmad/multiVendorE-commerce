@@ -20,11 +20,12 @@ class UserController extends Controller
 {
 
     // user login page show
-    public function login_page(){
+    public function login_page()
+    {
         return view('login');
     }
 
-         /**
+    /**
      * Destroy an authenticated session. or  logout here
      */
     public function logout(Request $request)
@@ -56,7 +57,7 @@ class UserController extends Controller
         return view('register');
     }
 
-   /**
+    /**
      * Handle an incoming registration request.
      *
      * @throws \Illuminate\Validation\ValidationException
@@ -64,22 +65,22 @@ class UserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string','max:25'],
-            'username' => ['required', 'string','max:25', 'unique:'.User::class],
-            'email' => ['required', 'string', 'email', 'max:50', 'unique:'.User::class],
-            'phone' => ['required', 'max:20', 'unique:'.User::class],
+            'name' => ['required', 'string', 'max:25'],
+            'username' => ['required', 'string', 'max:25', 'unique:' . User::class],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:' . User::class],
+            'phone' => ['required', 'max:20', 'unique:' . User::class],
             'password' => ['required', 'min:3'],
-            'confirm_password' => ['required','same:password'],
+            'confirm_password' => ['required', 'same:password'],
         ]);
 
         $slug = uniqid('u' . rand());
 
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
 
             $image = $request->file('image');
-            $customeName = "U".".".rand().time().".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/user/'.$customeName);
-            Image::make($image)->resize(250,250)->save($path);
+            $customeName = "U" . "." . rand() . time() . "." . $image->getClientOriginalExtension();
+            $path = public_path('uploads/user/' . $customeName);
+            Image::make($image)->resize(250, 250)->save($path);
 
             $user = User::create([
                 'name' => $request->name,
@@ -98,8 +99,13 @@ class UserController extends Controller
 
             Auth::login($user);
 
-            return redirect(RouteServiceProvider::HOME);
-        }else{
+            $notification = array(
+                'message' => "Profile Created Successfully",
+                'alert-type' => "success",
+            );
+
+            return redirect(RouteServiceProvider::HOME)->with($notification);
+        } else {
 
             $user = User::create([
                 'name' => $request->name,
@@ -116,10 +122,13 @@ class UserController extends Controller
 
             Auth::login($user);
 
-            return redirect(RouteServiceProvider::HOME);
+            $notification = array(
+                'message' => "Profile Created Successfully",
+                'alert-type' => "success",
+            );
+
+            return redirect(RouteServiceProvider::HOME)->with($notification);
         }
-
-
     }
 
     /**
@@ -147,20 +156,20 @@ class UserController extends Controller
         $id = $request->id;
 
         $request->validate([
-            'name' => ['required', 'string','max:25'],
-            'email' => ['required', 'string', 'email', 'max:50', 'unique:users,email,'.$id.'email'],
-            'phone' => ['required', 'max:20', 'unique:users,phone,'.$id.'phone'],
+            'name' => ['required', 'string', 'max:25'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users,email,' . $id . 'email'],
+            'phone' => ['required', 'max:20', 'unique:users,phone,' . $id . 'phone'],
             'address' => ['required', 'max:100'],
         ]);
 
 
         // check image here
-        if($request->image){
+        if ($request->image) {
 
             $image = $request->file('image');
-            $customeName = "U".".".rand().time().".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/user/'.$customeName);
-            Image::make($image)->resize(250,250)->save($path);
+            $customeName = "U" . "." . rand() . time() . "." . $image->getClientOriginalExtension();
+            $path = public_path('uploads/user/' . $customeName);
+            Image::make($image)->resize(250, 250)->save($path);
 
             $update = User::where('status_id', 1)->where('slag', $slug)->update([
                 'name' => $request->name,
@@ -169,8 +178,7 @@ class UserController extends Controller
                 'phone' => $request->phone,
                 'address' => $request->address,
             ]);
-
-        }else{
+        } else {
 
             $update = User::where('status_id', 1)->where('slag', $slug)->update([
                 'name' => $request->name,
@@ -187,8 +195,7 @@ class UserController extends Controller
                 'alert-type' => "success",
             );
             return back()->with($notification);
-
-        }else{
+        } else {
 
             $notification = array(
                 'message' => "Opps Profile Is Not Updated",
@@ -197,10 +204,29 @@ class UserController extends Controller
 
             return back()->with($notification);
         }
-
-
     }
 
+    //  Password Update
+    public function passwordUpdate(Request $request)
+    {
+        // form validation
+        $this->validate($request, [
+            'old_password' => 'required',
+            'new_password' => 'required',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+
+        // old password match
+        if (Hash::check($request->old_password, auth()->user()->password)) {
+            User::where('id', auth()->user()->id)->update([
+                'password' => Hash::make($request->new_password),
+            ]);
+
+            return redirect()->route('logout');
+        } else {
+            return back()->with('error', "Old Password Doesn't Match");
+        }
+    }
     /**
      * Remove the specified resource from storage.
      */
