@@ -786,8 +786,9 @@
         </div>
     </div>
     <!--End header-->
-    @yield('content')
-
+    <main class="main">
+        @yield('content')
+    </main>
     <footer class="main">
         <section class="newsletter mb-15 wow animate__animated animate__fadeIn">
             <div class="container">
