@@ -162,37 +162,44 @@
                                     <div class="card-header">
                                         <h5>Account Details</h5>
                                     </div>
+                                    <!-- @php
+                                    $userData = App\Models\User::firstOrfail();
+                                    @endphp -->
                                     <div class="card-body">
-                                        <p>Already have an account? <a href="page-login.html">Log in instead!</a></p>
-                                        <form method="post" name="enq">
+                                        <form method="post" name="enq" enctype="multipart/form-data" action="">
+                                            @csrf
                                             <div class="row">
                                                 <div class="form-group col-md-6">
-                                                    <label>First Name <span class="required">*</span></label>
-                                                    <input required="" class="form-control" name="name" type="text" />
+                                                    <label>Full Name <span class="required">*</span></label>
+                                                    <input required="" class="form-control" name="name" type="text" value="{{Auth::user()->name}}" />
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <label>Last Name <span class="required">*</span></label>
-                                                    <input required="" class="form-control" name="phone" />
+                                                    <label>Username <span class="required">*</span></label>
+                                                    <input required="" class="form-control" name="username" value="{{Auth::user()->username}}" />
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <label>Display Name <span class="required">*</span></label>
-                                                    <input required="" class="form-control" name="dname" type="text" />
+                                                    <label>Email <span class="required">*</span></label>
+                                                    <input required="" class="form-control" name="email" type="email" value="{{Auth::user()->email}}" />
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <label>Email Address <span class="required">*</span></label>
-                                                    <input required="" class="form-control" name="email" type="email" />
+                                                    <label>Phone <span class="required">*</span></label>
+                                                    <input required="" class="form-control" name="phone" type="text" value="{{Auth::user()->phone}}" />
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <label>Current Password <span class="required">*</span></label>
-                                                    <input required="" class="form-control" name="password" type="password" />
+                                                    <label>Address <span class="required">*</span></label>
+                                                    <input required="" class="form-control" name="address" type="text" value="{{Auth::user()->address}}" />
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <label>New Password <span class="required">*</span></label>
-                                                    <input required="" class="form-control" name="npassword" type="password" />
+                                                    <label>Photo <span class="required">*</span></label>
+                                                    <input required="" class="form-control" name="photo" type="file" id="image" />
                                                 </div>
-                                                <div class="form-group col-md-12">
-                                                    <label>Confirm Password <span class="required">*</span></label>
-                                                    <input required="" class="form-control" name="cpassword" type="password" />
+                                                <div class="row mb-3">
+                                                    <div class="col-sm-3">
+                                                        <h6 class="mb-0"></h6>
+                                                    </div>
+                                                    <div class="col-sm-9 text-secondary">
+                                                        <img src="{{(!empty(Auth::user()->photo))? url('uploads/images/admin/'.Auth::user()->photo):url('uploads/no_image.jpg') }}" alt="user" style=" width: 100px; height: 100px;" id="showImg">
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <button type="submit" class="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Save Change</button>
