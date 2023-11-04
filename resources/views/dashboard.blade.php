@@ -162,12 +162,10 @@
                                     <div class="card-header">
                                         <h5>Account Details</h5>
                                     </div>
-                                    <!-- @php
-                                    $userData = App\Models\User::firstOrfail();
-                                    @endphp -->
                                     <div class="card-body">
-                                        <form method="post" name="enq" enctype="multipart/form-data" action="">
+                                        <form method="post" name="enq" enctype="multipart/form-data" action="{{route('user.profile.update')}}">
                                             @csrf
+                                            <input type="hidden" value="{{Auth::user()->id}}" name="id">
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label>Full Name <span class="required">*</span></label>
@@ -191,14 +189,14 @@
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Photo <span class="required">*</span></label>
-                                                    <input required="" class="form-control" name="photo" type="file" id="image" />
+                                                    <input class="form-control" name="photo" type="file" id="image" />
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-sm-3">
                                                         <h6 class="mb-0"></h6>
                                                     </div>
                                                     <div class="col-sm-9 text-secondary">
-                                                        <img src="{{(!empty(Auth::user()->photo))? url('uploads/images/admin/'.Auth::user()->photo):url('uploads/no_image.jpg') }}" alt="user" style=" width: 100px; height: 100px;" id="showImg">
+                                                        <img src="{{(!empty(Auth::user()->photo))? url('uploads/images/user/'.Auth::user()->photo):url('uploads/no_image.jpg') }}" alt="user" style=" width: 100px; height: 100px;" id="showImg">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
