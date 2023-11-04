@@ -15,6 +15,15 @@ class UserController extends Controller
     {
         return view('dashboard');
     }
+    public function userLogout(Request $request){
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
+    }
     public function update(Request $request)
     {
         $id = $request['id'];
