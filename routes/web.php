@@ -31,6 +31,7 @@ Route::middleware('auth', 'role:user')->group(function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('');
     Route::get('/user/logout', [UserController::class, 'userLogout'])->name('user.logout');
     Route::post('/dashboard/profile/update', [UserController::class, 'update'])->name('user.profile.update');
+    Route::post('/dashboard/change/password', [UserController::class, 'updatePassword'])->name('user.change.password');
 });
 
 //admin with auth
