@@ -32,7 +32,7 @@
                                     <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="page-login.html"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                                    <a class="nav-link" href="{{route('user.logout')}}"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
                                 </li>
                             </ul>
                         </div>
@@ -42,6 +42,10 @@
                             <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                                 <div class="card">
                                     <div class="card-header">
+                                        <div class="mb-3">
+                                            <img src="{{(!empty(Auth::user()->photo))? url('uploads/images/user/'.Auth::user()->photo):url('uploads/no_image.jpg') }}" alt="user" class="rounded-circle p-1 bg-primary" style="  width: 100px; height: 100px;" id="showImg">
+
+                                        </div>
                                         <h3 class="mb-0">Hello, {{Auth::user()->name}}</h3>
                                     </div>
                                     <div class="card-body">
@@ -191,13 +195,9 @@
                                                     <label>Photo <span class="required">*</span></label>
                                                     <input class="form-control" name="photo" type="file" id="image" />
                                                 </div>
-                                                <div class="row mb-3">
-                                                    <div class="col-sm-3">
-                                                        <h6 class="mb-0"></h6>
-                                                    </div>
-                                                    <div class="col-sm-9 text-secondary">
-                                                        <img src="{{(!empty(Auth::user()->photo))? url('uploads/images/user/'.Auth::user()->photo):url('uploads/no_image.jpg') }}" alt="user" style=" width: 100px; height: 100px;" id="showImg">
-                                                    </div>
+                                                <div class="mb-3">
+                                                    <img src="{{(!empty(Auth::user()->photo))? url('uploads/images/user/'.Auth::user()->photo):url('uploads/no_image.jpg') }}" alt="user" class="rounded-circle p-1 bg-primary" style="  width: 100px; height: 100px;" id="showImg">
+
                                                 </div>
                                                 <div class="col-md-12">
                                                     <button type="submit" class="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Save Change</button>

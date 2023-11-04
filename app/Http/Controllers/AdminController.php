@@ -7,6 +7,8 @@ use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 {
@@ -67,6 +69,15 @@ class AdminController extends Controller
             'phone' => $request['phone'],
             'address' => $request['address'],
         ]);
+        if ($request->hasFile('photo')) {
+            $image = $request->file('photo');
+            $imageName = 'admin_' . time() . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(250, 250)->save('uploads/images/admin/' . $imageName);
+            User::where('id', $id)->update([
+                'photo' => $imageName,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ]);
+        }
         if ($update) {
             $notification = array(
                 'message' => 'Admin Profile update successfully.',

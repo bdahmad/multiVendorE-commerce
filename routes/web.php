@@ -29,6 +29,7 @@ Route::get('/', function () {
 
 Route::middleware('auth', 'role:user')->group(function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('');
+    Route::get('/user/logout', [UserController::class, 'userLogout'])->name('user.logout');
     Route::post('/dashboard/profile/update', [UserController::class, 'update'])->name('user.profile.update');
 });
 

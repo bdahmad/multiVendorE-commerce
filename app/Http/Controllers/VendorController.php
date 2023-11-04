@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Models\User;
+use Carbon\Carbon;
 
 class VendorController extends Controller
 {
@@ -51,6 +53,15 @@ class VendorController extends Controller
             'vendor_join' => $request['vendor_join'],
             'vendor_short_info' => $request['vendor_short_info'],
         ]);
+        if ($request->hasFile('photo')) {
+            $image = $request->file('photo');
+            $imageName = 'vendor_' . time() . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(250, 250)->save('uploads/images/vendor/' . $imageName);
+            User::where('id', $id)->update([
+                'photo' => $imageName,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ]);
+        }
         if ($update) {
             $notification = array(
                 'message' => 'Successfully Update Profile.',
