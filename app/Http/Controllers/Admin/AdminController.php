@@ -60,7 +60,7 @@ class AdminController extends Controller
         $this->validate($request,[
             'name' => 'required|max:50',
             'email' => 'required|max:100|email|unique:users,email,'.$id.'email',
-            'phone' => 'required|numeric|min:10|unique:users,phone,'.$id.'phone',
+            'phone' => 'required|numeric|min:10|max:20|unique:users,phone,'.$id.'phone',
             'address' => 'required|max:100',
 
         ]);

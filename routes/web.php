@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Superadmin\SuperadminController;
@@ -57,10 +58,18 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
 
 
     Route::post('/admin/password/update', [AdminController::class, 'adminPasswordUpdate'])->name('admin.password.update');
+
+
+    // all brand related url here
+
+    Route::get('/admin/all/brand', [BrandController::class, 'index'])->name('admin.all.brand');
+    Route::get('/admin/add/brand', [BrandController::class, 'create'])->name('admin.add.brand');
+    Route::post('/admin/brand/store', [BrandController::class, 'store'])->name('admin.brand.store');
 });
 
 // admin login route
 Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');
+Route::post('login/store', [AuthenticatedSessionController::class, 'store'])->name('loginStore');
 
 
 // all vendor route here
@@ -84,6 +93,7 @@ Route::middleware(['auth','role:3','verified'])->group(function(){
 });
 // vendor login route
 Route::get('/vendor/login', [VendorController::class, 'vendorLogin'])->name('vendor.login');
+Route::post('login/store', [AuthenticatedSessionController::class, 'store'])->name('loginStore');
 
 
 
