@@ -81,7 +81,7 @@ class UserController extends Controller
                 'message' => 'Successfully Changed password.',
                 'status' => 'success',
             );
-            return redirect('/login')->with($notification);
+            return redirect()->route('user.logout')->with($notification);
         } else {
             $notification = array(
                 'message' => 'Oops. Operation failed.',
