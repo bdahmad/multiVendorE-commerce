@@ -5,16 +5,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\User\UserController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\Backend\BrandController;
+
 
 Route::get('/', function () {
     return view('frontend.home.home');
@@ -41,6 +33,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/profile/update', [AdminController::class, 'adminProfileUpdate'])->name('admin.profile.update');
     Route::post('/admin/password/update', [AdminController::class, 'adminPasswordUpdate'])->name('admin.password.update');
     Route::get('/admin/change/password', [AdminController::class, 'adminChangePassword'])->name('admin.change.password');
+
+    Route::get('/admin/dashboard/brand', [BrandController::class, 'index'])->name('all-brand');
+    Route::get('/admin/dashboard/brand/add', [BrandController::class, 'add'])->name('add-brand');
+    Route::get('/admin/dashboard/brand/edit', [BrandController::class, 'edit'])->name('edit-brand');
+    Route::get('/admin/dashboard/brand/view', [BrandController::class, 'view'])->name('view-brand');
 });
 
 //admin without auth
