@@ -23,8 +23,11 @@ class UserController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
-
-        return redirect('/login');
+        $notification = array(
+            'message' => 'Successfully logout.',
+            'alert-type' => 'success',
+        );
+        return redirect('/login')->with($notification);
     }
     public function update(Request $request)
     {

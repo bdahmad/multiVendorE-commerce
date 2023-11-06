@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VendorController;
@@ -28,7 +27,7 @@ Route::get('/', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth', 'role:user')->group(function () {
-    Route::get('/dashboard', [UserController::class, 'index'])->name('');
+    Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
     Route::get('/user/logout', [UserController::class, 'userLogout'])->name('user.logout');
     Route::post('/dashboard/profile/update', [UserController::class, 'update'])->name('user.profile.update');
     Route::post('/dashboard/change/password', [UserController::class, 'updatePassword'])->name('user.change.password');

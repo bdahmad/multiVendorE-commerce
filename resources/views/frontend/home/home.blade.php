@@ -1,4 +1,4 @@
-@extends('layouts.frontend')
+@extends('layouts.user')
 @section('content')
 
 <section class="home-slider position-relative mb-30">
