@@ -1,4 +1,4 @@
-@extends('layouts.frontend')
+@extends('layouts.user')
 @section('content')
 <div class="page-header breadcrumb-wrap">
     <div class="container">
