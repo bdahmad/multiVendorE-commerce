@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{asset('adminbackend')}}/assets/css/dark-theme.css" />
     <link rel="stylesheet" href="{{asset('adminbackend')}}/assets/css/semi-dark.css" />
     <link rel="stylesheet" href="{{asset('adminbackend')}}/assets/css/header-colors.css" />
+    <link href="{{asset('adminbackend')}}/assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
 </head>
 
@@ -694,6 +695,7 @@
     <script src="{{asset('adminbackend')}}/assets/plugins/jquery-knob/excanvas.js"></script>
     <script src="{{asset('adminbackend')}}/assets/plugins/jquery-knob/jquery.knob.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="{{asset('adminbackend')}}/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
     <script>
         $(function() {
             $(".knob").knob();
@@ -717,6 +719,12 @@
         });
     </script>
     <script>
+		$(document).ready(function() {
+			$('#example').DataTable();
+		  } );
+	</script>
+    <script>
+        
         @if(Session::has('message'))
         var type = "{{ Session::get('alert-type','info') }}"
         switch (type) {

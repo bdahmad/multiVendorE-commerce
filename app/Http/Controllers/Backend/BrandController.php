@@ -15,6 +15,7 @@ class BrandController extends Controller
     }
     public function add()
     {
+        return view('admin.brand.add');
     }
     public function edit()
     {

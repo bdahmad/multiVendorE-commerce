@@ -27,17 +27,22 @@ Route::middleware('auth', 'role:user')->group(function () {
 
 //admin with auth
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'admin_dashboard'])->name('admin.dashboard');
-    Route::get('/admin/logout', [AdminController::class, 'adminDestroy'])->name('admin.logout');
-    Route::get('/admin/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
-    Route::post('/admin/profile/update', [AdminController::class, 'adminProfileUpdate'])->name('admin.profile.update');
-    Route::post('/admin/password/update', [AdminController::class, 'adminPasswordUpdate'])->name('admin.password.update');
-    Route::get('/admin/change/password', [AdminController::class, 'adminChangePassword'])->name('admin.change.password');
 
-    Route::get('/admin/dashboard/brand', [BrandController::class, 'index'])->name('all-brand');
-    Route::get('/admin/dashboard/brand/add', [BrandController::class, 'add'])->name('add-brand');
-    Route::get('/admin/dashboard/brand/edit', [BrandController::class, 'edit'])->name('edit-brand');
-    Route::get('/admin/dashboard/brand/view', [BrandController::class, 'view'])->name('view-brand');
+    Route::controller(AdminController::class)->group(function () {
+        Route::get('/admin/dashboard', [AdminController::class, 'admin_dashboard'])->name('admin.dashboard');
+        Route::get('/admin/logout', [AdminController::class, 'adminDestroy'])->name('admin.logout');
+        Route::get('/admin/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
+        Route::post('/admin/profile/update', [AdminController::class, 'adminProfileUpdate'])->name('admin.profile.update');
+        Route::post('/admin/password/update', [AdminController::class, 'adminPasswordUpdate'])->name('admin.password.update');
+        Route::get('/admin/change/password', [AdminController::class, 'adminChangePassword'])->name('admin.change.password');
+    });
+    
+    Route::controller(BrandController::class)->group(function () {
+        Route::get('/admin/dashboard/brand', [BrandController::class, 'index'])->name('all-brand');
+        Route::get('/admin/dashboard/brand/add', [BrandController::class, 'add'])->name('add-brand');
+        Route::get('/admin/dashboard/brand/edit', [BrandController::class, 'edit'])->name('edit-brand');
+        Route::get('/admin/dashboard/brand/view', [BrandController::class, 'view'])->name('view-brand');
+    });
 });
 
 //admin without auth
