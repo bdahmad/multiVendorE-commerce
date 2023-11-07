@@ -44,12 +44,12 @@
                                     <td>{{$item->brand_name}}</td>
                                     <td>{{$item->brand_official_email}}</td>
                                     <td>{{$item->brand_official_phone}}</td>
-                                    <td>{{$item->brand_status}}</td>
-                                    <td><img src="{{asset('uploads/brand/'.$item->brand_image)}}" alt="Brand Image" style="width: 100px"></td>
+                                    <td>{{$item->statusInfo->status_name}}</td>
+                                    <td><img src="{{asset('uploads/brand/'.$item->brand_image)}}" alt="Brand Image" style="width: 60px; height: 60px"></td>
                                     <td>
-                                        <a href="" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i></a>
-                                        <i class="fa fa-eye"></i>
-                                        <i class="fa fa-trash"></i>
+                                        <a href="{{route('admin.brand.edit',$item->brand_slug)}}" class="btn btn-info btn-sm "><i class="fa fa-pencil"></i></a>
+                                        <i class="btn btn-primary btn-sm fa fa-eye "></i>
+                                        <i class="btn btn-danger fa fa-trash "></i>
                                     </td>
                                 </tr>
                             @endforeach

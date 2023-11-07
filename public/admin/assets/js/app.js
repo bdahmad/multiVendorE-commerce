@@ -211,3 +211,15 @@ function show_vendor_update_button(){
     document.getElementById('vendor_data_update_btn_block').style.display = "block";
 };
 
+
+// brand data update button
+let brand_data_update_btn_block = document.getElementById('brand_data_update_btn_block');
+let brand_data_reset_btn = document.getElementById('brand_data_reset_btn');
+brand_data_reset_btn.addEventListener('click', ()=>{
+    document.getElementById('brand_data_update_btn_block').style.display = "none";
+
+});
+
+function show_brand_update_button(){
+    document.getElementById('brand_data_update_btn_block').style.display = "block";
+};
