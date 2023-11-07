@@ -14,7 +14,7 @@
             </div>
             <div class="ms-auto">
                 <div class="btn-group">
-                    <a href="{{ route('admin.add.brand') }}" type="button" class="btn btn-primary">Add Brand</a>
+                    <a href="{{ route('admin.all.brand') }}" type="button" class="btn btn-primary">All Brand</a>
                 </div>
             </div>
         </div>
@@ -47,12 +47,12 @@
                                     <td><img src="{{ asset('uploads/brand/' . $item->brand_image) }}" alt="Brand Image"
                                             style="width: 60px; height: 60px"></td>
                                     <td>
-                                        <a href="{{ route('admin.brand.edit', $item->brand_slug) }}"
-                                            class="btn btn-info btn-sm "><i class="fa fa-pencil"></i></a>
-                                        <a href="{{ route('admin.brand.edit', $item->brand_slug) }}"
-                                            class="btn btn-info btn-sm "><i class="fa fa-eye "></i></a>
-                                        <a href="{{ route('admin.brand.delete', $item->brand_slug) }}"
-                                            class="btn btn-info btn-sm " id="delete"><i class="fa fa-trash "></i></a>
+
+                                        <a href="{{ route('admin.brand.restore', $item->brand_slug) }}"
+                                            class="btn btn-info btn-sm " id="restore"><i class="fa fa-refresh "></i></a>
+
+                                        <a href="{{ route('admin.brand.permanentlyDelete', $item->brand_slug) }}"
+                                            class="btn btn-info btn-sm " id="permanentlyDelete"><i class="fa fa-trash "></i></a>
                                     </td>
                                 </tr>
                             @endforeach

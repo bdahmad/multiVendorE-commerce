@@ -67,6 +67,10 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
     Route::post('/admin/brand/store', [BrandController::class, 'store'])->name('admin.brand.store');
     Route::get('/admin/brand/edit/{slug}', [BrandController::class, 'edit'])->name('admin.brand.edit');
     Route::post('/admin/brand/update', [BrandController::class, 'update'])->name('admin.brand.update');
+    Route::get('/admin/brand/delete/{slug}', [BrandController::class, 'softDelete'])->name('admin.brand.delete');
+    Route::get('/admin/recycle/brand', [BrandController::class, 'recycle'])->name('admin.recycle.brand');
+    Route::get('/admin/restore/brand/{slug}', [BrandController::class, 'restore'])->name('admin.brand.restore');
+    Route::get('/admin/brand/permanentlyDelete/{slug}', [BrandController::class, 'permanentlyDelete'])->name('admin.brand.permanentlyDelete');
 });
 
 // admin login route

@@ -28,6 +28,7 @@
 					<ul>
 						<li> <a href="{{route('admin.all.brand')}}"><i class="bx bx-right-arrow-alt"></i>All Brand</a>
 						<li> <a href="{{route('admin.add.brand')}}"><i class="bx bx-right-arrow-alt"></i>Add Brand</a>
+						<li> <a href="{{route('admin.recycle.brand')}}"><i class="bx bx-right-arrow-alt"></i>Trash</a>
 
 						</li>
 						{{-- <li> <a href="index.html"><i class="bx bx-right-arrow-alt"></i>Default</a>

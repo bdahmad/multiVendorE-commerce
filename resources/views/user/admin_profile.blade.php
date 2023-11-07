@@ -239,7 +239,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 mt-3" id="admin_data_update_btn_block" style="display: none">
-                                        <input type="reset" class="btn btn-info" id="admin_data_reset_btn"></input>
+                                        <button type="reset" class="btn btn-info" id="admin_data_reset_btn"></button>
                                         <button type="submit" class="btn btn-success" id="admin_data_update_btn">Save
                                             Changes</button>
                                     </div>

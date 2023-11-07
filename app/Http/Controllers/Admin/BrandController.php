@@ -210,10 +210,92 @@ class BrandController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Soft Delete the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function softDelete(string $slug)
     {
-        //
+        $update = Brand::where('brand_slug', $slug)->update([
+            'deleted_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'brand_editor' => Auth::user()->id,
+        ]);
+
+        if($update){
+            $notification = array(
+                'message' => "Brand Move To Trash Successfully",
+                'alert-type' => "success",
+            );
+
+        }else{
+            $notification = array(
+                'message' => "Opps, Something is Wrong",
+                'alert-type' => "error",
+            );
+        }
+        return redirect()->route('admin.all.brand')->with($notification);
+    }
+
+
+    /**
+     * Show All Delete or Recycle Item.
+     */
+    public function recycle()
+    {
+        $all = Brand::whereNotNull('deleted_at')->latest()->get();
+        return view('admin.brand.all_recycle_brand', compact('all'));
+    }
+
+    /**
+     * Restore Delete or Recycle Item.
+     */
+    public function restore($slug)
+    {
+        $update = Brand::where('brand_slug', $slug)->update([
+            'deleted_at' => null,
+            'updated_at' => Carbon::now(),
+            'brand_editor' => Auth::user()->id,
+        ]);
+
+        if($update){
+            $notification = array(
+                'message' => "Brand Restore Successfully",
+                'alert-type' => "success",
+            );
+
+        }else{
+            $notification = array(
+                'message' => "Opps, Something is Wrong",
+                'alert-type' => "error",
+            );
+        }
+        return back()->with($notification);
+    }
+
+    /**
+     * Permanently Delete Item.
+     */
+    public function permanentlyDelete($slug)
+    {
+
+        $image = Brand::where('brand_slug', $slug)->value('brand_image');
+        if(File::exists(public_path('uploads/brand/'.$image))){
+            File::delete(public_path('uploads/brand/'.$image));
+        }
+
+        $delete = Brand::where('brand_slug', $slug)->delete();
+
+        if($delete){
+            $notification = array(
+                'message' => "Brand Permanently Deleted Successfully",
+                'alert-type' => "success",
+            );
+
+        }else{
+            $notification = array(
+                'message' => "Opps, Something is Wrong",
+                'alert-type' => "error",
+            );
+        }
+        return redirect()->route('admin.all.brand')->with($notification);
     }
 }

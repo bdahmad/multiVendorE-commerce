@@ -1,3 +1,4 @@
+
 $(function() {
 	"use strict";
 	new PerfectScrollbar(".header-message-list"), new PerfectScrollbar(".header-notifications-list"), $(".mobile-search-icon").on("click", function() {
@@ -223,3 +224,4 @@ brand_data_reset_btn.addEventListener('click', ()=>{
 function show_brand_update_button(){
     document.getElementById('brand_data_update_btn_block').style.display = "block";
 };
+
