@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Superadmin\SuperadminController;
@@ -61,16 +62,31 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
 
 
     // all brand related url here
+    Route::controller(BrandController::class)->group(function(){
+        Route::get('/admin/all/brand', 'index')->name('admin.all.brand');
+        Route::get('/admin/add/brand', 'create')->name('admin.add.brand');
+        Route::post('/admin/brand/store', 'store')->name('admin.brand.store');
+        Route::get('/admin/brand/edit/{slug}', 'edit')->name('admin.brand.edit');
+        Route::post('/admin/brand/update', 'update')->name('admin.brand.update');
+        Route::get('/admin/brand/delete/{slug}', 'softDelete')->name('admin.brand.delete');
+        Route::get('/admin/recycle/brand', 'recycle')->name('admin.recycle.brand');
+        Route::get('/admin/restore/brand/{slug}', 'restore')->name('admin.brand.restore');
+        Route::get('/admin/brand/permanentlyDelete/{slug}', 'permanentlyDelete')->name('admin.brand.permanentlyDelete');
+    });
 
-    Route::get('/admin/all/brand', [BrandController::class, 'index'])->name('admin.all.brand');
-    Route::get('/admin/add/brand', [BrandController::class, 'create'])->name('admin.add.brand');
-    Route::post('/admin/brand/store', [BrandController::class, 'store'])->name('admin.brand.store');
-    Route::get('/admin/brand/edit/{slug}', [BrandController::class, 'edit'])->name('admin.brand.edit');
-    Route::post('/admin/brand/update', [BrandController::class, 'update'])->name('admin.brand.update');
-    Route::get('/admin/brand/delete/{slug}', [BrandController::class, 'softDelete'])->name('admin.brand.delete');
-    Route::get('/admin/recycle/brand', [BrandController::class, 'recycle'])->name('admin.recycle.brand');
-    Route::get('/admin/restore/brand/{slug}', [BrandController::class, 'restore'])->name('admin.brand.restore');
-    Route::get('/admin/brand/permanentlyDelete/{slug}', [BrandController::class, 'permanentlyDelete'])->name('admin.brand.permanentlyDelete');
+
+    // all category related url here
+    Route::controller(CategoryController::class)->group(function(){
+        Route::get('/admin/all/category', 'index')->name('admin.all.category');
+        Route::get('/admin/add/category', 'create')->name('admin.add.category');
+        Route::post('/admin/category/store', 'store')->name('admin.category.store');
+        Route::get('/admin/category/edit/{slug}', 'edit')->name('admin.category.edit');
+        Route::post('/admin/category/update', 'update')->name('admin.category.update');
+        Route::get('/admin/category/delete/{slug}', 'softDelete')->name('admin.category.delete');
+        Route::get('/admin/recycle/category', 'recycle')->name('admin.recycle.category');
+        Route::get('/admin/restore/category/{slug}', 'restore')->name('admin.category.restore');
+        Route::get('/admin/category/permanentlyDelete/{slug}', 'permanentlyDelete')->name('admin.category.permanentlyDelete');
+    });
 });
 
 // admin login route

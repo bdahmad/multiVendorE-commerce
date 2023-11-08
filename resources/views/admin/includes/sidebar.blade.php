@@ -43,6 +43,21 @@
 						</li> --}}
 					</ul>
 				</li>
+
+				<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class='bx bx-home-circle'></i>
+						</div>
+						<div class="menu-title">Category</div>
+					</a>
+					<ul>
+						<li> <a href="{{route('admin.all.category')}}"><i class="bx bx-right-arrow-alt"></i>All Category</a>
+						<li> <a href="{{route('admin.add.category')}}"><i class="bx bx-right-arrow-alt"></i>Add Category</a>
+						<li> <a href="{{route('admin.recycle.category')}}"><i class="bx bx-right-arrow-alt"></i>Trash</a>
+
+						</li>
+					</ul>
+				</li>
 				<li>
 					<a href="javascript:;" class="has-arrow">
 						<div class="parent-icon"><i class="bx bx-category"></i>

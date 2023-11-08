@@ -66,6 +66,7 @@ class BrandController extends Controller
                 'brand_official_phone' => $request->brand_official_phone,
                 'brand_official_address' => $request->brand_official_address,
                 'brand_slug' => $slug,
+                'brand_status' => 1,
                 'brand_image' => $customeName,
                 'brand_creator' => Auth::user()->id,
                 'created_at' => Carbon::now(),
@@ -146,7 +147,6 @@ class BrandController extends Controller
             $path = public_path('uploads/brand/'.$customeName);
             Image::make($image)->resize(250,250)->save($path);
 
-            $slug = Str::slug($request->brand_name);
 
             $insert = Brand::where('id', $id)->update([
                 'brand_name' => $request->brand_name,

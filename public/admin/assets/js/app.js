@@ -225,3 +225,15 @@ function show_brand_update_button(){
     document.getElementById('brand_data_update_btn_block').style.display = "block";
 };
 
+// category data update button
+let category_data_update_btn_block = document.getElementById('category_data_update_btn_block');
+let category_data_reset_btn = document.getElementById('category_data_reset_btn');
+category_data_reset_btn.addEventListener('click', ()=>{
+    document.getElementById('category_data_update_btn_block').style.display = "none";
+
+});
+
+function show_category_update_button(){
+    document.getElementById('category_data_update_btn_block').style.display = "block";
+};
+

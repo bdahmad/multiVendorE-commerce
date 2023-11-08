@@ -8,18 +8,18 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Brand</li>
+                        <li class="breadcrumb-item active" aria-current="page">Category</li>
                     </ol>
                 </nav>
             </div>
             <div class="ms-auto">
                 <div class="btn-group">
-                    <a href="{{ route('admin.add.brand') }}" type="button" class="btn btn-primary">Add Brand</a>
+                    <a href="{{ route('admin.add.category') }}" type="button" class="btn btn-primary">Add Category</a>
                 </div>
             </div>
         </div>
         <!--end breadcrumb-->
-        <h6 class="mb-0 text-uppercase">All Brand Information</h6>
+        <h6 class="mb-0 text-uppercase">All category Information</h6>
         <hr />
         <div class="card">
             <div class="card-body">
@@ -29,8 +29,7 @@
                             <tr>
                                 <th>SL:</th>
                                 <th>Name</th>
-                                <th>Offical Email</th>
-                                <th>Offical Phone</th>
+                                <th>Slug</th>
                                 <th>Status</th>
                                 <th>Image</th>
                                 <th>Action</th>
@@ -40,18 +39,17 @@
                             @foreach ($all as $key => $item)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $item->brand_name }}</td>
-                                    <td>{{ $item->brand_official_email }}</td>
-                                    <td>{{ $item->brand_official_phone }}</td>
+                                    <td>{{ $item->category_name }}</td>
+                                    <td>{{ $item->category_slug }}</td>
                                     <td>{{ $item->statusInfo->status_name }}</td>
-                                    <td><img src="{{ asset('uploads/brand/' . $item->brand_image) }}" alt="Brand Image"
+                                    <td><img src="{{ asset('uploads/category/' . $item->category_image) }}" alt="category Image"
                                             style="width: 60px; height: 60px"></td>
                                     <td>
-                                        <a href="{{ route('admin.brand.edit', $item->brand_slug) }}"
+                                        <a href="{{ route('admin.category.edit', $item->category_slug) }}"
                                             class="btn btn-info btn-sm "><i class="fa fa-pencil"></i></a>
-                                        <a href="{{ route('admin.brand.edit', $item->brand_slug) }}"
+                                        <a href="{{ route('admin.category.edit', $item->category_slug) }}"
                                             class="btn btn-info btn-sm "><i class="fa fa-eye "></i></a>
-                                        <a href="{{ route('admin.brand.delete', $item->brand_slug) }}"
+                                        <a href="{{ route('admin.category.delete', $item->category_slug) }}"
                                             class="btn btn-info btn-sm " id="delete"><i class="fa fa-trash "></i></a>
                                     </td>
                                 </tr>
@@ -61,11 +59,9 @@
                             <tr>
                                 <th>SL:</th>
                                 <th>Name</th>
-                                <th>Offical Email</th>
-                                <th>Offical Phone</th>
                                 <th>Status</th>
                                 <th>Image</th>
-                                <th>Action</th>>
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('brand_official_address')->nullable();
             $table->string('brand_image')->nullable();
             $table->string('brand_slug')->nullable();
-            $table->string('brand_status')->default(1);
+            $table->string('brand_status')->nullable();
             $table->string('brand_creator')->nullable();
             $table->string('brand_editor')->nullable();
             $table->timestamps();
