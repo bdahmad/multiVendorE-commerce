@@ -148,7 +148,7 @@ class BrandController extends Controller
             Image::make($image)->resize(250,250)->save($path);
 
 
-            $insert = Brand::where('id', $id)->update([
+            $update = Brand::where('id', $id)->update([
                 'brand_name' => $request->brand_name,
                 'brand_pay_of_line' => $request->brand_pay_of_line,
                 'brand_title' => $request->brand_title,
@@ -164,7 +164,7 @@ class BrandController extends Controller
 
             ]);
 
-            if($insert){
+            if($update){
                 $notification = array(
                     'message' => "Brand Updated Successfully",
                     'alert-type' => "success",

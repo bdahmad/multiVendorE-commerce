@@ -13,7 +13,11 @@
                     </ol>
                 </nav>
             </div>
-
+            <div class="ms-auto">
+                <div class="btn-group">
+                    <a href="{{ route('admin.all.category') }}" type="button" class="btn btn-primary">All Category</a>
+                </div>
+            </div>
         </div>
         <!--end breadcrumb-->
         <div class="container">
@@ -21,9 +25,7 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="card">
-                            {{-- <div class="text-end">
-                                <i class="fa fa-pencil btn btn-info m-2" style="font-size: larger" id="input_toggle_btn" onclick="edit_form()"></i>
-                            </div> --}}
+
                             <div class="card-header">
                                 <h4>Add Category Information</h4>
                             </div>

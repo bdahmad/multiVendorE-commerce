@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Superadmin\SuperadminController;
@@ -86,6 +87,20 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
         Route::get('/admin/recycle/category', 'recycle')->name('admin.recycle.category');
         Route::get('/admin/restore/category/{slug}', 'restore')->name('admin.category.restore');
         Route::get('/admin/category/permanentlyDelete/{slug}', 'permanentlyDelete')->name('admin.category.permanentlyDelete');
+    });
+
+
+    // all sub/category related url here
+    Route::controller(SubCategoryController::class)->group(function(){
+        Route::get('/admin/all/sub/category', 'index')->name('admin.all.sub.category');
+        Route::get('/admin/add/sub/category', 'create')->name('admin.add.sub.category');
+        Route::post('/admin/sub/category/store', 'store')->name('admin.sub.category.store');
+        Route::get('/admin/sub/category/edit/{slug}', 'edit')->name('admin.sub.category.edit');
+        Route::post('/admin/sub/category/update', 'update')->name('admin.sub.category.update');
+        Route::get('/admin/sub/category/delete/{slug}', 'softDelete')->name('admin.sub.category.delete');
+        Route::get('/admin/recycle/sub/category', 'recycle')->name('admin.recycle.sub.category');
+        Route::get('/admin/restore/sub/category/{slug}', 'restore')->name('admin.sub.category.restore');
+        Route::get('/admin/sub/category/permanentlyDelete/{slug}', 'permanentlyDelete')->name('admin.sub.category.permanentlyDelete');
     });
 });
 

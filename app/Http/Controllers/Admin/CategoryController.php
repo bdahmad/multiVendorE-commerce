@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Image;
@@ -125,7 +125,7 @@ class CategoryController extends Controller
             $path = public_path('uploads/category/'.$customeName);
             Image::make($image)->resize(250,250)->save($path);
 
-            $insert = category::where('id', $id)->update([
+            $update = category::where('id', $id)->update([
                 'category_name' => $request->category_name,
                 'category_slug' => $slug,
                 'category_image' => $customeName,
@@ -135,7 +135,7 @@ class CategoryController extends Controller
 
             ]);
 
-            if($insert){
+            if($update){
                 $notification = array(
                     'message' => "Category Updated Successfully",
                     'alert-type' => "success",
@@ -206,7 +206,7 @@ class CategoryController extends Controller
      */
     public function recycle()
     {
-        $all = category::whereNotNull('deleted_at')->latest()->get();
+        $all = Category::whereNotNull('deleted_at')->latest()->get();
         return view('admin.category.all_recycle_category', compact('all'));
     }
 
@@ -215,7 +215,7 @@ class CategoryController extends Controller
      */
     public function restore($slug)
     {
-        $update = category::where('category_slug', $slug)->update([
+        $update = Category::where('category_slug', $slug)->update([
             'deleted_at' => null,
             'updated_at' => Carbon::now(),
             'category_editor' => Auth::user()->id,
@@ -242,12 +242,12 @@ class CategoryController extends Controller
     public function permanentlyDelete($slug)
     {
 
-        $image = category::where('category_slug', $slug)->value('category_image');
+        $image = Category::where('category_slug', $slug)->value('category_image');
         if(File::exists(public_path('uploads/category/'.$image))){
             File::delete(public_path('uploads/category/'.$image));
         }
 
-        $delete = category::where('category_slug', $slug)->delete();
+        $delete = Category::where('category_slug', $slug)->delete();
 
         if($delete){
             $notification = array(
