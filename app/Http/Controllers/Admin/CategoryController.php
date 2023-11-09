@@ -36,7 +36,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'category_name' => 'required|string|max:50|unique:categories',
             'category_image' => 'required',
         ]);
@@ -48,9 +48,9 @@ class CategoryController extends Controller
 
             $image = $request->file('category_image');
 
-            $customeName = "C".".".rand().time().".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/category/'.$customeName);
-            Image::make($image)->resize(250,250)->save($path);
+            $customeName = "C" . "." . rand() . time() . "." . $image->getClientOriginalExtension();
+            $path = public_path('uploads/category/' . $customeName);
+            Image::make($image)->resize(250, 250)->save($path);
 
             $insert = category::insert([
                 'category_name' => $request->category_name,
@@ -62,13 +62,12 @@ class CategoryController extends Controller
 
             ]);
 
-            if($insert){
+            if ($insert) {
                 $notification = array(
                     'message' => "Category Added Successfully",
                     'alert-type' => "success",
                 );
-
-            }else{
+            } else {
                 $notification = array(
                     'message' => "Opps, Something is Wrong",
                     'alert-type' => "error",
@@ -102,8 +101,8 @@ class CategoryController extends Controller
     {
         $id = $request->id;
 
-        $this->validate($request,[
-            'category_name' => 'required|string|max:50|unique:categories,category_name,'.$id.'category_name',
+        $this->validate($request, [
+            'category_name' => 'required|string|max:50|unique:categories,category_name,' . $id . 'category_name',
             'category_status' => 'required',
         ]);
 
@@ -118,13 +117,13 @@ class CategoryController extends Controller
             // delete old image
             $old_image = Category::where('id', $id)->value('category_image');
 
-            if(File::exists(public_path('uploads/category/'.$old_image))){
-                File::delete(public_path('uploads/category/'.$old_image));
+            if (File::exists(public_path('uploads/category/' . $old_image))) {
+                File::delete(public_path('uploads/category/' . $old_image));
             }
 
-            $customeName = "C".".".rand().time().".".$image->getClientOriginalExtension();
-            $path = public_path('uploads/category/'.$customeName);
-            Image::make($image)->resize(250,250)->save($path);
+            $customeName = "C" . "." . rand() . time() . "." . $image->getClientOriginalExtension();
+            $path = public_path('uploads/category/' . $customeName);
+            Image::make($image)->resize(250, 250)->save($path);
 
             $update = category::where('id', $id)->update([
                 'category_name' => $request->category_name,
@@ -136,20 +135,19 @@ class CategoryController extends Controller
 
             ]);
 
-            if($update){
+            if ($update) {
                 $notification = array(
                     'message' => "Category Updated Successfully",
                     'alert-type' => "success",
                 );
-
-            }else{
+            } else {
                 $notification = array(
                     'message' => "Opps, Something is Wrong",
                     'alert-type' => "error",
                 );
             }
             return redirect()->route('admin.all.category')->with($notification);
-        }else{
+        } else {
             $update = Category::where('id', $id)->update([
                 'category_name' => $request->category_name,
                 'category_slug' => $slug,
@@ -159,13 +157,12 @@ class CategoryController extends Controller
 
             ]);
 
-            if($update){
+            if ($update) {
                 $notification = array(
                     'message' => "Category Updated Successfully",
                     'alert-type' => "success",
                 );
-
-            }else{
+            } else {
                 $notification = array(
                     'message' => "Opps, Something is Wrong",
                     'alert-type' => "error",
@@ -187,12 +184,12 @@ class CategoryController extends Controller
             'category_editor' => Auth::user()->id,
         ]);
 
-        if($update){
+        if ($update) {
 
             // soft delete all related subcategory
             $all_sub_category = SubCategory::where('category_slug', $slug)->get();
 
-            foreach($all_sub_category as $single_sub_category){
+            foreach ($all_sub_category as $single_sub_category) {
                 $single_sub_category->deleted_at = Carbon::now();
                 $single_sub_category->save();
             }
@@ -201,8 +198,7 @@ class CategoryController extends Controller
                 'message' => "Category Move To Trash With Subcategory Successfully",
                 'alert-type' => "success",
             );
-
-        }else{
+        } else {
             $notification = array(
                 'message' => "Opps, Something is Wrong",
                 'alert-type' => "error",
@@ -232,20 +228,19 @@ class CategoryController extends Controller
             'category_editor' => Auth::user()->id,
         ]);
 
-        if($update){
-              // restore all related subcategory
-                $all_sub_category = SubCategory::where('category_slug', $slug)->get();
+        if ($update) {
+            // restore all related subcategory
+            $all_sub_category = SubCategory::where('category_slug', $slug)->get();
 
-                foreach($all_sub_category as $single_sub_category){
-                    $single_sub_category->deleted_at = null;
-                    $single_sub_category->save();
-                }
+            foreach ($all_sub_category as $single_sub_category) {
+                $single_sub_category->deleted_at = null;
+                $single_sub_category->save();
+            }
             $notification = array(
                 'message' => "Category Restore With Subcategory Successfully",
                 'alert-type' => "success",
             );
-
-        }else{
+        } else {
             $notification = array(
                 'message' => "Opps, Something is Wrong",
                 'alert-type' => "error",
@@ -261,19 +256,29 @@ class CategoryController extends Controller
     {
 
         $image = Category::where('category_slug', $slug)->value('category_image');
-        if(File::exists(public_path('uploads/category/'.$image))){
-            File::delete(public_path('uploads/category/'.$image));
+        if (File::exists(public_path('uploads/category/' . $image))) {
+            File::delete(public_path('uploads/category/' . $image));
+        }
+
+        // Permanently delete all related subcategory image
+        $all_sub_category = SubCategory::where('category_slug', $slug)->get();
+
+        foreach ($all_sub_category as $single_sub_category) {
+
+            if (File::exists(public_path('uploads/subCategory/' . $single_sub_category->sub_category_image))) {
+                File::delete(public_path('uploads/subCategory/'.$single_sub_category->sub_category_image));
+            }
         }
 
         $delete = Category::where('category_slug', $slug)->delete();
 
-        if($delete){
+        if ($delete) {
+
             $notification = array(
-                'message' => "category Permanently Deleted Successfully",
+                'message' => "Category Permanently Deleted With Subcategory Successfully",
                 'alert-type' => "success",
             );
-
-        }else{
+        } else {
             $notification = array(
                 'message' => "Opps, Something is Wrong",
                 'alert-type' => "error",
