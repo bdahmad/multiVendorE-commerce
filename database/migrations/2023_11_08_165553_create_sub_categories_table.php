@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('sub_category_slug')->unique();
             $table->string('sub_category_status')->nullable();
             $table->foreignId('category_id')->nullable();
+            $table->string('category_slug')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('sub_category_creator')->nullable();
             $table->string('sub_category_editor')->nullable();

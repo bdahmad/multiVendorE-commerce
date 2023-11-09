@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -179,6 +180,7 @@ class CategoryController extends Controller
      */
     public function softDelete(string $slug)
     {
+
         $update = Category::where('category_slug', $slug)->update([
             'deleted_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
@@ -186,8 +188,17 @@ class CategoryController extends Controller
         ]);
 
         if($update){
+
+            // soft delete all related subcategory
+            $all_sub_category = SubCategory::where('category_slug', $slug)->get();
+
+            foreach($all_sub_category as $single_sub_category){
+                $single_sub_category->deleted_at = Carbon::now();
+                $single_sub_category->save();
+            }
+
             $notification = array(
-                'message' => "Category Move To Trash Successfully",
+                'message' => "Category Move To Trash With Subcategory Successfully",
                 'alert-type' => "success",
             );
 
@@ -222,8 +233,15 @@ class CategoryController extends Controller
         ]);
 
         if($update){
+              // restore all related subcategory
+                $all_sub_category = SubCategory::where('category_slug', $slug)->get();
+
+                foreach($all_sub_category as $single_sub_category){
+                    $single_sub_category->deleted_at = null;
+                    $single_sub_category->save();
+                }
             $notification = array(
-                'message' => "category Restore Successfully",
+                'message' => "Category Restore With Subcategory Successfully",
                 'alert-type' => "success",
             );
 

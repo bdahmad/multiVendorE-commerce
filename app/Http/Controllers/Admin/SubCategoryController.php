@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -41,6 +42,7 @@ class SubCategoryController extends Controller
             'sub_category_image' => 'required',
         ]);
 
+        $category_slug = Category::where('id', $request->category_id)->value('category_slug');
 
         $slug = Str::slug($request->sub_category_name);
 
@@ -56,6 +58,7 @@ class SubCategoryController extends Controller
                 'sub_category_name' => $request->sub_category_name,
                 'sub_category_slug' => $slug,
                 'category_id' => $request->category_id,
+                'category_slug' => $category_slug,
                 'sub_category_status' => 1,
                 'sub_category_image' => $customeName,
                 'sub_category_creator' => Auth::user()->id,
@@ -110,7 +113,7 @@ class SubCategoryController extends Controller
         ]);
 
 
-
+        $category_slug = Category::where('id', $request->category_id)->value('category_slug');
         $slug = Str::slug($request->sub_category_name);
 
         if ($request->hasFile('sub_category_image')) {
@@ -131,6 +134,7 @@ class SubCategoryController extends Controller
             $update = Subcategory::where('id', $id)->update([
                 'sub_category_name' => $request->sub_category_name,
                 'category_id' => $request->category_id,
+                'category_slug' => $category_slug,
                 'sub_category_slug' => $slug,
                 'sub_category_image' => $customeName,
                 'sub_category_status' => $request->sub_category_status,
@@ -156,6 +160,7 @@ class SubCategoryController extends Controller
             $update = SubCategory::where('id', $id)->update([
                 'sub_category_name' => $request->sub_category_name,
                 'category_id' => $request->category_id,
+                'category_slug' => $category_slug,
                 'sub_category_slug' => $slug,
                 'sub_category_status' => $request->sub_category_status,
                 'sub_category_editor' => Auth::user()->id,
