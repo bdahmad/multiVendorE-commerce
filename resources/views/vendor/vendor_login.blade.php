@@ -34,7 +34,7 @@
 						</div>
 						<div class="card">
 							<div class="card-body">
-                                <form method="POST" action="{{ route('login') }}">
+                                <form method="POST" action="{{ route('loginStore') }}">
                                     @csrf
                                     <div class="border p-4 rounded">
                                         <div class="text-center">

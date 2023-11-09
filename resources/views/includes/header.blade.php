@@ -183,7 +183,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="index.html"><img src="{{ asset('frontend') }}/assets/imgs/theme/logo.svg"
+                        <a href="{{url('/')}}"><img src="{{ asset('frontend') }}/assets/imgs/theme/logo.svg"
                                 alt="logo" /></a>
                     </div>
                     <div class="header-right">
@@ -284,18 +284,18 @@
                                     </div>
                                 </div>
                                 <div class="header-action-icon-2">
-                                    <a href="page-account.html">
+                                    <a href="{{route('dashboard')}}">
                                         <img class="svgInject" alt="Nest"
                                             src="{{ asset('frontend') }}/assets/imgs/theme/icons/icon-user.svg" />
                                     </a>
 
                                     @auth
 
-                                    <a href="page-account.html"><span class="lable ml-0">Account</span></a>
+                                    <span class="lable ml-0">Account</span>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                         <ul>
                                             <li>
-                                                <a href="page-account.html"><i class="fi fi-rs-user mr-10"></i>My
+                                                <a href="{{route('dashboard')}}"><i class="fi fi-rs-user mr-10"></i>My
                                                     Account</a>
                                             </li>
                                             <li>
@@ -320,11 +320,13 @@
                                             </li>
                                         </ul>
                                     </div>
+
                                     @else
                                     <a href="{{route('login')}}"><span class="lable ml-0">Login</span></a>
                                     <a class="me-2px">|</a>
                                     <a href="{{route('register')}}"><span class="lable ml-0">Register</span></a>
                                     @endauth
+
                                 </div>
                             </div>
                         </div>

@@ -59,6 +59,7 @@
                             <tr>
                                 <th>SL:</th>
                                 <th>Name</th>
+                                <th>Slug</th>
                                 <th>Status</th>
                                 <th>Image</th>
                                 <th>Action</th>

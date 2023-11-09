@@ -386,6 +386,8 @@ $vendorData = User::find($id);
                     </li>
                 </ul>
             </div>
+
+
             <div class="user-box dropdown">
                 <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret"
                     href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -420,6 +422,8 @@ $vendorData = User::find($id);
                     </li>
                 </ul>
             </div>
+
+
         </nav>
     </div>
 </header>

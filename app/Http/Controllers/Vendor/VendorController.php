@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Vendor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SocialMedia;
+use Illuminate\Support\Str;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use File;
 use Illuminate\Support\Facades\Hash;
@@ -13,6 +15,62 @@ use Image;
 
 class VendorController extends Controller
 {
+
+    // vendor apply page show
+    public function vendorApply($slug) {
+        return view('vendor.vendorApply', compact('slug'));
+    }
+
+    // vendor apply page show
+    public function vendorApplySubmit(Request $request) {
+
+        $user_slug = $request->slug;
+
+        $this->validate($request,[
+            'vendor_shop_name' => 'required|string|max:50|unique:users',
+            'vendor_pay_of_line' => 'required|string|max:100',
+            'vendor_short_description' => 'required|string|max:250',
+            'vendor_shop_address' => 'required|string',
+            'vendor_profile_pic' => 'required',
+        ]);
+
+        $vendor_shop_slug = Str::slug($request->vendor_shop_name);
+
+        if($request->hasFile('vendor_profile_pic')){
+            $image = $request->file('vendor_profile_pic');
+
+            $customeName = "VP".".".rand().time().".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/vendor/'.$customeName);
+            Image::make($image)->resize(250,250)->save($path);
+
+            $update = User::where('slag', $user_slug)->update([
+                'vendor_shop_name' => $request->vendor_shop_name,
+                'vendor_pay_of_line' => $request->vendor_pay_of_line,
+                'vendor_short_description' => $request->vendor_short_description,
+                'vendor_shop_address' => $request->vendor_shop_address,
+                'vendor_shop_slug' => $vendor_shop_slug,
+                'vendor_join' => Carbon::now(),
+                'vendor_profile_pic' => $customeName,
+                'vendor_status_id' => 2,
+            ]);
+
+            if($update){
+                $notification = array(
+                    'message' => "Your Shop Created, Please Wait For Admin Active",
+                    'alert-type' => "success",
+                );
+
+            }else{
+                $notification = array(
+                    'message' => "Opps, Something is Wrong",
+                    'alert-type' => "error",
+                );
+            }
+            return redirect()->route('/')->with($notification);
+        }
+
+    }
+
     /**
      * Display a listing of the resource.
      */

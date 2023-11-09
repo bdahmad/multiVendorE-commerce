@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 // all public route route here
 Route::get('/', function () {
     return view('index');
-});
+})->name('/');
 
 
 
@@ -44,22 +44,23 @@ Route::middleware(['auth','role:1','verified'])->group(function(){
 // all admin route here
 Route::middleware(['auth','role:2','verified'])->group(function(){
 
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-
-    Route::get('/admin/logout', [AdminController::class, 'adminLogout'])->name('admin.logout');
-
-    Route::get('/admin/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
-
-    Route::get('/admin/settings', [AdminController::class, 'adminSettings'])->name('admin.settings');
-
-    Route::post('/admin/profile/update', [AdminController::class, 'adminProfileUpdate'])->name('admin.profile.update');
-
-    Route::post('/admin/profile/pic/update', [AdminController::class, 'adminProfilePicUpdate'])->name('admin.profile.pic.update');
-
-    Route::post('admin/social/link/update', [AdminController::class, 'adminSocialLinkUpdate'])->name('admin.social.link.update');
+    // all admin profile realated route
+    Route::controller(AdminController::class)->group(function(){
+        Route::get('/admin/dashboard', 'index')->name('admin.dashboard');
+        Route::get('/admin/logout', 'adminLogout')->name('admin.logout');
+        Route::get('/admin/profile', 'adminProfile')->name('admin.profile');
+        Route::get('/admin/settings', 'adminSettings')->name('admin.settings');
+        Route::post('/admin/profile/update', 'adminProfileUpdate')->name('admin.profile.update');
+        Route::post('/admin/profile/pic/update', 'adminProfilePicUpdate')->name('admin.profile.pic.update');
+        Route::post('admin/social/link/update', 'adminSocialLinkUpdate')->name('admin.social.link.update');
+        Route::post('/admin/password/update', 'adminPasswordUpdate')->name('admin.password.update');
+    });
 
 
-    Route::post('/admin/password/update', [AdminController::class, 'adminPasswordUpdate'])->name('admin.password.update');
+    // all vendor control admin route here
+    Route::controller(AdminController::class)->group(function(){
+
+    });
 
 
     // all brand related url here
@@ -112,23 +113,22 @@ Route::post('login/store', [AuthenticatedSessionController::class, 'store'])->na
 // all vendor route here
 Route::middleware(['auth','role:3','verified'])->group(function(){
 
-    Route::get('/vendor/dashboard', [VendorController::class, 'index'])->name('vendor.dashboard');
-
-    Route::get('/vendor/logout', [VendorController::class, 'vendorLogout'])->name('vendor.logout');
-
-    Route::get('/vendor/profile', [VendorController::class, 'vendorProfile'])->name('vendor.profile');
-
-    Route::post('/vendor/profile/update', [VendorController::class, 'vendorProfileUpdate'])->name('vendor.profile.update');
-
-    Route::get('/vendor/settings', [VendorController::class, 'vendorSettings'])->name('vendor.settings');
-
-    Route::post('/vendor/profile/pic/update', [VendorController::class, 'vendorProfilePicUpdate'])->name('vendor.profile.pic.update');
-
-    Route::post('/vendor/social/link/update', [VendorController::class, 'vendorSocialLinkUpdate'])->name('vendor.social.link.update');
-
-    Route::post('/vendor/password/update', [VendorController::class, 'vendorPasswordUpdate'])->name('vendor.password.update');
+    // all vendor profile related url here
+    Route::controller(VendorController::class)->group(function(){
+        Route::get('/vendor/dashboard', 'index')->name('vendor.dashboard');
+        Route::get('/vendor/logout', 'vendorLogout')->name('vendor.logout');
+        Route::get('/vendor/profile', 'vendorProfile')->name('vendor.profile');
+        Route::post('/vendor/profile/update', 'vendorProfileUpdate')->name('vendor.profile.update');
+        Route::get('/vendor/settings', 'vendorSettings')->name('vendor.settings');
+        Route::post('/vendor/profile/pic/update', 'vendorProfilePicUpdate')->name('vendor.profile.pic.update');
+        Route::post('/vendor/social/link/update', 'vendorSocialLinkUpdate')->name('vendor.social.link.update');
+        Route::post('/vendor/password/update', 'vendorPasswordUpdate')->name('vendor.password.update');
+    });
 });
-// vendor login route
+
+// vendor login register route
+Route::get('/vendor/apply/{slug}', [VendorController::class, 'vendorApply'])->name('vendor.apply');
+Route::post('/vendor/apply/submit', [VendorController::class, 'vendorApplySubmit'])->name('vendor.apply.submit');
 Route::get('/vendor/login', [VendorController::class, 'vendorLogin'])->name('vendor.login');
 Route::post('login/store', [AuthenticatedSessionController::class, 'store'])->name('loginStore');
 
@@ -137,14 +137,14 @@ Route::post('login/store', [AuthenticatedSessionController::class, 'store'])->na
 // // all user route
 Route::middleware(['auth','role:4','verified'])->group(function(){
 
-    Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
-
-    Route::get('logout', [UserController::class, 'logout'])->name('logout');
-
-    Route::post('update/profile', [UserController::class, 'update'])->name('update.profile');
-
-    Route::post('password/update', [UserController::class, 'passwordUpdate'])->name('password.update');
+    Route::controller(UserController::class)->group(function(){
+        Route::get('/dashboard', 'index')->name('dashboard');
+        Route::get('logout', 'logout')->name('logout');
+        Route::post('update/profile', 'update')->name('update.profile');
+        Route::post('password/update', 'passwordUpdate')->name('password.update');
+    });
 });
+
 // for register page
 Route::get('register', [UserController::class, 'create'])->name('register');
 // for register post

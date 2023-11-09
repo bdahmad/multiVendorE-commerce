@@ -165,7 +165,23 @@
                     data-wow-delay=".3s">
                     <h4 class="widget-title">Corporate</h4>
                     <ul class="footer-list mb-sm-5 mb-md-0">
-                        <li><a href="#">Become a Vendor</a></li>
+
+
+                        @php
+                            use App\Models\User;
+                        @endphp
+
+                        @auth
+                        <li><a href="{{route('vendor.apply',$slug = User::where('id', Auth::User()->id)->value('slag'))}}">Become a Vendor </a></li>
+                        @else
+
+                        <li><a href="{{route('login')}}">Become a Vendor </a></li>
+
+                        @endauth
+
+
+
+
                         <li><a href="#">Affiliate Program</a></li>
                         <li><a href="#">Farm Business</a></li>
                         <li><a href="#">Farm Careers</a></li>
