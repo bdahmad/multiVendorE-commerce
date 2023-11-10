@@ -40,8 +40,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(BrandController::class)->group(function () {
         Route::get('/admin/dashboard/brand', 'index')->name('all-brand');
         Route::get('/admin/dashboard/brand/add', 'add')->name('add-brand');
-        Route::get('/admin/dashboard/brand/edit/{$slug}', 'edit')->name('edit-brand');
+        Route::get('/admin/dashboard/brand/edit/{slug}', 'edit')->name('edit-brand');
         Route::post('/admin/dashboard/brand/submit', 'insert')->name('insert-brand');
+        Route::post('/admin/dashboard/brand/update', 'update')->name('update-brand');
     });
 });
 

@@ -43,7 +43,7 @@
                                 <img src="{{asset('uploads/images/brand/'.$data->brand_image)}}" height="30px" width="30px" alt="">
                             </td>
                             <td>
-                                <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                <a href="{{route('edit-brand',$data->brand_slug)}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                 <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>

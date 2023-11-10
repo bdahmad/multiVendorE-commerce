@@ -27,19 +27,20 @@
                 <div class="col-lg-10">
                     <div class="card">
                         <div class="card-body">
-                            <form method="post" action="{{ route('insert-brand') }}" enctype="multipart/form-data">
+                            <form method="post" action="{{route('update-brand')}}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Brand Name</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" class="form-control @error('brand_name') is-invalid @enderror" value = "{{old('brand_name')}}" name="brand_name" />
+                                        <input type="text" class="form-control @error('brand_name') is-invalid @enderror" value="{{$edit->brand_name}}" name="brand_name" />
                                         @error('brand_name')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
+                                <input type="hidden" value="{{$edit->brand_slug}}" name="slug">
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Brand Image</h6>
@@ -56,7 +57,7 @@
                                         <h6 class="mb-0"></h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <img src="{{url('uploads/no_image.jpg') }}" class="rounded-circle p-1 bg-primary" alt="Admin" style=" width: 100px; height: 100px;" id="showImg">
+                                        <img src="{{asset('uploads/images/brand/'.$edit->brand_image) }}" class="rounded-circle p-1 bg-primary" alt="Admin" style=" width: 100px; height: 100px;" id="showImg">
                                     </div>
                                 </div>
                                 <div class="row">
