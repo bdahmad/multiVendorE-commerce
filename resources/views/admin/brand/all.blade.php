@@ -37,12 +37,14 @@
                     <tbody>
                         @foreach($all as $key => $data)
                         <tr>
-                            <td>$key+1</td>
-                            <td>$data->brand_name</td>
-                            <td>$data->brand_image</td>
+                            <td>{{$key+1}}</td>
+                            <td>{{$data->brand_name}}</td>
                             <td>
-                                <a href="#"><i class="fa fa-edit"></i></a>
-                                <a href="#"><i class="fa fa-trash"></i></a>
+                                <img src="{{asset('uploads/images/brand/'.$data->brand_image)}}" height="30px" width="30px" alt="">
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                         @endforeach

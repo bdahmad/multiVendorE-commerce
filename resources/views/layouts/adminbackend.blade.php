@@ -22,12 +22,14 @@
     <link href="{{asset('adminbackend')}}/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('adminbackend')}}/assets/css/app.css" rel="stylesheet">
     <link href="{{asset('adminbackend')}}/assets/css/icons.css" rel="stylesheet">
+    <link href="{{asset('adminbackend')}}/assets/css/fontawesome.min.css" rel="stylesheet">
     <!-- Theme Style CSS -->
     <link rel="stylesheet" href="{{asset('adminbackend')}}/assets/css/dark-theme.css" />
     <link rel="stylesheet" href="{{asset('adminbackend')}}/assets/css/semi-dark.css" />
     <link rel="stylesheet" href="{{asset('adminbackend')}}/assets/css/header-colors.css" />
     <link href="{{asset('adminbackend')}}/assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0-10/css/all.css" integrity="sha512-Dj9pt3sZROOuTTs9S89ykGZeu1XQgWKg3DVpu5tZALApsrWdd3tnVjTclUuVONaHM4O8GgCnjSbHlTKXrd2OWg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -694,8 +696,12 @@
     <script src="{{asset('adminbackend')}}/assets/plugins/sparkline-charts/jquery.sparkline.min.js"></script>
     <script src="{{asset('adminbackend')}}/assets/plugins/jquery-knob/excanvas.js"></script>
     <script src="{{asset('adminbackend')}}/assets/plugins/jquery-knob/jquery.knob.js"></script>
+    <link href="{{asset('adminbackend')}}/assets/js/fontawesome.min.js" rel="stylesheet">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="{{asset('adminbackend')}}/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0-10/js/all.js" integrity="sha512-Cr2j03BU8uvGH3c27hfFIs78leIZaq8ltraqr7VDilMQ/QQczRxl6bg6/pKNT4OSdKGlkJ5zrsn1kvQCpn7HCg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(function() {
             $(".knob").knob();
@@ -719,12 +725,11 @@
         });
     </script>
     <script>
-		$(document).ready(function() {
-			$('#example').DataTable();
-		  } );
-	</script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
     <script>
-        
         @if(Session::has('message'))
         var type = "{{ Session::get('alert-type','info') }}"
         switch (type) {
