@@ -22,12 +22,14 @@ return new class extends Migration
             $table->string('vendor_avg_review')->nullable();
             $table->string('vendor_profile_pic')->nullable();
             $table->string('vendor_status_id')->nullable();
+            $table->string('vendor_editor_id')->nullable();
+            $table->string('vendor_creator_id')->nullable();
             $table->string('vendor_shop_address')->nullable();
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('slag')->unique()->nullable();
+            $table->string('slug')->unique()->nullable();
             $table->string('photo')->nullable();
             $table->string('phone')->nullable();
             $table->string('designation')->nullable();

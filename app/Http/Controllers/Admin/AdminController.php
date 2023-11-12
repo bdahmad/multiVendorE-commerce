@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\SocialMedia;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use File;
 use Illuminate\Support\Facades\Hash;
@@ -286,5 +287,99 @@ class AdminController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+
+    /**
+     * All active vendor List.
+     */
+    public function allActiveVendor()
+    {
+        $all_vendor = User::where('status_id', '1')->where('role_id', 3)->latest()->get();
+        return view('admin.vendor_manage.all_active_vendor', compact('all_vendor'));
+    }
+
+    /**
+     * All requested vendor List.
+     */
+    public function allRequestedVendor()
+    {
+        $all_requested_vendor = User::where('status_id', '1')->where('vendor_join', '!=', null)->where('role_id', 4)->latest()->get();
+        return view('admin.vendor_manage.all_requested_vendor', compact('all_requested_vendor'));
+    }
+
+
+    /**
+     * Show Vendor Information
+     */
+    public function adminVendorEdit($slug)
+    {
+        $vendor = User::where('status_id', '1')->where('vendor_shop_slug', $slug)->first();
+        return view('admin.vendor_manage.edit_requested_vendor', compact('vendor'));
+    }
+
+    /**
+     * Show Vendor Information
+     */
+    public function adminRequestedVendorDelete($slug)
+    {
+        
+        $vendor_profile_pic = User::where('status_id', '1')->where('vendor_shop_slug', $slug)->value('vendor_profile_pic');
+
+        $update = User::where('status_id', '1')->where('vendor_shop_slug', $slug)->update([
+            'vendor_status_id' => null,
+            'role_id' => null,
+            'vendor_creator_id' => null,
+            'vendor_join' => null,
+            'vendor_shop_name' => null,
+            'vendor_pay_of_line' => null,
+            'vendor_short_description' => null,
+            'vendor_shop_address' => null,
+            'vendor_profile_pic' => null,
+        ]);
+
+        if (File::exists(public_path('uploads/vendor/' . $vendor_profile_pic))) {
+            File::delete(public_path('uploads/vendor/' . $vendor_profile_pic));
+        }
+
+        if ($update) {
+            $notification = array(
+                'message' => "Vendor Requested Deleted Successfully",
+                'alert-type' => "success",
+            );
+        }else{
+            $notification = array(
+                'message' => "Opps, Something Is Wrong",
+                'alert-type' => "error",
+            );
+        }
+        return redirect()->route('admin.all.requested.vendor')->with($notification);
+
+    }
+
+    /**
+     * Active Requested Vendor
+     */
+    public function activeRequestedVendor(Request $request, $slug)
+    {
+        $update = User::where('status_id', '1')->where('vendor_shop_slug', $slug)->update([
+            'vendor_status_id' => 1,
+            'role_id' => 3,
+            'vendor_creator_id' => Auth::user()->id,
+            'vendor_join' => Carbon::now()->toDateTimeLocalString(),
+        ]);
+
+        if ($update) {
+            $notification = array(
+                'message' => "Vendor Activated Successfully",
+                'alert-type' => "success",
+            );
+        }else{
+            $notification = array(
+                'message' => "Opps, Something Is Wrong",
+                'alert-type' => "error",
+            );
+        }
+        return redirect()->route('admin.all.active.vendor')->with($notification);
     }
 }

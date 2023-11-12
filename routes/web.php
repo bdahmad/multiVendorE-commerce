@@ -59,6 +59,12 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
 
     // all vendor control admin route here
     Route::controller(AdminController::class)->group(function(){
+        Route::get('admin/all/active/vendor', 'allActiveVendor')->name('admin.all.active.vendor');
+        Route::get('admin/all/requested/vendor', 'allRequestedVendor')->name('admin.all.requested.vendor');
+        Route::get('/admin/vendor/edit/{slug}', 'adminVendorEdit')->name('admin.vendor.edit');
+        Route::post('/admin/active/requested/vendor/{slug}', 'activeRequestedVendor')->name('admin.active.requested.vendor');
+
+        Route::get('/admin/requested/vendor/delete/{slug}', 'adminRequestedVendorDelete')->name('admin.requested.vendor.delete');
 
     });
 

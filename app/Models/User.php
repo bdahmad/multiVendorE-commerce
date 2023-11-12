@@ -41,5 +41,16 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    
+    public function statusInfo(){
+        return $this->belongsTo('App\Models\Status', 'status_id', 'id');
+    }
+    public function vendorStatusInfo(){
+        return $this->belongsTo('App\Models\Status', 'vendor_status_id', 'id');
+    }
+    public function creatorInfo(){
+        return $this->belongsTo('App\Models\User', 'vendor_creator_id', 'id');
+    }
+    public function editorInfo(){
+        return $this->belongsTo('App\Models\User', 'vendor_creator_id', 'id');
+    }
 }
