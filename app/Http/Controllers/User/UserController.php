@@ -44,7 +44,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $id = Auth::user()->id;
+        $id = Auth::user()->user_id;
         $userData = User::find($id);
         return view('dashboard', compact('userData'));
     }
@@ -172,21 +172,18 @@ class UserController extends Controller
             Image::make($image)->resize(250, 250)->save($path);
 
             $update = User::where('status_id', 1)->where('slag', $slug)->update([
-                'name' => $request->name,
-                'email' => $request->email,
                 'photo' => $customeName,
-                'phone' => $request->phone,
-                'address' => $request->address,
-            ]);
-        } else {
 
-            $update = User::where('status_id', 1)->where('slag', $slug)->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'address' => $request->address,
             ]);
         }
+
+        $update = User::where('status_id', 1)->where('slag', $slug)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+        ]);
+
 
         if ($update) {
 
@@ -218,7 +215,7 @@ class UserController extends Controller
 
         // old password match
         if (Hash::check($request->old_password, auth()->user()->password)) {
-            User::where('id', auth()->user()->id)->update([
+            User::where('user_id', auth()->user()->user_id)->update([
                 'password' => Hash::make($request->new_password),
             ]);
 

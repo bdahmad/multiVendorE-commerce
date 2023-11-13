@@ -88,6 +88,25 @@
 						</li>
 					</ul>
 				</li>
+
+
+				<li class="menu-label">Product Manage</li>
+
+				<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class='bx bx-cart'></i>
+						</div>
+						<div class="menu-title">Products</div>
+					</a>
+					<ul>
+						<li> <a href="{{route('admin.all.active.product')}}"><i class="bx bx-right-arrow-alt"></i>All Products</a>
+						</li>
+						<li> <a href="{{route('admin.all.requested.product')}}"><i class="bx bx-right-arrow-alt"></i>All Requested Products</a>
+						</li>
+						<li> <a href="{{route('admin.add.product')}}"><i class="bx bx-right-arrow-alt"></i>Add Products</a>
+						</li>
+					</ul>
+				</li>
 			</ul>
 			<!--end navigation-->
 		</div>

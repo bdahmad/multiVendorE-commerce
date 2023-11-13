@@ -149,64 +149,39 @@ class BrandController extends Controller
 
 
             $update = Brand::where('id', $id)->update([
-                'brand_name' => $request->brand_name,
-                'brand_pay_of_line' => $request->brand_pay_of_line,
-                'brand_title' => $request->brand_title,
-                'brand_description' => $request->brand_description,
-                'brand_official_email' => $request->brand_official_email,
-                'brand_official_phone' => $request->brand_official_phone,
-                'brand_official_address' => $request->brand_official_address,
-                'brand_slug' => $slug,
                 'brand_image' => $customeName,
-                'brand_status' => $request->brand_status,
-                'brand_editor' => Auth::user()->id,
-                'updated_at' => Carbon::now(),
-
             ]);
 
-            if($update){
-                $notification = array(
-                    'message' => "Brand Updated Successfully",
-                    'alert-type' => "success",
-                );
-
-            }else{
-                $notification = array(
-                    'message' => "Opps, Something is Wrong",
-                    'alert-type' => "error",
-                );
-            }
-            return redirect()->route('admin.all.brand')->with($notification);
-        }else{
-            $update = Brand::where('id', $id)->update([
-                'brand_name' => $request->brand_name,
-                'brand_pay_of_line' => $request->brand_pay_of_line,
-                'brand_title' => $request->brand_title,
-                'brand_description' => $request->brand_description,
-                'brand_official_email' => $request->brand_official_email,
-                'brand_official_phone' => $request->brand_official_phone,
-                'brand_official_address' => $request->brand_official_address,
-                'brand_slug' => $slug,
-                'brand_status' => $request->brand_status,
-                'brand_editor' => Auth::user()->id,
-                'updated_at' => Carbon::now(),
-
-            ]);
-
-            if($update){
-                $notification = array(
-                    'message' => "Brand Updated Successfully",
-                    'alert-type' => "success",
-                );
-
-            }else{
-                $notification = array(
-                    'message' => "Opps, Something is Wrong",
-                    'alert-type' => "error",
-                );
-            }
-            return redirect()->route('admin.all.brand')->with($notification);
         }
+
+        $update = Brand::where('id', $id)->update([
+            'brand_name' => $request->brand_name,
+            'brand_pay_of_line' => $request->brand_pay_of_line,
+            'brand_title' => $request->brand_title,
+            'brand_description' => $request->brand_description,
+            'brand_official_email' => $request->brand_official_email,
+            'brand_official_phone' => $request->brand_official_phone,
+            'brand_official_address' => $request->brand_official_address,
+            'brand_slug' => $slug,
+            'brand_status' => $request->brand_status,
+            'brand_editor' => Auth::user()->id,
+            'updated_at' => Carbon::now(),
+        ]);
+
+        if($update){
+            $notification = array(
+                'message' => "Brand Updated Successfully",
+                'alert-type' => "success",
+            );
+
+        }else{
+            $notification = array(
+                'message' => "Opps, Something is Wrong",
+                'alert-type' => "error",
+            );
+        }
+        return redirect()->route('admin.all.brand')->with($notification);
+
     }
 
     /**

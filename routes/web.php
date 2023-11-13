@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Products\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Superadmin\SuperadminController;
 use App\Http\Controllers\User\UserController;
@@ -44,7 +45,7 @@ Route::middleware(['auth','role:1','verified'])->group(function(){
 // all admin route here
 Route::middleware(['auth','role:2','verified'])->group(function(){
 
-    // all admin profile realated route
+    // all admin profile related route
     Route::controller(AdminController::class)->group(function(){
         Route::get('/admin/dashboard', 'index')->name('admin.dashboard');
         Route::get('/admin/logout', 'adminLogout')->name('admin.logout');
@@ -109,6 +110,21 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
         Route::get('/admin/restore/sub/category/{slug}', 'restore')->name('admin.sub.category.restore');
         Route::get('/admin/sub/category/permanentlyDelete/{slug}', 'permanentlyDelete')->name('admin.sub.category.permanentlyDelete');
     });
+
+    // all product related url here
+    Route::controller(ProductsController::class)->group(function(){
+        Route::get('/admin/all/active/product', 'adminAllActiveProduct')->name('admin.all.active.product');
+        Route::get('/admin/all/requested/active/product', 'adminAllRequestedProduct')->name('admin.all.requested.product');
+        Route::get('/admin/add/product', 'adminAddProduct')->name('admin.add.product');
+        // Route::post('/admin/sub/category/store', 'store')->name('admin.sub.category.store');
+        // Route::get('/admin/sub/category/edit/{slug}', 'edit')->name('admin.sub.category.edit');
+        // Route::post('/admin/sub/category/update', 'update')->name('admin.sub.category.update');
+        // Route::get('/admin/sub/category/delete/{slug}', 'softDelete')->name('admin.sub.category.delete');
+        // Route::get('/admin/recycle/sub/category', 'recycle')->name('admin.recycle.sub.category');
+        // Route::get('/admin/restore/sub/category/{slug}', 'restore')->name('admin.sub.category.restore');
+        // Route::get('/admin/sub/category/permanentlyDelete/{slug}', 'permanentlyDelete')->name('admin.sub.category.permanentlyDelete');
+    });
+
 });
 
 // admin login route

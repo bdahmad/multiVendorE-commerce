@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
+class Product extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $primaryKey = 'brand_id';
+
+    protected $primaryKey = 'product_id';
+
 
     public function statusInfo(){
         return $this->belongsTo('App\Models\Status', 'brand_status', 'id');
@@ -21,3 +23,4 @@ class Brand extends Model
         return $this->belongsTo('App\Models\User', 'brand_editor', 'id');
     }
 }
+
