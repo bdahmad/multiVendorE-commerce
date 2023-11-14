@@ -6,6 +6,7 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\CategoryController;
 
 
 Route::get('/', function () {
@@ -44,6 +45,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::post('/admin/dashboard/brand/submit', 'insert')->name('insert-brand');
         Route::post('/admin/dashboard/brand/update', 'update')->name('update-brand');
         Route::get('/admin/dashboard/brand/softDelete/{id}', 'softDelete')->name('softDelete-brand');
+    });
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/admin/dashboard/category', 'index')->name('all-category');
+        Route::get('/admin/dashboard/category/add', 'add')->name('add-category');
+        Route::get('/admin/dashboard/category/edit/{slug}', 'edit')->name('edit-category');
+        Route::post('/admin/dashboard/category/submit', 'insert')->name('insert-category');
+        Route::post('/admin/dashboard/category/update', 'update')->name('update-category');
+        Route::get('/admin/dashboard/category/softDelete/{id}', 'softDelete')->name('softDelete-category');
     });
 });
 
