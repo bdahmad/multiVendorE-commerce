@@ -19,25 +19,24 @@ return new class extends Migration
             $table->integer('vendor_id')->nullable();
             $table->integer('supplier_id')->nullable();
 
-            $table->string('product_quantity_type')->nullable();
-            $table->string('product_type')->nullable();
-            $table->string('product_quality_type')->nullable();
-
             $table->string('product_name');
             $table->string('product_slug');
             $table->string('product_code');
             $table->string('product_barcode')->nullable();
-            $table->string('product_quantity');
 
             $table->string('product_tags')->nullable();
+            $table->string('product_quality_tag')->nullable();
             $table->string('product_size')->nullable();
             $table->string('product_color')->nullable();
             $table->string('product_weight')->nullable();
             $table->string('product_sku')->nullable();
             $table->string('product_dimensions')->nullable();
             $table->string('product_materials')->nullable();
+            $table->enum('product_quantity_type', ['pice', 'weight', 'litter', 'litter&weight'])->nullable();
 
             $table->string('product_buy_price');
+            $table->string('product_vat');
+            $table->string('product_shipping_const');
             $table->string('product_sel_price');
             $table->string('product_discount_price')->nullable();
             $table->string('product_event_price')->nullable();

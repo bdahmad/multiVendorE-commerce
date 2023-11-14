@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ProductsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display all active product
      */
     public function adminAllActiveProduct()
     {
@@ -18,11 +18,11 @@ class ProductsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * admin create product
      */
-    public function create()
+    public function adminAddProduct()
     {
-        //
+        return view('admin.product_manage.add_product');
     }
 
     /**

@@ -27,7 +27,7 @@ class UserTableSeeder extends Seeder
                 'password' => Hash::make('111'),
                 'role_id' => 1,
                 'status_id' => 1,
-                'slag' => uniqid('sa' . rand()),
+                'slug' => uniqid('sa' . rand()),
 
                 // this data related with super admin just for seed null value
                 'vendor_shop_name' => null,
@@ -48,7 +48,7 @@ class UserTableSeeder extends Seeder
                 'password' => Hash::make('111'),
                 'role_id' => 2,
                 'status_id' => 1,
-                'slag' => uniqid('a' . rand()),
+                'slug' => uniqid('a' . rand()),
 
                 // this data related with admin just for seed null value
                 'vendor_shop_name' => null,
@@ -70,7 +70,7 @@ class UserTableSeeder extends Seeder
                 'password' => Hash::make('111'),
                 'role_id' => 3,
                 'status_id' => 1,
-                'slag' => uniqid('v' . rand()),
+                'slug' => uniqid('v' . rand()),
 
                 // for vendor fake data
                 'vendor_shop_name' => 'TFC',
@@ -92,7 +92,7 @@ class UserTableSeeder extends Seeder
                 'password' => Hash::make('111'),
                 'role_id' => 4,
                 'status_id' => 1,
-                'slag' => uniqid('u' . rand()),
+                'slug' => uniqid('u' . rand()),
 
                 // this data not use on user admin just for seed null value
                 'vendor_shop_name' => null,

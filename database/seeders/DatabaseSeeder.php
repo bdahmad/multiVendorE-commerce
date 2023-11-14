@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
             RoleTableSeeder::class,
             StatusTableSeeder::class,
             SocialMediaTableSeeder::class,
+            CategoryTableSeeder::class,
+            SubcategoryTableSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 
