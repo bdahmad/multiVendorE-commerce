@@ -43,6 +43,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/admin/dashboard/brand/edit/{slug}', 'edit')->name('edit-brand');
         Route::post('/admin/dashboard/brand/submit', 'insert')->name('insert-brand');
         Route::post('/admin/dashboard/brand/update', 'update')->name('update-brand');
+        Route::get('/admin/dashboard/brand/softDelete/{id}', 'softDelete')->name('softDelete-brand');
     });
 });
 

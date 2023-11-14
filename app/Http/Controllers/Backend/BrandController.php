@@ -94,8 +94,27 @@ class BrandController extends Controller
             return redirect()->route('edit-brand', $slug)->with($notification);
         }
     }
-    public function softDelete()
+    public function softDelete($id)
     {
+        $delete = Brand::where('brand_status',1)->where('brand_id',$id)->update([
+            'brand_status' => 0,
+            'updated_at' => Carbon::now()->toDateTimeString(),
+        ]);
+        if($delete){
+            $notification = array(
+                'message' => 'Successfully delete brand item.',
+                'alert-type' => 'success'
+            );
+            return redirect()->back()->with($notification);
+        }else{
+            $notification = array(
+                'message' => 'Operation Failed.',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+
+        }
+
     }
     public function restore()
     {
