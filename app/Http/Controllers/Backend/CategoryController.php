@@ -38,7 +38,7 @@ class CategoryController extends Controller
         if ($request->hasFile('category_image')) {
             $img = $request->file('category_image');
             $imgName = 'category_' . time() . '.' . $img->getClientOriginalExtension();
-            Image::make($img)->resize(300, 300)->save('uploads/images/category/' . $imgName);
+            Image::make($img)->resize(120,120)->save('uploads/images/category/' . $imgName);
         }
         $slug = Str::slug($request->category_name);
         $insert = Category::insert([
@@ -72,7 +72,7 @@ class CategoryController extends Controller
         if ($request->hasFile('category_image')) {
             $img = $request->file('category_image');
             $imgName = 'category_' . time() . '.' . $img->getClientOriginalExtension();
-            Image::make($img)->resize(300, 300)->save('uploads/images/category/' . $imgName);
+            Image::make($img)->resize(120, 120)->save('uploads/images/category/' . $imgName);
         }
 
         $update = Category::where('category_status', 1)->where('category_slug', $slug)->update([
