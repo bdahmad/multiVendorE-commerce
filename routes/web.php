@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\SubCategoryController;
 
 
 Route::get('/', function () {
@@ -53,6 +54,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::post('/admin/dashboard/category/submit', 'insert')->name('insert-category');
         Route::post('/admin/dashboard/category/update', 'update')->name('update-category');
         Route::get('/admin/dashboard/category/softDelete/{id}', 'softDelete')->name('softDelete-category');
+    });
+    Route::controller(SubCategoryController::class)->group(function () {
+        Route::get('/admin/dashboard/sub/category', 'index')->name('all-sub-category');
+        Route::get('/admin/dashboard/sub/category/add', 'add')->name('add-sub-category');
+        Route::get('/admin/dashboard/sub/category/edit/{slug}', 'edit')->name('edit-sub-category');
+        Route::post('/admin/dashboard/sub/category/submit', 'insert')->name('insert-sub-category');
+        Route::post('/admin/dashboard/sub/category/update', 'update')->name('update-sub-category');
+        Route::get('/admin/dashboard/sub/category/softDelete/{id}', 'softDelete')->name('softDelete-sub-category');
     });
 });
 
