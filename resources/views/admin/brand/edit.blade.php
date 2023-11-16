@@ -41,12 +41,13 @@
                                     </div>
                                 </div>
                                 <input type="hidden" value="{{$edit->brand_slug}}" name="slug">
+                                <input type="hidden" value="{{$edit->brand_image}}" name="old_image">
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Brand Image</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="file" name="brand_image" class="form-control @error('brand_image') is-invalid @enderror" id="image" />
+                                        <input type="file" name="brand_image" class="form-control @error('brand_image') is-invalid @enderror" id="image"  />
                                         @error('brand_image')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror

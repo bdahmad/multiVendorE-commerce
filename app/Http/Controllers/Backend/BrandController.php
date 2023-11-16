@@ -63,12 +63,18 @@ class BrandController extends Controller
     public function update(Request $request)
     {
         $slug = $request->slug;
+        $old_image = $request->old_image;
+
         $this->validate($request, [
             'brand_name' => 'required',
             'brand_image' => 'required',
         ]);
 
         if ($request->hasFile('brand_image')) {
+            $location = public_path('uploads/images/brand/' . $old_image);
+            if (file_exists($location)) {
+                unlink($location);
+            }
             $img = $request->file('brand_image');
             $imgName = 'brand_' . time() . '.' . $img->getClientOriginalExtension();
             Image::make($img)->resize(300, 300)->save('uploads/images/brand/' . $imgName);
