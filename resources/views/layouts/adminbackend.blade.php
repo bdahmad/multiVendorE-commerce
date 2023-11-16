@@ -84,6 +84,19 @@
                 </li>
                 <li>
                     <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><i class='bx bx-cookie'></i>
+                        </div>
+                        <div class="menu-title">Sub Category</div>
+                    </a>
+                    <ul>
+                        <li> <a href="{{route('all-sub-category')}}"><i class="bx bx-right-arrow-alt"></i>All Sub Category</a>
+                        </li>
+                        <li> <a href="{{route('add-sub-category')}}"><i class="bx bx-right-arrow-alt"></i>Add Sub Category</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="bx bx-category"></i>
                         </div>
                         <div class="menu-title">Application</div>
