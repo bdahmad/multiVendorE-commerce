@@ -71,6 +71,32 @@
                 </li>
                 <li>
                     <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><i class='bx bx-cookie'></i>
+                        </div>
+                        <div class="menu-title">Category</div>
+                    </a>
+                    <ul>
+                        <li> <a href="{{route('all-category')}}"><i class="bx bx-right-arrow-alt"></i>All Category</a>
+                        </li>
+                        <li> <a href="{{route('add-category')}}"><i class="bx bx-right-arrow-alt"></i>Add Category</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><i class='bx bx-cookie'></i>
+                        </div>
+                        <div class="menu-title">Sub Category</div>
+                    </a>
+                    <ul>
+                        <li> <a href="{{route('all-sub-category')}}"><i class="bx bx-right-arrow-alt"></i>All Sub Category</a>
+                        </li>
+                        <li> <a href="{{route('add-sub-category')}}"><i class="bx bx-right-arrow-alt"></i>Add Sub Category</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class="bx bx-category"></i>
                         </div>
                         <div class="menu-title">Application</div>
@@ -711,6 +737,7 @@
     <!--app JS-->
     <script src="{{asset('adminbackend')}}/assets/js/app.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         jQuery(document).ready(function() {
@@ -751,6 +778,68 @@
         }
         @endif
     </script>
+    {{-- sweet alert confirmaion here+ --}}
+
+<script>
+    $(document).ready(function() {
+
+        // soft delete confirmation here
+        $(document).on('click', '#delete', function(e) {
+            e.preventDefault();
+            var link = $(this).attr("href");
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Delete This Data?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Delete'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = link
+                }
+            })
+        });
+
+        // restore confirmaion here
+        $(document).on('click', '#restore', function(e) {
+            e.preventDefault();
+            var link = $(this).attr("href");
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Resotre This Data?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Restore'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = link
+                }
+            })
+        });
+        // permanently delete confirmaion here
+        $(document).on('click', '#permanentlyDelete', function(e) {
+            e.preventDefault();
+            var link = $(this).attr("href");
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Permanently Delete This Data?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Delete'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = link
+                }
+            })
+        });
+    });
+</script>
 </body>
 
 </html>
