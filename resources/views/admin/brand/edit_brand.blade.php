@@ -39,7 +39,7 @@
                                             <h6 class="mb-0">Name:</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="hidden" name="id" value="{{ $data->id }}">
+                                            <input type="hidden" name="id" value="{{ $data->brand_id }}">
                                             <input type="text"
                                                 class="form-control @error('brand_name') is-invalid @enderror"
                                                 id="brand_name" name="brand_name"
@@ -205,7 +205,8 @@
                                     </div>
 
                                     <div class="mb-3 mt-3" id="brand_data_update_btn_block" style="display: none">
-                                        <input type="reset" class="btn btn-info" id="brand_data_reset_btn"></input>
+                                        <input type="reset" class="btn btn-info" id="brand_data_reset_btn"/>
+
                                         <button type="submit" class="btn btn-success" id="brand_data_update_btn">Save
                                             Change</button>
                                     </div>

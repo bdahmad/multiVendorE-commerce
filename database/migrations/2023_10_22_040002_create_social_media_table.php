@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('social_media', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id')->nullable();
+            $table->id('social_media_id');
+            $table->foreignId('user_id')->nullable();
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->string('social_media_name')->nullable();
             $table->string('social_media_link')->nullable();
             $table->string('social_media_slug')->nullable();

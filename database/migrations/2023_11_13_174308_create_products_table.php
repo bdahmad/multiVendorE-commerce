@@ -14,9 +14,15 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id('product_id');
             $table->integer('category_id');
-            $table->integer('subcategory_id');
-            $table->integer('brand_id')->nullable();
-            $table->integer('vendor_id')->nullable();
+            // $table->integer('subcategory_id');
+            $table->foreignId('subcategory_id')->nullable();
+            $table->foreign('subcategory_id')->references('sub_category_id')->on('sub_categories')->onDelete('cascade');
+            // $table->integer('brand_id')->nullable();
+            $table->foreignId('brand_id')->nullable();
+            $table->foreign('brand_id')->references('brand_id')->on('brands')->onDelete('cascade');
+            // $table->integer('vendor_id')->nullable();
+            $table->foreignId('vendor_id')->nullable();
+            $table->foreign('vendor_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->integer('supplier_id')->nullable();
 
             $table->string('product_name');
@@ -24,15 +30,15 @@ return new class extends Migration
             $table->string('product_code');
             $table->string('product_barcode')->nullable();
 
-            $table->string('product_tags')->nullable();
-            $table->string('product_quality_tag')->nullable();
             $table->string('product_size')->nullable();
             $table->string('product_color')->nullable();
-            $table->string('product_weight')->nullable();
-            $table->string('product_sku')->nullable();
-            $table->string('product_dimensions')->nullable();
             $table->string('product_materials')->nullable();
-            $table->enum('product_quantity_type', ['pice', 'weight', 'litter', 'litter&weight'])->nullable();
+            $table->string('product_tags')->nullable();
+            $table->string('product_quality_tag')->nullable();
+            $table->string('product_weight')->nullable();
+            $table->string('product_dimensions')->nullable();
+            $table->string('product_sku')->nullable();
+            $table->enum('product_quantity_type', ['piece', 'kg', 'litter','meter', 'litter$piece','kg$piece'])->nullable();
 
             $table->string('product_buy_price');
             $table->string('product_vat');
@@ -43,16 +49,17 @@ return new class extends Migration
 
             $table->string('product_short_description');
             $table->string('product_long_description');
-            $table->string('product_thumbnail');
-            $table->string('product_avg_review')->nullable();
             $table->string('product_note')->nullable();
+            $table->string('product_avg_review')->nullable();
 
             $table->string('product_hot_deals')->nullable();
             $table->string('product_featured')->nullable();
             $table->string('product_special_offer')->nullable();
             $table->string('product_special_deals')->nullable();
 
-            $table->integer('product_status_id');
+            $table->string('product_thumbnail');
+
+            $table->integer('product_status_id')->nullable();
             $table->integer('product_creator_id')->nullable();
             $table->integer('product_editor_id');
             $table->timestamps();

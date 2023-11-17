@@ -9,4 +9,5 @@ class SocialMedia extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $primaryKey = 'social_media_id';
 }

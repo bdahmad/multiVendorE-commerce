@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             SocialMediaTableSeeder::class,
             CategoryTableSeeder::class,
             SubcategoryTableSeeder::class,
+            BrandTableSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 

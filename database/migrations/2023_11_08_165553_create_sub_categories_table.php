@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sub_categories', function (Blueprint $table) {
-            $table->id();
+            $table->id('sub_category_id');
             $table->string('sub_category_name')->unique();
             $table->string('sub_category_image')->nullable();
             $table->string('sub_category_slug')->unique();
             $table->string('sub_category_status')->nullable();
-            $table->foreignId('category_id')->nullable();
             $table->string('category_slug')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreignId('category_id')->nullable();
+            $table->foreign('category_id')->references('category_id')->on('categories')->onDelete('cascade');
             $table->string('sub_category_creator')->nullable();
             $table->string('sub_category_editor')->nullable();
             $table->timestamps();

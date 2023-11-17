@@ -27,10 +27,8 @@ class BrandTableSeeder extends Seeder
                 'brand_official_phone' => '01718022214',
                 'brand_official_address' => 'brand_official_address',
                 'brand_slug' => 'walton',
-                'sub_category_status' => 1,
-                'category_id' => 1,
-                'category_slug' => 'electronics',
-                'sub_category_creator' => 2,
+                'brand_status' => 1,
+                'brand_creator' => 2,
                 'created_at' => Carbon::now()->toDateTimeLocalString(),
             ],
 

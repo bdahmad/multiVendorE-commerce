@@ -15,6 +15,7 @@
     <link href="{{ asset('admin') }}/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
     <link href="{{ asset('admin') }}/assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
     <link href="{{ asset('admin') }}/assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="{{ asset('admin') }}/assets/plugins/input-tags/css/tagsinput.css" rel="stylesheet" />
 
     <!-- loader-->
     <link href="{{ asset('admin') }}/assets/css/pace.min.css" rel="stylesheet" />
@@ -42,6 +43,17 @@
     {{-- sweet alert cdn  --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    {{-- jquery cdn  --}}
+    <script src="{{ asset('admin') }}/assets/js/jquery.min.js"></script>
+
+    {{-- select 2 cdn  --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+  
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 
 </head>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\SubCategory;
@@ -73,6 +74,7 @@ class CategoryController extends Controller
                     'alert-type' => "error",
                 );
             }
+
             return redirect()->route('admin.all.category')->with($notification);
         }
     }
@@ -102,7 +104,7 @@ class CategoryController extends Controller
         $id = $request->id;
 
         $this->validate($request, [
-            'category_name' => 'required|string|max:50|unique:categories,category_name,' . $id . 'category_name',
+            'category_name' => 'required|string|max:50|unique:categories,category_name,' . $id . ',category_id',
             'category_status' => 'required',
         ]);
 
@@ -115,7 +117,7 @@ class CategoryController extends Controller
             $image = $request->file('category_image');
 
             // delete old image
-            $old_image = Category::where('id', $id)->value('category_image');
+            $old_image = Category::where('category_id', $id)->value('category_image');
 
             if (File::exists(public_path('uploads/category/' . $old_image))) {
                 File::delete(public_path('uploads/category/' . $old_image));
@@ -125,51 +127,34 @@ class CategoryController extends Controller
             $path = public_path('uploads/category/' . $customeName);
             Image::make($image)->resize(250, 250)->save($path);
 
-            $update = category::where('id', $id)->update([
-                'category_name' => $request->category_name,
-                'category_slug' => $slug,
+            $update = category::where('category_id', $id)->update([
                 'category_image' => $customeName,
-                'category_status' => $request->category_status,
-                'category_editor' => Auth::user()->id,
-                'updated_at' => Carbon::now(),
-
             ]);
 
-            if ($update) {
-                $notification = array(
-                    'message' => "Category Updated Successfully",
-                    'alert-type' => "success",
-                );
-            } else {
-                $notification = array(
-                    'message' => "Opps, Something is Wrong",
-                    'alert-type' => "error",
-                );
-            }
-            return redirect()->route('admin.all.category')->with($notification);
-        } else {
-            $update = Category::where('id', $id)->update([
-                'category_name' => $request->category_name,
-                'category_slug' => $slug,
-                'category_status' => $request->category_status,
-                'category_editor' => Auth::user()->id,
-                'updated_at' => Carbon::now(),
-
-            ]);
-
-            if ($update) {
-                $notification = array(
-                    'message' => "Category Updated Successfully",
-                    'alert-type' => "success",
-                );
-            } else {
-                $notification = array(
-                    'message' => "Opps, Something is Wrong",
-                    'alert-type' => "error",
-                );
-            }
-            return redirect()->route('admin.all.category')->with($notification);
         }
+
+        $update = Category::where('category_id', $id)->update([
+            'category_name' => $request->category_name,
+            'category_slug' => $slug,
+            'category_status' => $request->category_status,
+            'category_editor' => Auth::user()->user_id,
+            'updated_at' => Carbon::now(),
+
+        ]);
+
+        if ($update) {
+            $notification = array(
+                'message' => "Category Updated Successfully",
+                'alert-type' => "success",
+            );
+        } else {
+            $notification = array(
+                'message' => "Opps, Something is Wrong",
+                'alert-type' => "error",
+            );
+        }
+        return redirect()->route('admin.all.category')->with($notification);
+
     }
 
     /**
@@ -181,11 +166,11 @@ class CategoryController extends Controller
         $update = Category::where('category_slug', $slug)->update([
             'deleted_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-            'category_editor' => Auth::user()->id,
+            'category_editor' => Auth::user()->user_id,
         ]);
 
-        if ($update) {
 
+        if ($update) {
             // soft delete all related subcategory
             $all_sub_category = SubCategory::where('category_slug', $slug)->get();
 
@@ -214,6 +199,7 @@ class CategoryController extends Controller
     public function recycle()
     {
         $all = Category::whereNotNull('deleted_at')->latest()->get();
+
         return view('admin.category.all_recycle_category', compact('all'));
     }
 
@@ -225,7 +211,7 @@ class CategoryController extends Controller
         $update = Category::where('category_slug', $slug)->update([
             'deleted_at' => null,
             'updated_at' => Carbon::now(),
-            'category_editor' => Auth::user()->id,
+            'category_editor' => Auth::user()->user_id,
         ]);
 
         if ($update) {

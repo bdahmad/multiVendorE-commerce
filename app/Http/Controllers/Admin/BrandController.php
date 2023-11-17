@@ -118,12 +118,12 @@ class BrandController extends Controller
         $id = $request->id;
 
         $this->validate($request,[
-            'brand_name' => 'required|string|max:50|unique:brands,brand_name,'.$id.'brand_name',
+            'brand_name' => 'required|string|max:50|unique:brands,brand_name,'.$id.',brand_id',
             'brand_pay_of_line' => 'required|string|max:100',
             'brand_title' => 'required|string|max:100',
             'brand_description' => 'required|string|max:250',
-            'brand_official_email' => 'required|max:100|email|unique:brands,brand_official_email,'.$id.'brand_official_email',
-            'brand_official_phone' => 'required|min:10|unique:brands,brand_official_phone,'.$id.'brand_official_phone',
+            'brand_official_email' => 'required|max:100|email|unique:brands,brand_official_email,'.$id.',brand_id',
+            'brand_official_phone' => 'required|min:10|unique:brands,brand_official_phone,'.$id.',brand_id',
             'brand_official_address' => 'required|string',
             'brand_status' => 'required',
         ]);
@@ -137,7 +137,7 @@ class BrandController extends Controller
             $image = $request->file('brand_image');
 
             // delete old image
-            $old_image = Brand::where('id', $id)->value('brand_image');
+            $old_image = Brand::where('brand_id', $id)->value('brand_image');
 
             if(File::exists(public_path('uploads/brand/'.$old_image))){
                 File::delete(public_path('uploads/brand/'.$old_image));
@@ -148,13 +148,13 @@ class BrandController extends Controller
             Image::make($image)->resize(250,250)->save($path);
 
 
-            $update = Brand::where('id', $id)->update([
+            $update = Brand::where('brand_id', $id)->update([
                 'brand_image' => $customeName,
             ]);
 
         }
 
-        $update = Brand::where('id', $id)->update([
+        $update = Brand::where('brand_id', $id)->update([
             'brand_name' => $request->brand_name,
             'brand_pay_of_line' => $request->brand_pay_of_line,
             'brand_title' => $request->brand_title,
@@ -164,7 +164,7 @@ class BrandController extends Controller
             'brand_official_address' => $request->brand_official_address,
             'brand_slug' => $slug,
             'brand_status' => $request->brand_status,
-            'brand_editor' => Auth::user()->id,
+            'brand_editor' => Auth::user()->user_id,
             'updated_at' => Carbon::now(),
         ]);
 
@@ -192,7 +192,7 @@ class BrandController extends Controller
         $update = Brand::where('brand_slug', $slug)->update([
             'deleted_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-            'brand_editor' => Auth::user()->id,
+            'brand_editor' => Auth::user()->user_id,
         ]);
 
         if($update){
@@ -228,7 +228,7 @@ class BrandController extends Controller
         $update = Brand::where('brand_slug', $slug)->update([
             'deleted_at' => null,
             'updated_at' => Carbon::now(),
-            'brand_editor' => Auth::user()->id,
+            'brand_editor' => Auth::user()->user_id,
         ]);
 
         if($update){

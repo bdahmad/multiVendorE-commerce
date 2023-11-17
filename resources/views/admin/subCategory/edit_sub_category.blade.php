@@ -39,7 +39,7 @@
                                             <h6 class="mb-0">Name:</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="hidden" name="id" value="{{ $data->id }}">
+                                            <input type="hidden" name="id" value="{{ $data->sub_category_id }}">
                                             <input type="text"
                                                 class="form-control @error('sub_category_name') is-invalid @enderror"
                                                 id="sub_category_name" name="sub_category_name"
@@ -66,7 +66,7 @@
 
                                                 <option value="">Select Category</option>
                                                 @foreach ($all as $item)
-                                                    <option value="{{ $item->id }}"@if ($item->id == $data->category_id) selected @endif>{{ $item->category_name }}</option>
+                                                    <option value="{{ $item->category_id }}"@if ($item->category_id == $data->category_id) selected @endif>{{ $item->category_name }}</option>
                                                 @endforeach
                                             </select>
 

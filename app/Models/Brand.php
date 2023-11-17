@@ -15,9 +15,9 @@ class Brand extends Model
         return $this->belongsTo('App\Models\Status', 'brand_status', 'id');
     }
     public function creatorInfo(){
-        return $this->belongsTo('App\Models\User', 'brand_creator', 'id');
+        return $this->belongsTo('App\Models\User', 'brand_creator', 'user_id');
     }
     public function editorInfo(){
-        return $this->belongsTo('App\Models\User', 'brand_editor', 'id');
+        return $this->belongsTo('App\Models\User', 'brand_editor', 'user_id');
     }
 }

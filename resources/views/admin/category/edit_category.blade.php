@@ -39,7 +39,7 @@
                                             <h6 class="mb-0">Name:</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="hidden" name="id" value="{{ $data->id }}">
+                                            <input type="hidden" name="id" value="{{ $data->category_id }}">
                                             <input type="text"
                                                 class="form-control @error('category_name') is-invalid @enderror"
                                                 id="category_name" name="category_name"

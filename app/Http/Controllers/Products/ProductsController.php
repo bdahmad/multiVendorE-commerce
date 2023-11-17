@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -26,11 +28,12 @@ class ProductsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * find sub category on category change dropdown.
      */
-    public function store(Request $request)
+    public function adminFindSubcategory($id)
     {
-        //
+        $data = SubCategory::where('category_id', $id)->get();
+        return json_decode($data);
     }
 
     /**

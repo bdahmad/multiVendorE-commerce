@@ -172,7 +172,7 @@
                         @endphp
 
                         @auth
-                        <li><a href="{{route('vendor.apply',$slug = User::where('id', Auth::User()->id)->value('slag'))}}">Become a Vendor </a></li>
+                        <li><a href="{{route('vendor.apply',$slug = User::where('user_id', Auth::User()->user_id)->value('slug'))}}">Become a Vendor </a></li>
                         @else
 
                         <li><a href="{{route('login')}}">Become a Vendor </a></li>

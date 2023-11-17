@@ -42,7 +42,7 @@ class SubCategoryController extends Controller
             'sub_category_image' => 'required',
         ]);
 
-        $category_slug = Category::where('id', $request->category_id)->value('category_slug');
+        $category_slug = Category::where('category_id', $request->category_id)->value('category_slug');
 
         $slug = Str::slug($request->sub_category_name);
 
@@ -107,13 +107,13 @@ class SubCategoryController extends Controller
         $id = $request->id;
 
         $this->validate($request,[
-            'sub_category_name' => 'required|string|max:50|unique:sub_categories,sub_category_name,'.$id.'sub_category_name',
+            'sub_category_name' => 'required|string|max:50|unique:sub_categories,sub_category_name,'.$id.',sub_category_id',
             'category_id' => 'required',
             'sub_category_status' => 'required',
         ]);
 
 
-        $category_slug = Category::where('id', $request->category_id)->value('category_slug');
+        $category_slug = Category::where('category_id', $request->category_id)->value('category_slug');
         $slug = Str::slug($request->sub_category_name);
 
         if ($request->hasFile('sub_category_image')) {
@@ -121,7 +121,7 @@ class SubCategoryController extends Controller
             $image = $request->file('sub_category_image');
 
             // delete old image
-            $old_image = SubCategory::where('id', $id)->value('sub_category_image');
+            $old_image = SubCategory::where('sub_category_id', $id)->value('sub_category_image');
 
             if(File::exists(public_path('uploads/subCategory/'.$old_image))){
                 File::delete(public_path('uploads/subCategory/'.$old_image));
@@ -131,57 +131,36 @@ class SubCategoryController extends Controller
             $path = public_path('uploads/subCategory/'.$customeName);
             Image::make($image)->resize(250,250)->save($path);
 
-            $update = Subcategory::where('id', $id)->update([
-                'sub_category_name' => $request->sub_category_name,
-                'category_id' => $request->category_id,
-                'category_slug' => $category_slug,
-                'sub_category_slug' => $slug,
+            $update = Subcategory::where('sub_category_id', $id)->update([
                 'sub_category_image' => $customeName,
-                'sub_category_status' => $request->sub_category_status,
-                'sub_category_editor' => Auth::user()->id,
-                'updated_at' => Carbon::now(),
-
             ]);
 
-            if($update){
-                $notification = array(
-                    'message' => "Sub Category Updated Successfully",
-                    'alert-type' => "success",
-                );
-
-            }else{
-                $notification = array(
-                    'message' => "Opps, Something is Wrong",
-                    'alert-type' => "error",
-                );
-            }
-            return redirect()->route('admin.all.sub.category')->with($notification);
-        }else{
-            $update = SubCategory::where('id', $id)->update([
-                'sub_category_name' => $request->sub_category_name,
-                'category_id' => $request->category_id,
-                'category_slug' => $category_slug,
-                'sub_category_slug' => $slug,
-                'sub_category_status' => $request->sub_category_status,
-                'sub_category_editor' => Auth::user()->id,
-                'updated_at' => Carbon::now(),
-
-            ]);
-
-            if($update){
-                $notification = array(
-                    'message' => "Sub Category Updated Successfully",
-                    'alert-type' => "success",
-                );
-
-            }else{
-                $notification = array(
-                    'message' => "Opps, Something is Wrong",
-                    'alert-type' => "error",
-                );
-            }
-            return redirect()->route('admin.all.sub.category')->with($notification);
         }
+        $update = SubCategory::where('sub_category_id', $id)->update([
+            'sub_category_name' => $request->sub_category_name,
+            'category_id' => $request->category_id,
+            'category_slug' => $category_slug,
+            'sub_category_slug' => $slug,
+            'sub_category_status' => $request->sub_category_status,
+            'sub_category_editor' => Auth::user()->id,
+            'updated_at' => Carbon::now(),
+
+        ]);
+
+        if($update){
+            $notification = array(
+                'message' => "Sub Category Updated Successfully",
+                'alert-type' => "success",
+            );
+
+        }else{
+            $notification = array(
+                'message' => "Opps, Something is Wrong",
+                'alert-type' => "error",
+            );
+        }
+        return redirect()->route('admin.all.sub.category')->with($notification);
+
     }
 
     /**
@@ -189,7 +168,9 @@ class SubCategoryController extends Controller
      */
     public function softDelete(string $slug)
     {
-        $update = SubCategory::where('sub_category_slug', $slug)->update([
+
+
+        $update = Subcategory::where('sub_category_slug', $slug)->update([
             'deleted_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
             'sub_category_editor' => Auth::user()->id,
@@ -216,7 +197,7 @@ class SubCategoryController extends Controller
      */
     public function recycle()
     {
-        $all = Subcategory::whereNotNull('deleted_at')->latest()->get();
+        $all = SubCategory::whereNotNull('deleted_at')->latest()->get();
         return view('admin.subCategory.all_recycle_sub_category', compact('all'));
     }
 
