@@ -34,7 +34,7 @@
                                         <h6 class="mb-0">Sub Category Name</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" class="form-control @error('sub_category_name') is-invalid @enderror" value = "{{old('sub_category_name')}}" name="sub_category_name" />
+                                        <input type="text" class="form-control @error('sub_category_name') is-invalid @enderror" value="{{old('sub_category_name')}}" name="sub_category_name" />
                                         @error('sub_category_name')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -45,7 +45,15 @@
                                         <h6 class="mb-0">Category Name</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" class="form-control @error('sub_category_name') is-invalid @enderror" value = "{{old('sub_category_name')}}" name="sub_category_name" />
+                                        @php
+                                        $categorys = App\Models\Backend\Category::where('category_status',1)->get();
+                                        @endphp
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option value="">Select Category</option>
+                                            @foreach($categorys as $category)
+                                            <option value="{{$category->category_id}}">{{$category->category_name}}</option>
+                                            @endforeach
+                                        </select>
                                         @error('sub_category_name')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                         @enderror
