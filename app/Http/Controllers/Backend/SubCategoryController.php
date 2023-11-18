@@ -32,17 +32,19 @@ class SubCategoryController extends Controller
     {
         $this->validate($request, [
             'sub_category_name' => 'required',
+            'category_id' => 'required',
             'sub_category_image' => 'required',
         ]);
 
         if ($request->hasFile('sub_category_image')) {
             $img = $request->file('sub_category_image');
             $imgName = 'sub_category_' . time() . '.' . $img->getClientOriginalExtension();
-            Image::make($img)->resize(120,120)->save('uploads/images/sub-category/' . $imgName);
+            Image::make($img)->resize(120, 120)->save('uploads/images/sub-category/' . $imgName);
         }
         $slug = Str::slug($request->sub_category_name);
         $insert = subCategory::insert([
             'sub_category_name' => $request->sub_category_name,
+            'category_id' => $request->category_id,
             'sub_category_slug' => $slug,
             'sub_category_image' => $imgName,
             'created_at' => Carbon::now()->toDateTimeString(),
@@ -52,7 +54,7 @@ class SubCategoryController extends Controller
                 'message' => 'sub category insert successfully.',
                 'alert-type' => 'success'
             );
-            return redirect()->route('all-sub-category')->with($notification);
+            return redirect()->back()->with($notification);
         } else {
             $notification = array(
                 'message' => 'Operation Failed.',
@@ -97,18 +99,18 @@ class SubCategoryController extends Controller
     }
     public function softDelete($id)
     {
-        $delete = subCategory::where('sub_category_status',1)->where('sub_category_id',$id)->update([
+        $delete = subCategory::where('sub_category_status', 1)->where('sub_category_id', $id)->update([
             'sub_category_status' => 0,
             'updated_at' => Carbon::now()->toDateTimeString(),
         ]);
 
-        if($delete){
+        if ($delete) {
             $notification = array(
                 'message' => 'Successfully delete sub category item.',
                 'alert-type' => 'success',
             );
             return redirect()->back()->with($notification);
-        }else{
+        } else {
             $notification = array(
                 'message' => 'Operation Failed.',
                 'alert-type' => 'error',

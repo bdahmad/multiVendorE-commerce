@@ -32,6 +32,7 @@
                                 <tr>
                                     <th>SI</th>
                                     <th>Name</th>
+                                    <th>Category</th>
                                     <th>Image</th>
                                     <th>Manage</th>
                                 </tr>
@@ -40,13 +41,14 @@
                                 @foreach($all as $key => $data)
                                 <tr>
                                     <td>{{$key+1}}</td>
-                                    <td>{{$data->category_name}}</td>
+                                    <td>{{$data->sub_category_name}}</td>
+                                    <td>{{$data->categoryInfo->category_name}}</td>
                                     <td>
                                         <img src="{{asset('uploads/images/category/'.$data->category_image)}}" height="30px" width="30px" alt="">
                                     </td>
                                     <td>
-                                        <a href="{{route('edit-category',$data->category_slug)}}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                                        <a href="{{route('softDelete-category',$data->category_id)}}" id="delete" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                        <a href="" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                                        <a href="" id="delete" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
