@@ -115,8 +115,9 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
     Route::controller(ProductsController::class)->group(function(){
         Route::get('/admin/all/active/product', 'adminAllActiveProduct')->name('admin.all.active.product');
         Route::get('/admin/all/requested/active/product', 'adminAllRequestedProduct')->name('admin.all.requested.product');
-        Route::get('/admin/add/product', 'adminAddProduct')->name('admin.add.product');
         Route::get('/admin/find/subcategory/{id}', 'adminFindSubcategory')->name('admin.find.subcategory');
+        Route::get('/admin/add/product', 'adminAddProduct')->name('admin.add.product');
+        Route::post('/admin/store/product', 'adminStoreProduct')->name('admin.store.product');
         // Route::post('/admin/sub/category/store', 'store')->name('admin.sub.category.store');
         // Route::get('/admin/sub/category/edit/{slug}', 'edit')->name('admin.sub.category.edit');
         // Route::post('/admin/sub/category/update', 'update')->name('admin.sub.category.update');

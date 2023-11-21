@@ -68,7 +68,36 @@ class BrandController extends Controller
                 'brand_slug' => $slug,
                 'brand_status' => 1,
                 'brand_image' => $customeName,
-                'brand_creator' => Auth::user()->id,
+                'brand_creator' => Auth::user()->user_id,
+                'created_at' => Carbon::now(),
+
+            ]);
+
+            if($insert){
+                $notification = array(
+                    'message' => "Brand Added Successfully",
+                    'alert-type' => "success",
+                );
+
+            }else{
+                $notification = array(
+                    'message' => "Opps, Something is Wrong",
+                    'alert-type' => "error",
+                );
+            }
+            return redirect()->route('admin.all.brand')->with($notification);
+        }else{
+            $insert = Brand::create([
+                'brand_name' => $request->brand_name,
+                'brand_pay_of_line' => $request->brand_pay_of_line,
+                'brand_title' => $request->brand_title,
+                'brand_description' => $request->brand_description,
+                'brand_official_email' => $request->brand_official_email,
+                'brand_official_phone' => $request->brand_official_phone,
+                'brand_official_address' => $request->brand_official_address,
+                'brand_slug' => $slug,
+                'brand_status' => 1,
+                'brand_creator' => Auth::user()->user_id,
                 'created_at' => Carbon::now(),
 
             ]);

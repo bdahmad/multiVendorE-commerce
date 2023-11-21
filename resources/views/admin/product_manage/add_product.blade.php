@@ -1,4 +1,4 @@
-@extends('admin.admin_master');
+@extends('admin.admin_master')
 @section('content')
     <div class="page-content">
 
@@ -21,68 +21,82 @@
             </div>
         </div>
         <!--end breadcrumb-->
-
+        <form action="{{route('admin.store.product')}}" method="post" enctype="multipart/form-data">
+            @csrf
         <div class="card">
             <div class="card-body p-4">
                 <h5 class="card-title">Add New Product</h5>
-                <hr />
+                <hr/>
                 <div class="form-body mt-4">
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="border border-3 p-4 rounded">
                                 <div class="form-group mb-3 ">
                                     <label for="product_name" na class="form-label">Product Name</label>
-                                    <input type="text" class="form-control" id="product_name" name="product_name"
-                                        placeholder="Enter Product Name">
+                                    <input type="text" class="form-control @error('product_name')
+                                        is-invalid
+                                    @enderror" id="product_name" name="product_name"
+                                        placeholder="Enter Product Name" value="{{old('product_name')}}">
+                                        @error('product_name')
+                                            <span class="text-danger"></span>{{ $message }}</span>
+                                        @enderror
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="product_size" na class="form-label">Product Size</label>
                                     <input type="text" class="form-control visually-hidden" id="product_size"
-                                        name="product_size" data-role="tagsinput" value="S, M, L, Xl, XXL, 3XL">
+                                        name="product_size" data-role="tagsinput" placeholder="S, M, L, Xl, XXL, 3XL" value="{{old('product_size')}}">
+
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="product_color" na class="form-label">Product Color</label>
                                     <input type="text" class="form-control visually-hidden" id="product_color"
                                         name="product_color" data-role="tagsinput"
-                                        value="Red, White, Black, Blue, Purpel, Pink">
+                                        placeholder="Red, White, Black, Blue, Purpel, Pink" value="{{old('product_color')}}">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="product_materials" na class="form-label">Product Materials</label>
                                     <input type="text" class="form-control visually-hidden" id="product_materials"
-                                        name="product_materials" data-role="tagsinput" value="Cutton, Fiber">
+                                        name="product_materials" data-role="tagsinput" placeholder="Cutton, Fiber" value="{{old('product_materials')}}">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="product_tags" na class="form-label">Product Tag</label>
                                     <input type="text" class="form-control visually-hidden" id="product_tags"
-                                        name="product_tags" data-role="tagsinput" value="New Product, Top Product">
+                                        name="product_tags" data-role="tagsinput" placeholder="New Product, Top Product, Hot Product" value="{{old('product_tags')}}">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="product_quality_tag" na class="form-label">Product Quality Tag</label>
                                     <input type="text" class="form-control visually-hidden" id="product_quality_tag"
-                                        name="product_quality_tag" data-role="tagsinput" value="Regular, Premium">
+                                        name="product_quality_tag" data-role="tagsinput" placeholder="Regular, Premium" value="{{old('product_quality_tag')}}">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="product_weight" na class="form-label">Product Weight</label>
-                                    <input type="text" class="form-control visually-hidden" id="product_weight"
-                                        name="product_weight" data-role="tagsinput" value="250gm, 500gm, 1kg, 5kg, 10kg">
+                                    <input type="text" class="form-control visually-hidden @error('product_weight')
+                                        is-invalid
+                                    @enderror" id="product_weight"
+                                        name="product_weight" data-role="tagsinput" placeholder="250gm, 500gm, 1kg, 5kg, 10kg" value="{{old('product_weight')}}">
+                                    @error('product_weight')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="product_dimensions" na class="form-label">Product Dimensions</label>
                                     <input type="text" class="form-control visually-hidden" id="product_dimensions"
                                         name="product_dimensions" data-role="tagsinput"
-                                        value="6.65 x 3.01 x 0.35 in, 7.65 x 4.01 x 0.70 in">
+                                        placeholder="6.65 x 3.01 x 0.35 in, 7.65 x 4.01 x 0.70 in" value="{{old('product_dimensions')}}">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="product_quantity_type" na class="form-label">Product Quantity Type</label>
-                                    <select class="form-select" id="product_quantity_type"
+                                    <select class="form-select @error('product_quantity_type')
+                                        is-invalid
+                                    @enderror" id="product_quantity_type"
                                         name = "product_quantity_type">
                                         <option value="">Select Quantity Type Of Product</option>
                                         <option value="piece">Piece</option>
@@ -92,6 +106,9 @@
                                         <option value="litter$piece">Litter And Piece</option>
                                         <option value="kg$piece">KG And Piece</option>
                                     </select>
+                                    @error('product_quantity_type')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -100,39 +117,59 @@
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label for="inputPrice" class="form-label">Buy Price</label>
-                                        <input type="email" class="form-control" id="product_buy_price"
-                                            name="product_buy_price" placeholder="Buy Price">
+                                        <input type="text" class="form-control @error('product_buy_price')
+                                            is-invalid
+                                        @enderror" id="product_buy_price"
+                                            name="product_buy_price" placeholder="Buy Price" value="{{old('product_buy_price')}}">
+                                        @error('product_buy_price')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="inputPrice" class="form-label">Product Vat</label>
-                                        <input type="email" class="form-control" id="product_vat"
-                                            placeholder="Product Vat" name="product_vat">
+                                        <input type="text" class="form-control @error('product_vat')
+                                            is-invalid
+                                        @enderror" id="product_vat"
+                                            placeholder="Product Vat in %" name="product_vat" value="{{old('product_vat')}}">
+                                        @error('product_vat')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPrice" class="form-label">Shipping Charge</label>
-                                        <input type="email" class="form-control" id="product_shipping_const"
-                                            placeholder="Product Vat" name="product_shipping_const">
+                                        <input type="text" class="form-control @error('product_shipping_const')
+                                            is-invalid
+                                        @enderror" id="product_shipping_const"
+                                            placeholder="Product Shipping Cost" name="product_shipping_const" value="{{old('product_shipping_const')}}">
+                                            @error('product_shipping_const')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPrice" class="form-label">Sell Price</label>
-                                        <input type="email" class="form-control" id="product_sel_price"
-                                            placeholder="Product Vat" name="product_sel_price">
+                                        <input type="text" class="form-control @error('product_sel_price')
+                                            is-invalid
+                                        @enderror" id="product_sel_price"
+                                            placeholder="Product Vat" name="product_sel_price" value="{{old('product_sel_price')}}">
+                                            @error('product_sel_price')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPrice" class="form-label">Discount Price</label>
-                                        <input type="email" class="form-control" id="product_discount_price"
-                                            placeholder="Product Vat" name="product_discount_price">
+                                        <input type="text" class="form-control" id="product_discount_price"
+                                            placeholder="Product Vat" name="product_discount_price" value="{{old('product_discount_price')}}">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPrice" class="form-label">Event Price</label>
-                                        <input type="email" class="form-control" id="product_event_price"
-                                            placeholder="Product Vat" name="product_event_price">
+                                        <input type="text" class="form-control" id="product_event_price"
+                                            placeholder="Product Vat" name="product_event_price" value="{{old('product_event_price')}}">
                                     </div>
 
 
                                     <div class="col-12">
-                                        <label for="inputProductCategory" class="form-label">Category</label>
+                                        <label for="category_id" class="form-label">Category</label>
 
                                         @php
                                             $all_category = App\Models\Category::where('category_status', 1)
@@ -140,22 +177,32 @@
                                                 ->get();
                                         @endphp
 
-                                        <select class="form-select" id="inputProductCategory">
+                                        <select class="form-select @error('category_id')
+                                            is-invalid
+                                        @enderror" id="category_id" name="category_id">
 
                                             @foreach ($all_category as $category)
                                                 <option value="{{ $category->category_id }}">{{ $category->category_name }}
                                                 </option>
                                             @endforeach
                                         </select>
+                                        @error('category_id')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="inputProductSubcategory" class="form-label">Sub Category</label>
+                                        <label for="subcategory_id" class="form-label">Sub Category</label>
 
-                                        <select class="form-select" id="inputProductSubcategory"
-                                            name="inputProductSubcategory">
+                                        <select class="form-select @error('subcategory_id')
+                                            is-invalid
+                                        @enderror" id="subcategory_id"
+                                            name="subcategory_id">
 
                                         </select>
+                                        @error('subcategory_id')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="col-12">
@@ -233,35 +280,61 @@
                             </div>
                         </div>
 
-                        <div class="mb-3 mt-3">
+                        <div class="mb-3 mt-3 ">
                             <label for="product_short_description" name="product_short_description"
                                 class="form-label">Product Short Description</label>
-                            <textarea class="form-control summernote" name="product_short_description" rows="3"></textarea>
+                            <textarea class="form-control summernote @error('product_short_description')
+                            is-invalid
+                            @enderror" name="product_short_description" rows="3">{{old('product_short_description')}}</textarea>
+
+                            @error('product_short_description')
+                                <span class="text-white bg-dark">{{$message}}</span>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="product_long_description" name="product_long_description"
                                 class="form-label">Product Long Description</label>
-                            <textarea class="form-control summernote" name="product_long_description" rows="3"></textarea>
+                            <textarea class="form-control summernote @error('product_long_description')
+                                is-invalid
+                            @enderror" name="product_long_description" rows="3">{{old('product_long_description')}}</textarea>
+
+                            @error('product_long_description')
+                                <span class="text-white bg-dark">{{$message}}</span>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="product_note" name="product_note" class="form-label">Product Note</label>
-                            <textarea class="form-control summernote" name="product_note" rows="3"></textarea>
+                            <textarea class="form-control summernote @error('product_note')
+                                is-invalid
+                            @enderror" name="product_note" rows="3">{{old('product_note')}}</textarea>
+                            @error('product_note')
+                                <span class="text-white bg-dark">{{$message}}</span>
+                            @enderror
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="inputProductTitle" class="form-label">Main Thambnail</label>
-                            <input name="product_thambnail" class="form-control" type="file" id="formFile"
+                            <input name="product_thumbnail" class="form-control @error('product_thumbnail')
+                                is-invalid
+                            @enderror" type="file" id="formFile"
                                 onChange="mainThamUrl(this)">
-
+                            @error('product_thumbnail')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                             <img class="my-3" src="" id="mainThmb" />
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="inputProductTitle" class="form-label">Multiple Image</label>
-                            <input class="form-control" name="multi_img[]" type="file" id="multiImg"
+                            <input class="form-control @error('product_multi_img')
+                                is-invalid
+                            @enderror" name="product_multi_img[]" type="file" id="multiImg"
                                 multiple="">
+                                @error('product_multi_img')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
                             <div class="row my-3" id="preview_img"></div>
                         </div>
                     </div>
@@ -271,9 +344,8 @@
                     <input type="reset" class="btn btn-danger" id="admin_product_add_reset_btn" />
                     <button type="submit" class="btn btn-success" id="admin_product_add_btn">Upload Product</button>
                 </div>
-
-
             </div><!--end row-->
+        </form>
         </div>
     </div>
     </div>
@@ -285,7 +357,7 @@
     <script>
         $(document).ready(function() {
 
-            $('#inputProductCategory').on('change', function() {
+            $('#category_id').on('change', function() {
                 $category_id = $(this).val();
                 if ($category_id) {
                     $.ajax({
@@ -294,8 +366,8 @@
                         // data: $category_id,
                         dataType: "json",
                         success: function(data) {
-                            $inputProductSubcategory = $('#inputProductSubcategory').html('');
-                            $('#inputProductSubcategory').empty();
+                            $inputProductSubcategory = $('#subcategory_id').html('');
+                            $('#subcategory_id').empty();
                             $.each(data, function(indexInArray, valueOfElement) {
                                 $inputProductSubcategory.append('<option value = "' +
                                     valueOfElement.sub_category_id + '">' +
