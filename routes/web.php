@@ -118,9 +118,8 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
         Route::get('/admin/find/subcategory/{id}', 'adminFindSubcategory')->name('admin.find.subcategory');
         Route::get('/admin/add/product', 'adminAddProduct')->name('admin.add.product');
         Route::post('/admin/store/product', 'adminStoreProduct')->name('admin.store.product');
-        // Route::post('/admin/sub/category/store', 'store')->name('admin.sub.category.store');
-        // Route::get('/admin/sub/category/edit/{slug}', 'edit')->name('admin.sub.category.edit');
-        // Route::post('/admin/sub/category/update', 'update')->name('admin.sub.category.update');
+        Route::get('/admin/active/product/edit', 'edit')->name('admin.active.product.edit');
+        Route::post('/admin/active/product/delete', 'update')->name('admin.active.product.delete');
         // Route::get('/admin/sub/category/delete/{slug}', 'softDelete')->name('admin.sub.category.delete');
         // Route::get('/admin/recycle/sub/category', 'recycle')->name('admin.recycle.sub.category');
         // Route::get('/admin/restore/sub/category/{slug}', 'restore')->name('admin.sub.category.restore');

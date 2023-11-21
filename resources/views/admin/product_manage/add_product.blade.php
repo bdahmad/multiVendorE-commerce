@@ -117,10 +117,10 @@
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label for="inputPrice" class="form-label">Buy Price</label>
-                                        <input type="text" class="form-control @error('product_buy_price')
+                                        <input type="number" class="form-control @error('product_buy_price')
                                             is-invalid
                                         @enderror" id="product_buy_price"
-                                            name="product_buy_price" placeholder="Buy Price" value="{{old('product_buy_price')}}">
+                                            name="product_buy_price" placeholder="500" value="{{old('product_buy_price')}}">
                                         @error('product_buy_price')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
@@ -128,43 +128,43 @@
 
                                     <div class="col-md-6">
                                         <label for="inputPrice" class="form-label">Product Vat</label>
-                                        <input type="text" class="form-control @error('product_vat')
+                                        <input type="number" class="form-control @error('product_vat')
                                             is-invalid
                                         @enderror" id="product_vat"
-                                            placeholder="Product Vat in %" name="product_vat" value="{{old('product_vat')}}">
+                                            placeholder="10%" name="product_vat" value="{{old('product_vat')}}">
                                         @error('product_vat')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPrice" class="form-label">Shipping Charge</label>
-                                        <input type="text" class="form-control @error('product_shipping_const')
+                                        <input type="number" class="form-control @error('product_shipping_const')
                                             is-invalid
                                         @enderror" id="product_shipping_const"
-                                            placeholder="Product Shipping Cost" name="product_shipping_const" value="{{old('product_shipping_const')}}">
+                                            placeholder="100" name="product_shipping_const" value="{{old('product_shipping_const')}}">
                                             @error('product_shipping_const')
                                                 <span class="text-danger">{{$message}}</span>
                                             @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPrice" class="form-label">Sell Price</label>
-                                        <input type="text" class="form-control @error('product_sel_price')
+                                        <input type="number" class="form-control @error('product_sel_price')
                                             is-invalid
                                         @enderror" id="product_sel_price"
-                                            placeholder="Product Vat" name="product_sel_price" value="{{old('product_sel_price')}}">
+                                            placeholder="800" name="product_sel_price" value="{{old('product_sel_price')}}">
                                             @error('product_sel_price')
                                                 <span class="text-danger">{{$message}}</span>
                                             @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPrice" class="form-label">Discount Price</label>
-                                        <input type="text" class="form-control" id="product_discount_price"
-                                            placeholder="Product Vat" name="product_discount_price" value="{{old('product_discount_price')}}">
+                                        <input type="number" class="form-control" id="product_discount_price"
+                                            placeholder="10%" name="product_discount_price" value="{{old('product_discount_price')}}">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPrice" class="form-label">Event Price</label>
-                                        <input type="text" class="form-control" id="product_event_price"
-                                            placeholder="Product Vat" name="product_event_price" value="{{old('product_event_price')}}">
+                                        <input type="number" class="form-control" id="product_event_price"
+                                            placeholder="700" name="product_event_price" value="{{old('product_event_price')}}">
                                     </div>
 
 
@@ -192,22 +192,22 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="subcategory_id" class="form-label">Sub Category</label>
+                                        <label for="sub_category_id" class="form-label">Sub Category</label>
 
-                                        <select class="form-select @error('subcategory_id')
+                                        <select class="form-select @error('sub_category_id')
                                             is-invalid
-                                        @enderror" id="subcategory_id"
-                                            name="subcategory_id">
+                                        @enderror" id="sub_category_id"
+                                            name="sub_category_id">
 
                                         </select>
-                                        @error('subcategory_id')
+                                        @error('sub_category_id')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
 
                                     <div class="col-12">
                                         <label for="inputbrand" class="form-label">Brand</label>
-                                        <select class="form-select searchAndSelect" id="inputbrand">
+                                        <select class="form-select searchAndSelect" id="inputbrand" name="brand_id">
                                             @php
                                                 $all_brand = App\Models\Brand::where('brand_status', 1)
                                                     ->orderBy('brand_name', 'ASC')
@@ -224,7 +224,7 @@
 
                                     <div class="col-12">
                                         <label for="inputVendor" class="form-label">Vendor</label>
-                                        <select class="form-select searchAndSelect" id="inputVendor">
+                                        <select class="form-select searchAndSelect" id="inputVendor" name="vendor_id">
                                             @php
                                                 $all_vendor = App\Models\User::where('vendor_status_id', 1)
                                                     ->orderBy('vendor_shop_name', 'ASC')
@@ -328,11 +328,11 @@
 
                         <div class="form-group mb-3">
                             <label for="inputProductTitle" class="form-label">Multiple Image</label>
-                            <input class="form-control @error('product_multi_img')
+                            <input class="form-control @error('product_multi_image')
                                 is-invalid
-                            @enderror" name="product_multi_img[]" type="file" id="multiImg"
-                                multiple="">
-                                @error('product_multi_img')
+                            @enderror" name="product_multi_image[]" type="file" id="multiImg"
+                                multiple="" max="5">
+                                @error('product_multi_image')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
                             <div class="row my-3" id="preview_img"></div>
@@ -366,8 +366,8 @@
                         // data: $category_id,
                         dataType: "json",
                         success: function(data) {
-                            $inputProductSubcategory = $('#subcategory_id').html('');
-                            $('#subcategory_id').empty();
+                            $inputProductSubcategory = $('#sub_category_id').html('');
+                            $('#sub_category_id').empty();
                             $.each(data, function(indexInArray, valueOfElement) {
                                 $inputProductSubcategory.append('<option value = "' +
                                     valueOfElement.sub_category_id + '">' +

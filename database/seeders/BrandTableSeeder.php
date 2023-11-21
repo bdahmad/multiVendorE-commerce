@@ -22,7 +22,7 @@ class BrandTableSeeder extends Seeder
                 'brand_title' => 'Energy Efficient & Eco Friendly',
                 'brand_description' => 'brand_description',
 
-                'brand_official_email' => 'Walton Air Conditioner is integrated with intelligent inverter technology that saves maximum electricity.',
+                'brand_official_email' => 'walton@gamil.com',
 
                 'brand_official_phone' => '01718022214',
                 'brand_official_address' => 'brand_official_address',

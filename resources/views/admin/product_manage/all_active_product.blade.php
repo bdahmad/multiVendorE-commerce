@@ -43,8 +43,8 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $active_product->product_name }}</td>
                                     <td>{{ $active_product->categoryInfo->category_name }}</td>
-                                    <td>{{ $active_product->subcategoryInfo->subcategory_name }}</td>
-                                    <td>{{ $active_product->price}}</td>
+                                    <td>{{ $active_product->subcategoryInfo->sub_category_name }}</td>
+                                    <td>{{ $active_product->product_sel_price}}</td>
                                     <td>
                                         <?php
                                             for ($i=1; $i <= $active_product->product_avg_review ; $i++) {
@@ -54,7 +54,7 @@
                                             }
                                         ?>
                                     </td>
-                                    <td><img src="{{ asset('uploads/product/thumbnail' . $active_product->product_thumbnail) }}" alt="product Image"
+                                    <td><img src="{{ asset('uploads/product/' . $active_product->product_thumbnail) }}" alt="product Image"
                                             style="width: 60px; height: 60px"></td>
                                     <td>
                                         <a href="{{ route('admin.active.product.edit', $active_product->product_slug) }}"
