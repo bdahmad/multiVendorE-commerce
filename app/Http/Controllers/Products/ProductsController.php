@@ -8,6 +8,8 @@ use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use DNS1D;
+use DNS2D;
 
 class ProductsController extends Controller
 {
@@ -59,8 +61,9 @@ class ProductsController extends Controller
         ]);
 
         $product_slug = Str::slug($request->product_name);
-        $product_code = $request->product_name.uniqid();
-       
+        $product_code = $request->product_slug.uniqid();
+        $product_info_for_QR_code = 'Product Name: '.$request->product_name.'product_code'.$request->$product_code.'Product Price'.$request->product_sel_price;
+        $product_barcode = DNS2D::getBarcodeHTML($product_info_for_QR_code, 'QRCODE');
 
 
 
