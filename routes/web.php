@@ -12,20 +12,10 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Vendor\VendorController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 
 // all public route route here
-Route::get('/', function () {
+Route::get('/', function() {
     return view('index');
 })->name('/');
 
@@ -118,12 +108,13 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
         Route::get('/admin/find/subcategory/{id}', 'adminFindSubcategory')->name('admin.find.subcategory');
         Route::get('/admin/add/product', 'adminAddProduct')->name('admin.add.product');
         Route::post('/admin/store/product', 'adminStoreProduct')->name('admin.store.product');
-        Route::get('/admin/active/product/edit', 'edit')->name('admin.active.product.edit');
-        Route::post('/admin/active/product/delete', 'update')->name('admin.active.product.delete');
-        // Route::get('/admin/sub/category/delete/{slug}', 'softDelete')->name('admin.sub.category.delete');
-        // Route::get('/admin/recycle/sub/category', 'recycle')->name('admin.recycle.sub.category');
-        // Route::get('/admin/restore/sub/category/{slug}', 'restore')->name('admin.sub.category.restore');
-        // Route::get('/admin/sub/category/permanentlyDelete/{slug}', 'permanentlyDelete')->name('admin.sub.category.permanentlyDelete');
+        Route::get('/admin/active/product/edit/{slug}', 'adminActiveProductEdit')->name('admin.active.product.edit');
+        Route::post('/admin/update/product', 'adminUpdateProduct')->name('admin.update.product');
+        Route::post('/admin/product/single/image/update', 'adminProductSingleImageUpdate')->name('admin.product.single.image.update');
+        Route::get('/admin/active/product/delete/{slug}', 'adminDeleteProduct')->name('admin.active.product.delete');
+        Route::get('/admin/recycle/product', 'recycle')->name('admin.recycle.product');
+        Route::get('/admin/product/restore/{slug}', 'restore')->name('admin.product.restore');
+        Route::get('/admin/product/permanentlyDelete/{slug}', 'permanentlyDelete')->name('admin.product.permanentlyDelete');
     });
 
 });
@@ -194,3 +185,4 @@ Route::post('login/store', [AuthenticatedSessionController::class, 'store'])->na
 
 
 // require __DIR__.'/auth.php';
+

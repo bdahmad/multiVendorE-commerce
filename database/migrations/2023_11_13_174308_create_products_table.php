@@ -65,6 +65,7 @@ return new class extends Migration
             $table->integer('product_creator_id')->nullable();
             $table->integer('product_editor_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

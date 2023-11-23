@@ -2262,10 +2262,6 @@ input.search-control-2::placeholder {
 }
 
 
-
-
-
-
 @media screen and (max-width:1280px) {
 	.email-header {
 		height: auto

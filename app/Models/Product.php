@@ -19,6 +19,10 @@ class Product extends Model
     public function creatorInfo(){
         return $this->belongsTo('App\Models\User', 'brand_creator', 'user_id');
     }
+
+    // public function vendorInfo(){
+    //     return $this->belongsTo('App\Models\Product', 'vendor_id', 'user_id');
+    // }
     public function editorInfo(){
         return $this->belongsTo('App\Models\User', 'brand_editor', 'user_id');
     }

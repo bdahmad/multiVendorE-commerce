@@ -105,6 +105,8 @@
 						</li>
 						<li> <a href="{{route('admin.add.product')}}"><i class="bx bx-right-arrow-alt"></i>Add Products</a>
 						</li>
+						<li> <a href="{{route('admin.recycle.product')}}"><i class="bx bx-right-arrow-alt"></i>Trash</a>
+						</li>
 					</ul>
 				</li>
 			</ul>
