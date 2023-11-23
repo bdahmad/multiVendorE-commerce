@@ -70,7 +70,7 @@ class ProductsController extends Controller
         // $product_info_for_QR_code = 'Product Name: '.$request->product_name.'product_code'.$request->$product_code.'Product Price'.$request->product_sel_price;
         // $product_barcode = DNS2D::getBarcodeSVG($product_info_for_QR_code, 'QRCODE');
 
-        $id = Product::insert([
+        $id = Product::insertGetId([
             'product_slug' => $product_slug,
             'product_code' => $product_code,
             // 'product_barcode' => $product_barcode,
@@ -100,6 +100,7 @@ class ProductsController extends Controller
             'product_short_description' => $request->product_short_description,
             'product_long_description' => $request->product_long_description,
             'product_note' => $request->product_note,
+
             'product_hot_deals' => $request->product_hot_deals,
             'product_featured' => $request->product_featured,
             'product_special_offer' => $request->product_special_offer,
@@ -407,4 +408,44 @@ class ProductsController extends Controller
 
     }
 
+     /**
+     * Permanently Delete Item.
+     */
+    public function permanentlyDelete($slug)
+    {
+
+        $product = Product::where('product_slug', $slug)->first();
+
+        // delete thumbnail image folder
+        $image = $product->product_thumbnail;
+        if(File::exists(public_path('uploads/product/'.$image))){
+            File::delete(public_path('uploads/product/'.$image));
+        }
+
+        // delete multi image from folder
+        $multi_image = ProductMultiImage::where('product_id', $product->product_id)->get();
+
+        foreach ($multi_image as $image) {
+
+            if(File::exists(public_path('uploads/product/multi_image/'.$image->product_multi_image))){
+                File::delete(public_path('uploads/product/multi_image/'.$image->product_multi_image));
+            }
+        }
+
+        $delete = Product::where('product_slug', $slug)->delete();
+
+        if($delete){
+            $notification = array(
+                'message' => "Product Permanently Deleted Successfully",
+                'alert-type' => "success",
+            );
+
+        }else{
+            $notification = array(
+                'message' => "Opps, Something is Wrong",
+                'alert-type' => "error",
+            );
+        }
+        return redirect()->route('admin.all.active.product')->with($notification);
+    }
 }
