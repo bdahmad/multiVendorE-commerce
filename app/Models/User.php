@@ -49,9 +49,9 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\Status', 'vendor_status_id', 'id');
     }
     public function creatorInfo(){
-        return $this->belongsTo('App\Models\User', 'vendor_creator_id', 'id');
+        return $this->belongsTo('App\Models\User', 'vendor_creator_id', 'user_id');
     }
     public function editorInfo(){
-        return $this->belongsTo('App\Models\User', 'vendor_creator_id', 'id');
+        return $this->belongsTo('App\Models\User', 'vendor_creator_id', 'user_id');
     }
 }

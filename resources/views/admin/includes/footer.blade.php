@@ -40,6 +40,7 @@
 {{-- toaster cnd  --}}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="{{ asset('admin') }}/assets/js/index.js"></script>
+
 <!--app JS-->
 <script src="{{ asset('admin') }}/assets/plugins/input-tags/js/tagsinput.js"></script>
 

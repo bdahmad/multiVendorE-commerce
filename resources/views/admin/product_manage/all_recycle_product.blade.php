@@ -14,12 +14,12 @@
             </div>
             <div class="ms-auto">
                 <div class="btn-group">
-                    <a href="{{ route('admin.all.product') }}" type="button" class="btn btn-primary">All Active Product</a>
+                    <a href="{{ route('admin.all.product') }}" type="button" class="btn btn-primary">All Product</a>
                 </div>
             </div>
         </div>
         <!--end breadcrumb-->
-        <h6 class="mb-0 text-uppercase">item Active Products</h6>
+        <h6 class="mb-0 text-uppercase">All Recycle Products</h6>
         <hr />
         <div class="card">
             <div class="card-body">

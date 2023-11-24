@@ -21,9 +21,9 @@
                             @php
 
                                 use App\Models\User;
-                                $is_already_applyed = User::where('slag', $slug)->value('vendor_join');
+                                $is_already_applyed = User::where('slug', $slug)->value('vendor_join');
 
-                                $vendor_applyed_data = User::where('slag', $slug)->first();
+                                $vendor_applyed_data = User::where('slug', $slug)->first();
 
 
                             @endphp

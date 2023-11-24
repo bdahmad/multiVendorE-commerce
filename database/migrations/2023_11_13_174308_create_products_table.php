@@ -62,6 +62,7 @@ return new class extends Migration
             $table->string('product_thumbnail')->nullable();
 
             $table->integer('product_status_id')->nullable();
+            $table->integer('product_vendor_status_id')->default(1);
             $table->integer('product_creator_id')->nullable();
             $table->integer('product_editor_id')->nullable();
             $table->timestamps();

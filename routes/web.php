@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Superadmin\SuperadminController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Vendor\VendorController;
+use App\Http\Controllers\Vendor\VendorProductController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -101,14 +102,14 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
         Route::get('/admin/sub/category/permanentlyDelete/{slug}', 'permanentlyDelete')->name('admin.sub.category.permanentlyDelete');
     });
 
-    // all product related url here
+    // all Admin product related url here
     Route::controller(ProductsController::class)->group(function(){
         Route::get('/admin/all/product', 'adminAllProduct')->name('admin.all.product');
-        Route::get('/admin/all/requested/active/product', 'adminAllRequestedProduct')->name('admin.all.requested.product');
+        Route::get('/admin/all/requested/product', 'adminAllRequestedProduct')->name('admin.all.requested.product');
         Route::get('/admin/find/subcategory/{id}', 'adminFindSubcategory')->name('admin.find.subcategory');
         Route::get('/admin/add/product', 'adminAddProduct')->name('admin.add.product');
         Route::post('/admin/store/product', 'adminStoreProduct')->name('admin.store.product');
-        Route::get('/admin/active/product/edit/{slug}', 'adminActiveProductEdit')->name('admin.active.product.edit');
+        Route::get('/admin/product/edit/{slug}', 'adminEditProduct')->name('admin.product.edit');
         Route::post('/admin/update/product', 'adminUpdateProduct')->name('admin.update.product');
         Route::post('/admin/product/single/image/update', 'adminProductSingleImageUpdate')->name('admin.product.single.image.update');
 
@@ -116,7 +117,7 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
 
         Route::get('/admin/active/product/{slug}', 'adminActiveProduct')->name('admin.active.product');
 
-        Route::get('/admin/active/product/delete/{slug}', 'adminDeleteProduct')->name('admin.active.product.delete');
+        Route::get('/admin/product/delete/{slug}', 'adminDeleteProduct')->name('admin.product.delete');
         Route::get('/admin/recycle/product', 'recycle')->name('admin.recycle.product');
         Route::get('/admin/product/restore/{slug}', 'restore')->name('admin.product.restore');
         Route::get('/admin/product/permanentlyDelete/{slug}', 'permanentlyDelete')->name('admin.product.permanentlyDelete');
@@ -143,6 +144,28 @@ Route::middleware(['auth','role:3','verified'])->group(function(){
         Route::post('/vendor/social/link/update', 'vendorSocialLinkUpdate')->name('vendor.social.link.update');
         Route::post('/vendor/password/update', 'vendorPasswordUpdate')->name('vendor.password.update');
     });
+
+    // all Vendor product related url here
+    Route::controller(VendorProductController::class)->group(function(){
+        Route::get('/vendor/all/product', 'vendorAllProduct')->name('vendor.all.product');
+        Route::get('/vendor/find/subcategory/{id}', 'vendorFindSubcategory')->name('vendor.find.subcategory');
+        Route::get('/vendor/add/product', 'vendorAddProduct')->name('vendor.add.product');
+        Route::post('/vendor/store/product', 'vendorStoreProduct')->name('vendor.store.product');
+        Route::get('/vendor/product/edit/{slug}', 'vendorEditProduct')->name('vendor.product.edit');
+        Route::post('/vendor/update/product', 'vendorUpdateProduct')->name('vendor.update.product');
+        Route::post('/vendor/product/single/image/update', 'vendorProductSingleImageUpdate')->name('vendor.product.single.image.update');
+
+        Route::get('/vendor/inactive/product/{slug}', 'vendorInactiveProduct')->name('vendor.inactive.product');
+
+        Route::get('/vendor/active/product/{slug}', 'vendorActiveProduct')->name('vendor.active.product');
+
+        Route::get('/vendor/product/delete/{slug}', 'vendorDeleteProduct')->name('vendor.product.delete');
+        Route::get('/vendor/recycle/product', 'recycle')->name('vendor.recycle.product');
+        Route::get('/vendor/product/restore/{slug}', 'restore')->name('vendor.product.restore');
+        Route::get('/vendor/product/permanentlyDelete/{slug}', 'permanentlyDelete')->name('vendor.product.permanentlyDelete');
+    });
+
+
 });
 
 // vendor login register route

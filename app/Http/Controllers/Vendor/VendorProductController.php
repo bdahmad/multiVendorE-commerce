@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Products;
+namespace App\Http\Controllers\Vendor;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductMultiImage;
 use App\Models\SubCategory;
@@ -14,28 +13,29 @@ use Image;
 use Auth;
 use File;
 
-class ProductsController extends Controller
+class VendorProductController extends Controller
 {
-    /**
+     /**
      * Display all active product
      */
-    public function adminAllProduct()
+    public function vendorAllProduct()
     {
-        $all = Product::where('deleted_at', null)->latest()->get();
-        return view('admin.product_manage.all_product', compact('all'));
+        $id = Auth::user()->user_id;
+        $all = Product::where('vendor_id', $id)->where('deleted_at', null)->latest()->get();
+        return view('vendor.product_manage.all_product', compact('all'));
     }
 
     /**
-     * admin create product
+     * vendor create product
      */
-    public function adminAddProduct()
+    public function vendorAddProduct()
     {
-        return view('admin.product_manage.add_product');
+        return view('vendor.product_manage.add_product');
     }
     /**
-     * admin store product
+     * vendor store product
      */
-    public function adminStoreProduct(Request $request)
+    public function vendorStoreProduct(Request $request)
     {
 
         $this->validate($request,[
@@ -78,7 +78,6 @@ class ProductsController extends Controller
 
             'brand_id' => $request->brand_id,
             'vendor_id' => $request->vendor_id,
-            'supplier_id' => $request->supplier_id,
             'product_name' => $request->product_name,
             'product_size' => $request->product_size,
             'product_color' => $request->product_color,
@@ -105,6 +104,7 @@ class ProductsController extends Controller
             'product_special_deals' => $request->product_special_deals,
 
             'product_status_id' => 2,
+            'vendor_id' => Auth::user()->user_id,
             'product_creator_id' => Auth::user()->user_id,
             'created_at' => Carbon::now(),
 
@@ -147,14 +147,14 @@ class ProductsController extends Controller
             'alert-type' => "success",
         );
 
-        return redirect()->route('admin.all.product')->with($notification);
+        return redirect()->route('vendor.all.product')->with($notification);
 
     }
 
     /**
      * find sub category on category change dropdown.
      */
-    public function adminFindSubcategory($id)
+    public function vendorFindSubcategory($id)
     {
         $data = SubCategory::where('category_id', $id)->get();
         return json_decode($data);
@@ -171,16 +171,16 @@ class ProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function adminEditProduct(string $slug)
+    public function vendorEditProduct(string $slug)
     {
         $data = Product::where('product_slug', $slug)->first();
-        return view('admin.product_manage.edit_product', compact('data'));
+        return view('vendor.product_manage.edit_product', compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function adminUpdateProduct(Request $request)
+    public function vendorUpdateProduct(Request $request)
     {
 
         $this->validate($request,[
@@ -219,8 +219,6 @@ class ProductsController extends Controller
             'sub_category_id' => $request->sub_category_id,
 
             'brand_id' => $request->brand_id,
-            'vendor_id' => $request->vendor_id,
-            'supplier_id' => $request->supplier_id,
             'product_name' => $request->product_name,
             'product_size' => $request->product_size,
             'product_color' => $request->product_color,
@@ -246,7 +244,7 @@ class ProductsController extends Controller
             'product_special_offer' => $request->product_special_offer,
             'product_special_deals' => $request->product_special_deals,
 
-            'product_editor_id' => Auth::user()->user_id,
+            'product_editor_id' => Auth::user()->id,
             'updated_at' => Carbon::now(),
 
         ]);
@@ -303,7 +301,7 @@ class ProductsController extends Controller
             'alert-type' => "success",
         );
 
-        return redirect()->route('admin.all.product')->with($notification);
+        return redirect()->route('vendor.all.product')->with($notification);
 
 
     }
@@ -311,7 +309,7 @@ class ProductsController extends Controller
     /**
      * update product multi image resource from storage.
      */
-    public function adminProductSingleImageUpdate(Request $request)
+    public function vendorProductSingleImageUpdate(Request $request)
     {
 
 
@@ -345,10 +343,11 @@ class ProductsController extends Controller
     /**
      * Inactive Product.
      */
-    public function adminInactiveProduct(string $slug)
+    public function vendorInactiveProduct(string $slug)
     {
+
         $update = Product::where('product_slug', $slug)->update([
-            'product_status_id' => 3,
+            'product_vendor_status_id' => 3,
             'updated_at' => Carbon::now(),
             'product_editor_id' => Auth::user()->user_id,
         ]);
@@ -371,10 +370,11 @@ class ProductsController extends Controller
     /**
      * Active Product.
      */
-    public function adminActiveProduct(string $slug)
+    public function vendorActiveProduct(string $slug)
     {
+
         $update = Product::where('product_slug', $slug)->update([
-            'product_status_id' => 1,
+            'product_vendor_status_id' => 1,
             'updated_at' => Carbon::now(),
             'product_editor_id' => Auth::user()->user_id,
         ]);
@@ -397,7 +397,7 @@ class ProductsController extends Controller
     /**
      * Recycle the specified resource from storage.
      */
-    public function adminDeleteProduct(string $slug)
+    public function vendorDeleteProduct(string $slug)
     {
         $update = Product::where('product_slug', $slug)->update([
             'deleted_at' => Carbon::now(),
@@ -426,8 +426,9 @@ class ProductsController extends Controller
      */
     public function recycle()
     {
-        $all = Product::whereNotNull('deleted_at')->latest()->get();
-        return view('admin.product_manage.all_recycle_product', compact('all'));
+        $id = Auth::user()->user_id;
+        $all = Product::where('vendor_id', $id)->whereNotNull('deleted_at')->latest()->get();
+        return view('vendor.product_manage.all_recycle_product', compact('all'));
     }
 
     /**
@@ -495,6 +496,6 @@ class ProductsController extends Controller
                 'alert-type' => "error",
             );
         }
-        return redirect()->route('admin.all.product')->with($notification);
+        return redirect()->route('vendor.all.product')->with($notification);
     }
 }

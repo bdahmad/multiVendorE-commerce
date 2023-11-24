@@ -105,7 +105,7 @@ class VendorController extends Controller
     {
 
         // fin all data
-        $id = Auth::user()->id;
+        $id = Auth::user()->user_id;
         $vendorData = User::find($id);
         return view('vendor.vendor_profile', compact('vendorData'));
     }
@@ -114,7 +114,7 @@ class VendorController extends Controller
     public function vendorProfileUpdate(Request $request)
     {
 
-        $id = Auth::user()->id;
+        $id = Auth::user()->user_id;
 
         $this->validate($request, [
             'vendor_shop_name' => 'required|max:50|unique:users,vendor_shop_name,' . $id . 'vendor_shop_name',
@@ -153,7 +153,7 @@ class VendorController extends Controller
     public function vendorSettings()
     {
         // fin all data
-        $id = Auth::user()->id;
+        $id = Auth::user()->user_id;
         $vendorData = User::find($id);
 
         return view('vendor.vendor_settings', compact('vendorData'));
@@ -164,7 +164,7 @@ class VendorController extends Controller
     {
 
         // fin all data
-        $id = Auth::user()->id;
+        $id = Auth::user()->user_id;
         $vendorData = User::find($id);
 
         // check image here
