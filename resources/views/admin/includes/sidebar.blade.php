@@ -99,11 +99,12 @@
 						<div class="menu-title">Products</div>
 					</a>
 					<ul>
-						<li> <a href="{{route('admin.all.active.product')}}"><i class="bx bx-right-arrow-alt"></i>All Products</a>
+                        <li> <a href="{{route('admin.add.product')}}"><i class="bx bx-right-arrow-alt"></i>Add Products</a>
+						<li> <a href="{{route('admin.all.product')}}"><i class="bx bx-right-arrow-alt"></i>All Products</a>
 						</li>
 						<li> <a href="{{route('admin.all.requested.product')}}"><i class="bx bx-right-arrow-alt"></i>All Requested Products</a>
 						</li>
-						<li> <a href="{{route('admin.add.product')}}"><i class="bx bx-right-arrow-alt"></i>Add Products</a>
+						</li>
 						</li>
 						<li> <a href="{{route('admin.recycle.product')}}"><i class="bx bx-right-arrow-alt"></i>Trash</a>
 						</li>

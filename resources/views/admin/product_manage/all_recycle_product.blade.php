@@ -14,7 +14,7 @@
             </div>
             <div class="ms-auto">
                 <div class="btn-group">
-                    <a href="{{ route('admin.all.active.product') }}" type="button" class="btn btn-primary">All Active Product</a>
+                    <a href="{{ route('admin.all.product') }}" type="button" class="btn btn-primary">All Active Product</a>
                 </div>
             </div>
         </div>

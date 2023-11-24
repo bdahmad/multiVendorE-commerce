@@ -21,10 +21,10 @@ class ProductsController extends Controller
     /**
      * Display all active product
      */
-    public function adminAllActiveProduct()
+    public function adminAllProduct()
     {
-        $all_active_product = Product::where('product_status_id', 1)->where('deleted_at', null)->latest()->get();
-        return view('admin.product_manage.all_active_product', compact('all_active_product'));
+        $all = Product::where('deleted_at', null)->latest()->get();
+        return view('admin.product_manage.all_product', compact('all'));
     }
 
     /**
@@ -70,7 +70,7 @@ class ProductsController extends Controller
         // $product_info_for_QR_code = 'Product Name: '.$request->product_name.'product_code'.$request->$product_code.'Product Price'.$request->product_sel_price;
         // $product_barcode = DNS2D::getBarcodeSVG($product_info_for_QR_code, 'QRCODE');
 
-        $id = Product::insertGetId([
+        $id = Product::insert([
             'product_slug' => $product_slug,
             'product_code' => $product_code,
             // 'product_barcode' => $product_barcode,
@@ -106,7 +106,7 @@ class ProductsController extends Controller
             'product_special_offer' => $request->product_special_offer,
             'product_special_deals' => $request->product_special_deals,
 
-            'product_status_id' => 1,
+            'product_status_id' => 2,
             'product_creator_id' => Auth::user()->id,
             'created_at' => Carbon::now(),
 
@@ -345,6 +345,58 @@ class ProductsController extends Controller
         }
     }
 
+    /**
+     * Inactive Product.
+     */
+    public function adminInactiveProduct(string $slug)
+    {
+        $update = Product::where('product_slug', $slug)->update([
+            'product_status_id' => 3,
+            'updated_at' => Carbon::now(),
+            'product_editor_id' => Auth::user()->user_id,
+        ]);
+
+        if($update){
+            $notification = array(
+                'message' => "Product Inactive Successfully",
+                'alert-type' => "success",
+            );
+
+        }else{
+            $notification = array(
+                'message' => "Opps, Something is Wrong",
+                'alert-type' => "error",
+            );
+        }
+        return back()->with($notification);
+
+    }
+    /**
+     * Active Product.
+     */
+    public function adminActiveProduct(string $slug)
+    {
+        $update = Product::where('product_slug', $slug)->update([
+            'product_status_id' => 1,
+            'updated_at' => Carbon::now(),
+            'product_editor_id' => Auth::user()->user_id,
+        ]);
+
+        if($update){
+            $notification = array(
+                'message' => "Product Active Successfully",
+                'alert-type' => "success",
+            );
+
+        }else{
+            $notification = array(
+                'message' => "Opps, Something is Wrong",
+                'alert-type' => "error",
+            );
+        }
+        return back()->with($notification);
+
+    }
     /**
      * Recycle the specified resource from storage.
      */

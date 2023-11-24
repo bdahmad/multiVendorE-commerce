@@ -29,39 +29,62 @@
                             <tr>
                                 <th>SL:</th>
                                 <th>Product Name</th>
-                                <th>Category</th>
+                                {{-- <th>Category</th> --}}
                                 <th>Subategory</th>
                                 <th>Price</th>
                                 <th>Review</th>
+                                <th>Status</th>
                                 <th>Image</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($all_active_product as $key => $active_product)
+                            @foreach ($all as $key => $item)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $active_product->product_name }}</td>
-                                    <td>{{ $active_product->categoryInfo->category_name }}</td>
-                                    <td>{{ $active_product->subcategoryInfo->sub_category_name }}</td>
-                                    <td>{{ $active_product->product_sel_price}}</td>
+                                    <td>{{ $item->product_name }}</td>
+                                    {{-- <td>{{ $item->categoryInfo->category_name }}</td> --}}
+                                    <td>{{ $item->subcategoryInfo->sub_category_name }}</td>
+                                    <td>{{ $item->product_sel_price}}</td>
                                     <td>
                                         <?php
-                                            for ($i=1; $i <= $active_product->product_avg_review ; $i++) {
+                                            for ($i=1; $i <= $item->product_avg_review ; $i++) {
                                             ?>
                                             <span><i class="fa fa-star"></i></span>
                                         <?php
                                             }
                                         ?>
                                     </td>
-                                    <td><img src="{{ asset('uploads/product/' . $active_product->product_thumbnail) }}" alt="product Image"
+                                    <td>
+                                        @if ($item->product_status_id == 1)
+
+                                            <span class="badge rounded-pill text-white bg-warning " style="font-size: 12px">Active</span>
+
+                                        @elseif ($item->product_status_id == 2)
+                                            <span class="badge rounded-pill text-white bg-danger " style="font-size: 12px">Processing</span>
+                                        @else
+                                            <span class="badge rounded-pill text-white bg-danger " style="font-size: 12px">Inactive</span>
+                                        @endif
+
+                                    </td>
+                                    <td><img src="{{ asset('uploads/product/' . $item->product_thumbnail) }}" alt="product Image"
                                             style="width: 60px; height: 60px"></td>
                                     <td>
-                                        <a href="{{ route('admin.active.product.edit', $active_product->product_slug) }}"
+                                        <a href="{{ route('admin.active.product.edit', $item->product_slug) }}"
                                             class="btn btn-info btn-sm "><i class="fa fa-pencil"></i></a>
-                                        <a href="{{ route('admin.active.product.edit', $active_product->product_slug) }}"
+                                        <a href="{{ route('admin.active.product.edit', $item->product_slug) }}"
                                             class="btn btn-info btn-sm "><i class="fa fa-eye "></i></a>
-                                        <a href="{{ route('admin.active.product.delete', $active_product->product_slug) }}"
+
+                                        @if ($item->product_status_id == 1 )
+                                            <a href="{{ route('admin.inactive.product', $item->product_slug) }}"
+                                                class="btn btn-info btn-sm "><i class="fa fa-lock "></i></a>
+                                        @else
+                                        <a href="{{ route('admin.active.product', $item->product_slug) }}"
+                                            class="btn btn-info btn-sm "><i class="fa fa-unlock "></i></a>
+                                        @endif
+
+
+                                        <a href="{{ route('admin.active.product.delete', $item->product_slug) }}"
                                             class="btn btn-info btn-sm " id="delete"><i class="fa fa-trash "></i></a>
                                     </td>
                                 </tr>
@@ -71,10 +94,11 @@
                             <tr>
                                 <th>SL:</th>
                                 <th>Product Name</th>
-                                <th>Category</th>
+                                {{-- <th>Category</th> --}}
                                 <th>Subategory</th>
                                 <th>Price</th>
                                 <th>Review</th>
+                                <th>Status</th>
                                 <th>Image</th>
                                 <th>Action</th>
                             </tr>

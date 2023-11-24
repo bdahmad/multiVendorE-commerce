@@ -103,7 +103,7 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
 
     // all product related url here
     Route::controller(ProductsController::class)->group(function(){
-        Route::get('/admin/all/active/product', 'adminAllActiveProduct')->name('admin.all.active.product');
+        Route::get('/admin/all/product', 'adminAllProduct')->name('admin.all.product');
         Route::get('/admin/all/requested/active/product', 'adminAllRequestedProduct')->name('admin.all.requested.product');
         Route::get('/admin/find/subcategory/{id}', 'adminFindSubcategory')->name('admin.find.subcategory');
         Route::get('/admin/add/product', 'adminAddProduct')->name('admin.add.product');
@@ -111,6 +111,11 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
         Route::get('/admin/active/product/edit/{slug}', 'adminActiveProductEdit')->name('admin.active.product.edit');
         Route::post('/admin/update/product', 'adminUpdateProduct')->name('admin.update.product');
         Route::post('/admin/product/single/image/update', 'adminProductSingleImageUpdate')->name('admin.product.single.image.update');
+
+        Route::get('/admin/inactive/product/{slug}', 'adminInactiveProduct')->name('admin.inactive.product');
+
+        Route::get('/admin/active/product/{slug}', 'adminActiveProduct')->name('admin.active.product');
+
         Route::get('/admin/active/product/delete/{slug}', 'adminDeleteProduct')->name('admin.active.product.delete');
         Route::get('/admin/recycle/product', 'recycle')->name('admin.recycle.product');
         Route::get('/admin/product/restore/{slug}', 'restore')->name('admin.product.restore');
