@@ -68,7 +68,7 @@ class SubCategoryController extends Controller
 
             if($insert){
                 $notification = array(
-                    'message' => "Category Added Successfully",
+                    'message' => "Sub Category Added Successfully",
                     'alert-type' => "success",
                 );
 

@@ -32,6 +32,7 @@
                                 <th>Product Name</th>
                                 {{-- <th>Category</th> --}}
                                 <th>Subategory</th>
+                                <th>Vendor</th>
                                 <th>Price</th>
                                 <th>Review</th>
                                 <th>Status</th>
@@ -46,6 +47,9 @@
                                     <td>{{ $item->product_name }}</td>
                                     {{-- <td>{{ $item->categoryInfo->category_name }}</td> --}}
                                     <td>{{ $item->subcategoryInfo->sub_category_name }}</td>
+                                    <td>
+                                        {{$item->vendorInfo->vendor_shop_name ?? '' }}
+                                    </td>
                                     <td>{{ $item->product_sel_price}}</td>
                                     <td>
                                         <?php
@@ -97,6 +101,7 @@
                                 <th>Product Name</th>
                                 {{-- <th>Category</th> --}}
                                 <th>Subategory</th>
+                                <th>Vendor</th>
                                 <th>Price</th>
                                 <th>Review</th>
                                 <th>Status</th>

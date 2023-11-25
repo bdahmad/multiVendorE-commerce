@@ -496,6 +496,6 @@ class VendorProductController extends Controller
                 'alert-type' => "error",
             );
         }
-        return redirect()->route('vendor.all.product')->with($notification);
+        return back()->with($notification);
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Products\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Superadmin\SuperadminController;
@@ -105,7 +106,7 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
     // all Admin product related url here
     Route::controller(ProductsController::class)->group(function(){
         Route::get('/admin/all/product', 'adminAllProduct')->name('admin.all.product');
-        Route::get('/admin/all/requested/product', 'adminAllRequestedProduct')->name('admin.all.requested.product');
+
         Route::get('/admin/find/subcategory/{id}', 'adminFindSubcategory')->name('admin.find.subcategory');
         Route::get('/admin/add/product', 'adminAddProduct')->name('admin.add.product');
         Route::post('/admin/store/product', 'adminStoreProduct')->name('admin.store.product');
@@ -198,6 +199,11 @@ Route::get('login', [UserController::class, 'login_page'])->name('login');
 Route::post('login/store', [AuthenticatedSessionController::class, 'store'])->name('loginStore');
 
 
+// all guest route here
+Route::controller(FrontendController::class)->group(function(){
+    Route::get('/find/subcategory/{id}', 'findSubcategory')->name('find.subcategory');
+
+});
 
 
 // Route::get('/dashboard', function () {

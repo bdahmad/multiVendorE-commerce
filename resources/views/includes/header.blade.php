@@ -189,18 +189,24 @@
                     <div class="header-right">
                         <div class="search-style-2">
                             <form action="#">
-                                <select class="select-active">
+                                <select class="select-active" id="category_id">
                                     <option>All Categories</option>
-                                    <option>Milks and Dairies</option>
-                                    <option>Wines & Alcohol</option>
-                                    <option>Clothing & Beauty</option>
-                                    <option>Pet Foods & Toy</option>
-                                    <option>Fast food</option>
-                                    <option>Baking material</option>
-                                    <option>Vegetables</option>
-                                    <option>Fresh Seafood</option>
-                                    <option>Noodles & Rice</option>
-                                    <option>Ice cream</option>
+
+                                    @php
+                                        $categories = App\Models\Category::where('category_status', 1)->orderBy('category_name', 'ASC')->get();
+
+                                    @endphp
+
+                                    @foreach ($categories as $item)
+                                        <option value="{{ $item->category_id }}">{{ $item->category_name }}
+                                        </option>
+                                    @endforeach
+
+                                </select>
+
+                                <select class="select-active" id="sub_category_id"">
+                                    <option>Sub Categories</option>
+
                                 </select>
                                 <input type="text" placeholder="Search for items..." />
                             </form>
@@ -355,93 +361,54 @@
                                 <span class="fi-rs-apps"></span> All Categories
                                 <i class="fi-rs-angle-down"></i>
                             </a>
+
+                            @php
+
+                                $all_categories_number = App\Models\Category::where('category_status', 1)->count();
+                                $category_half_number = ceil($all_categories_number / 2);
+
+                                // first 50%
+                                $category_half= App\Models\Category::where('category_status', 1)->orderBy('category_id', 'ASC')->limit($category_half_number)->get();
+
+
+                                // last 50%
+                                $category_last_half = App\Models\Category::where('category_status', 1)->orderBy('category_id', 'DESC')->limit($category_half_number)->get();
+
+                            @endphp
+
                             <div class="categories-dropdown-wrap categories-dropdown-active-large font-heading">
                                 <div class="d-flex categori-dropdown-inner">
+
                                     <ul>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('frontend') }}/assets/imgs/theme/icons/category-1.svg"
-                                                    alt="" />Milks and Dairies</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('frontend') }}/assets/imgs/theme/icons/category-2.svg"
-                                                    alt="" />Clothing & beauty</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('frontend') }}/assets/imgs/theme/icons/category-3.svg"
-                                                    alt="" />Pet Foods & Toy</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('frontend') }}/assets/imgs/theme/icons/category-4.svg"
-                                                    alt="" />Baking material</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('frontend') }}/assets/imgs/theme/icons/category-5.svg"
-                                                    alt="" />Fresh Fruit</a>
-                                        </li>
+
+                                        @foreach ($category_half as $item)
+
+                                            <li>
+                                                <a href="shop-grid-right.html"> <img
+                                                        src="{{ asset('uploads/category/'.$item->category_image) }}"
+                                                        alt="" />{{$item->category_name}}</a>
+                                            </li>
+
+                                        @endforeach
+
+
+
                                     </ul>
+
+
                                     <ul class="end">
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('frontend') }}/assets/imgs/theme/icons/category-6.svg"
-                                                    alt="" />Wines & Drinks</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('frontend') }}/assets/imgs/theme/icons/category-7.svg"
-                                                    alt="" />Fresh Seafood</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('frontend') }}/assets/imgs/theme/icons/category-8.svg"
-                                                    alt="" />Fast food</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('frontend') }}/assets/imgs/theme/icons/category-9.svg"
-                                                    alt="" />Vegetables</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('frontend') }}/assets/imgs/theme/icons/category-10.svg"
-                                                    alt="" />Bread and Juice</a>
-                                        </li>
+                                        @foreach ($category_last_half as $item)
+                                            <li>
+                                                <a href="shop-grid-right.html"> <img
+                                                        src="{{ asset('uploads/category/'.$item->category_image) }}"
+                                                        alt="" />{{$item->category_name}}</a>
+                                            </li>
+                                        @endforeach
+
                                     </ul>
+
                                 </div>
-                                <div class="more_slide_open" style="display: none">
-                                    <div class="d-flex categori-dropdown-inner">
-                                        <ul>
-                                            <li>
-                                                <a href="shop-grid-right.html"> <img
-                                                        src="{{ asset('frontend') }}/assets/imgs/theme/icons/icon-1.svg"
-                                                        alt="" />Milks and Dairies</a>
-                                            </li>
-                                            <li>
-                                                <a href="shop-grid-right.html"> <img
-                                                        src="{{ asset('frontend') }}/assets/imgs/theme/icons/icon-2.svg"
-                                                        alt="" />Clothing & beauty</a>
-                                            </li>
-                                        </ul>
-                                        <ul class="end">
-                                            <li>
-                                                <a href="shop-grid-right.html"> <img
-                                                        src="{{ asset('frontend') }}/assets/imgs/theme/icons/icon-3.svg"
-                                                        alt="" />Wines & Drinks</a>
-                                            </li>
-                                            <li>
-                                                <a href="shop-grid-right.html"> <img
-                                                        src="{{ asset('frontend') }}/assets/imgs/theme/icons/icon-4.svg"
-                                                        alt="" />Fresh Seafood</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="more_categories"><span class="icon"></span> <span
-                                        class="heading-sm-1">Show more...</span></div>
+
                             </div>
                         </div>
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">

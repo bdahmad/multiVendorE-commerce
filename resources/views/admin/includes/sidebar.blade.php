@@ -103,8 +103,6 @@
                         </li>
 						<li> <a href="{{route('admin.all.product')}}"><i class="bx bx-right-arrow-alt"></i>All Products</a>
 						</li>
-						<li> <a href="{{route('admin.all.requested.product')}}"><i class="bx bx-right-arrow-alt"></i>All Requested Products</a>
-						</li>
 						<li> <a href="{{route('admin.recycle.product')}}"><i class="bx bx-right-arrow-alt"></i>Trash</a>
 						</li>
 					</ul>

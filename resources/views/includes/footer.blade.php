@@ -315,7 +315,36 @@
         @endif
        </script>
 
+        {{-- for sub category load  --}}
+    <script>
+        $(document).ready(function() {
 
+            $('#category_id').on('change', function() {
+
+                $category_id = $(this).val();
+                if ($category_id) {
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('/find/subcategory') }}/" + $category_id,
+                        // data: $category_id,
+                        dataType: "json",
+                        success: function(data) {
+                            $inputProductSubcategory = $('#sub_category_id').html('');
+                            $('#sub_category_id').empty();
+                            $.each(data, function(indexInArray, valueOfElement) {
+                                $inputProductSubcategory.append('<option value = "' +
+                                    valueOfElement.sub_category_id + '">' +
+                                    valueOfElement.sub_category_name + '</option>');
+                                // console.log(valueOfElement.sub_category_id);
+                            });
+                        }
+                    });
+                }
+
+            });
+
+        });
+    </script>
 </body>
 
 </html>

@@ -33,5 +33,8 @@ class Product extends Model
     public function subcategoryInfo(){
         return $this->belongsTo('App\Models\SubCategory', 'sub_category_id', 'sub_category_id');
     }
+    public function vendorInfo(){
+        return $this->belongsTo('App\Models\User', 'vendor_id', 'user_id');
+    }
 }
 
