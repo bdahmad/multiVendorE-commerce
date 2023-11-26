@@ -341,10 +341,12 @@
 
                         <div class="form-group mb-3">
                             <label for="inputProductTitle" class="form-label">Main Thambnail</label>
-                            <input name="product_thumbnail" class="form-control @error('product_thumbnail')
-                                is-invalid
-                            @enderror" type="file" id="formFile"
-                                onChange="mainThamUrl(this)">
+                            @if ($data->vendor_id == null)
+                                <input name="product_thumbnail" class="form-control @error('product_thumbnail')
+                                    is-invalid
+                                @enderror" type="file" id="formFile"
+                                    onChange="mainThamUrl(this)">
+                            @endif
                             @error('product_thumbnail')
                                 <span class="text-danger">{{$message}}</span>
                             @enderror
@@ -354,11 +356,12 @@
                         </div>
                     </div>
                 </div>
-
+                @if ($data->vendor_id == null)
                 <div class="input-group mb-3">
                     <input type="reset" class="btn btn-danger" id="admin_product_add_reset_btn" />
                     <button type="submit" class="btn btn-success" id="admin_product_add_btn">Update Product</button>
                 </div>
+                @endif
             </div><!--end row-->
         </div>
     </form>
@@ -376,7 +379,9 @@
                         <tr>
                             <th scope="col">Sl</th>
                             <th scope="col">Image</th>
+                            @if ($data->vendor_id == null)
                             <th scope="col">Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -392,11 +397,15 @@
                             <td>
                                 <img src="{{asset('uploads/product/multi_image/'.$single_img->product_multi_image)}}" alt="" srcset="" style="width: 100px">
                             </td>
+                            @if ($data->vendor_id == null)
                             <td>
+
                                 <a  class="btn btn-info btn-sm" data-id="{{$single_img->product_multi_image_id }}" id="edit_multi_img_btn" data-bs-toggle="modal" data-bs-target="#imgUploadModal"><i class="fa fa-pencil"></i></a>
 
                                 <a class="btn btn-danger btn-sm" id="delete_multi_img_btn"><i class="fa fa-trash"></i></a>
+
                             </td>
+                            @endif
                         </tr>
                         @endforeach
 

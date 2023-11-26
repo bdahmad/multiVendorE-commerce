@@ -103,8 +103,8 @@
                                         <option value="kg">KG</option>
                                         <option value="litter">Litter</option>
                                         <option value="meter">Metter</option>
-                                        <option value="litter$piece">Litter And Piece</option>
-                                        <option value="kg$piece">KG And Piece</option>
+                                        <option value="litter&piece">Litter And Piece</option>
+                                        <option value="kg&piece">KG And Piece</option>
                                     </select>
                                     @error('product_quantity_type')
                                         <span class="text-danger">{{$message}}</span>

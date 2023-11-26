@@ -75,8 +75,12 @@
                                     <td><img src="{{ asset('uploads/product/' . $item->product_thumbnail) }}" alt="product Image"
                                             style="width: 60px; height: 60px"></td>
                                     <td>
+                                        @if ($item->vendor_id == null)
+
                                         <a href="{{ route('admin.product.edit', $item->product_slug) }}"
                                             class="btn btn-info btn-sm "><i class="fa fa-pencil"></i></a>
+                                        @endif
+
                                         <a href="{{ route('admin.product.edit', $item->product_slug) }}"
                                             class="btn btn-info btn-sm "><i class="fa fa-eye "></i></a>
 

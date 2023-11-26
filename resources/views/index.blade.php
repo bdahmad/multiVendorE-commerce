@@ -161,7 +161,7 @@
                                     data-wow-delay=".1s">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
-                                            <a href="shop-product-right.html">
+                                            <a href="{{route('product.details',$item->product_slug)}}">
                                                 <img class="default-img"
                                                     src="{{ asset('uploads/product/'.$item->product_thumbnail) }}"
                                                     alt="" />
@@ -212,10 +212,9 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">Snack</a>
+                                            <a href="shop-grid-right.html">{{$item->categoryInfo->category_name}}</a>
                                         </div>
-                                        <h2><a href="shop-product-right.html">Seeds of Change Organic Quinoa, Brown, &
-                                                Red Rice</a></h2>
+                                        <h2><a href="{{route('product.details',$item->product_slug)}}">{{$item->product_name}}</a></h2>
                                         <div class="product-rate-cover">
                                             <div class="product-rate d-inline-block">
                                                 <div class="product-rating" style="width: 90%"></div>
@@ -224,12 +223,18 @@
                                         </div>
                                         <div>
                                             <span class="font-small text-muted">By <a
-                                                    href="vendor-details-1.html">NestFood</a></span>
+                                                    href="vendor-details-1.html">
+                                                    @if ($item->vendor_id != null)
+                                                    {{$item->vendorInfo->vendor_shop_name}}
+                                                    @else
+                                                </a></span>
+                                                    Admin
+                                                    @endif
                                         </div>
                                         <div class="product-card-bottom">
                                             <div class="product-price">
-                                                <span>$28.85</span>
-                                                <span class="old-price">$32.8</span>
+                                                <span>{{round($price)}}</span>
+                                                <span class="old-price">{{round($item->product_sel_price)}}</span>
                                             </div>
                                             <div class="add-cart">
                                                 <a class="add" href="shop-cart.html"><i
@@ -261,7 +266,7 @@
                                 data-wow-delay=".1s">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
-                                        <a href="shop-product-right.html">
+                                        <a href="{{route('product.details',$item->product_slug)}}">
                                             <img class="default-img"
                                                 src="{{ asset('uploads/product/'.$item->product_thumbnail) }}"
                                                 alt="" />
@@ -283,11 +288,6 @@
                                         <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
                                             data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                                     </div>
-
-                                    @php
-                                        $price = $item->product_sel_price - $item->product_discount_price;
-                                        $discount = ($price / $item->product_sel_price) * 100 ;
-                                    @endphp
 
                                     @if ($item->product_discount_price != null)
 
@@ -312,10 +312,9 @@
                                 </div>
                                 <div class="product-content-wrap">
                                     <div class="product-category">
-                                        <a href="shop-grid-right.html">Snack</a>
+                                        <a href="shop-grid-right.html">{{$item->categoryInfo->category_name}}</a>
                                     </div>
-                                    <h2><a href="shop-product-right.html">Seeds of Change Organic Quinoa, Brown, &
-                                            Red Rice</a></h2>
+                                    <h2><a href="{{route('product.details',$item->product_slug)}}">{{$item->product_name}}</a></h2>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 90%"></div>
@@ -324,12 +323,18 @@
                                     </div>
                                     <div>
                                         <span class="font-small text-muted">By <a
-                                                href="vendor-details-1.html">NestFood</a></span>
+                                            href="vendor-details-1.html">
+                                            @if ($item->vendor_id != null)
+                                            {{$item->vendorInfo->vendor_shop_name}}
+                                            @else
+                                        </a></span>
+                                            Admin
+                                            @endif
                                     </div>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
-                                            <span>$28.85</span>
-                                            <span class="old-price">$32.8</span>
+                                            <span>{{round($price)}}</span>
+                                            <span class="old-price">{{round($item->product_sel_price)}}</span>
                                         </div>
                                         <div class="add-cart">
                                             <a class="add" href="shop-cart.html"><i

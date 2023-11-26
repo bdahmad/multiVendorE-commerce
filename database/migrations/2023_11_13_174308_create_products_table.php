@@ -39,7 +39,7 @@ return new class extends Migration
             $table->string('product_weight')->nullable();
             $table->string('product_dimensions')->nullable();
             $table->string('product_sku')->nullable();
-            $table->enum('product_quantity_type', ['piece', 'kg', 'litter','meter', 'litter$piece','kg$piece'])->nullable();
+            $table->enum('product_quantity_type', ['piece', 'kg', 'litter','meter', 'litter&piece','kg&piece'])->nullable();
 
             $table->string('product_buy_price')->nullable();
             $table->string('product_vat')->nullable();
