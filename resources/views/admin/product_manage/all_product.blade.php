@@ -30,7 +30,7 @@
                             <tr>
                                 <th>SL:</th>
                                 <th>Product Name</th>
-                                {{-- <th>Category</th> --}}
+                                <th>Category</th>
                                 <th>Subategory</th>
                                 <th>Vendor</th>
                                 <th>Price</th>
@@ -45,7 +45,7 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $item->product_name }}</td>
-                                    {{-- <td>{{ $item->categoryInfo->category_name }}</td> --}}
+                                    <td>{{ $item->categoryInfo->category_name }}</td>
                                     <td>{{ $item->subcategoryInfo->sub_category_name }}</td>
                                     <td>
                                         {{$item->vendorInfo->vendor_shop_name ?? '' }}
@@ -99,7 +99,7 @@
                             <tr>
                                 <th>SL:</th>
                                 <th>Product Name</th>
-                                {{-- <th>Category</th> --}}
+                                <th>Category</th>
                                 <th>Subategory</th>
                                 <th>Vendor</th>
                                 <th>Price</th>
