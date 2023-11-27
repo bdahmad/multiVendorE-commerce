@@ -112,7 +112,7 @@ class UserController extends Controller
                 'username' => $request->username,
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'slag' => $slug,
+                'slug' => $slug,
                 'role_id' => 4,
                 'status_id' => 1,
                 'password' => Hash::make($request->password),

@@ -43,7 +43,7 @@ class VendorController extends Controller
             $path = public_path('uploads/vendor/'.$customeName);
             Image::make($image)->resize(250,250)->save($path);
 
-            $update = User::where('slag', $user_slug)->update([
+            $update = User::where('slug', $user_slug)->update([
                 'vendor_shop_name' => $request->vendor_shop_name,
                 'vendor_pay_of_line' => $request->vendor_pay_of_line,
                 'vendor_short_description' => $request->vendor_short_description,
