@@ -203,6 +203,7 @@ Route::post('login/store', [AuthenticatedSessionController::class, 'store'])->na
 Route::controller(FrontendController::class)->group(function(){
     Route::get('/find/subcategory/{id}', 'findSubcategory')->name('find.subcategory');
     Route::get('/product/details/{slug}', 'productDetails')->name('product.details');
+    Route::get('/vendor/details/{slug}', 'vendorDetails')->name('vendor.details');
 
 });
 

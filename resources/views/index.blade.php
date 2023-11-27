@@ -814,7 +814,7 @@
                     <div class="vendor-wrap mb-40">
                         <div class="vendor-img-action-wrap">
                             <div class="vendor-img">
-                                <a href="vendor-details-1.html">
+                                <a href="{{ route('vendor.details', $vendor->slug) }}">
                                     <img class="default-img"
                                         src="{{asset('uploads/vendor/'.$vendor->vendor_profile_pic)}}"
                                         alt="" />
@@ -830,7 +830,7 @@
                                     <div class="product-category">
                                         <span class="text-muted">Since {{ $vendor->vendor_join }}</span>
                                     </div>
-                                    <h4 class="mb-5"><a href="vendor-details-1.html">{{$vendor->vendor_shop_name}}</a></h4>
+                                    <h4 class="mb-5"><a href="{{ route('vendor.details', $vendor->slug) }}">{{$vendor->vendor_shop_name}}</a></h4>
                                     <div class="product-rate-cover">
                                         @php
                                             $product_count = App\Models\Product::where('product_status_id', 1)->where('product_vendor_status_id', 1)->where('vendor_id', $vendor->user_id)->count();
@@ -844,11 +844,10 @@
                                 <ul class="contact-infor text-muted">
 
                                     <li><img src="{{ asset('frontend') }}/assets/imgs/theme/icons/icon-contact.svg"
-                                            alt="" /><strong>Call Us:</strong><span>(+91) -
-                                            540-025-124553</span></li>
+                                            alt="" /><strong>Call Us:</strong><span>{{$vendor->phone}}</span></li>
                                 </ul>
                             </div>
-                            <a href="vendor-details-1.html" class="btn btn-xs">Visit Store <i
+                            <a href="{{ route('vendor.details', $vendor->slug) }}" class="btn btn-xs">Visit Store <i
                                     class="fi-rs-arrow-small-right"></i></a>
                         </div>
                     </div>
