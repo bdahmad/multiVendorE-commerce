@@ -6,10 +6,10 @@
             <div class="archive-header">
                 <div class="row align-items-center">
                     <div class="col-xl-3">
-                        <h1 class="mb-15">{{ $category->category_name }}</h1>
+                        <h1 class="mb-15">{{ $sub_category->sub_category_name }}</h1>
                         <div class="breadcrumb">
                             <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                            <span></span> {{ $category->category_name }} <span></span>
+                            <span></span> {{ $sub_category->sub_category_name }} <span></span>
                         </div>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                             </div>
                             <div class="product-content-wrap">
                                 <div class="product-category">
-                                    <a href="shop-grid-right.html">{{$item->categoryInfo->category_name}}</a>
+                                    <a href="shop-grid-right.html">{{$item->subcategoryInfo->sub_category_name}}</a>
                                 </div>
                                 <h2><a href="{{route('product.details',$item->product_slug)}}">{{$item->product_name}}</a></h2>
                                 <div class="product-rate-cover">
@@ -186,16 +186,16 @@
             </div>
             <div class="col-lg-1-5 primary-sidebar sticky-sidebar">
                 <div class="sidebar-widget widget-category-2 mb-30">
-                    <h5 class="section-title style-1 mb-30">Category</h5>
+                    <h5 class="section-title style-1 mb-30">Sub Category</h5>
                     <ul>
 
-                        @foreach ($categories as $single_category)
+                        @foreach ($sub_categories as $single_sub_category)
 
                         @php
-                            $categoryWiseProduct = App\Models\Product::where('product_status_id', 1)->where('product_vendor_status_id', 1)->where('category_id', $single_category->category_id)->count();
+                            $subcategoryWiseProduct = App\Models\Product::where('product_status_id', 1)->where('product_vendor_status_id', 1)->where('sub_category_id', $single_sub_category->sub_category_id)->count();
                         @endphp
                         <li>
-                            <a href="shop-grid-right.html"> <img src="{{asset('uploads/category/'.$single_category->category_image)}}" alt="" />{{$single_category->category_name}}</a><span class="count">{{$categoryWiseProduct}}</span>
+                            <a href="shop-grid-right.html"> <img src="{{asset('uploads/subCategory/'.$single_sub_category->sub_category_image)}}" alt="" />{{$single_sub_category->sub_category_name}}</a><span class="count">{{$subcategoryWiseProduct}}</span>
                         </li>
                         @endforeach
 
@@ -246,7 +246,7 @@
                 <div class="sidebar-widget product-sidebar mb-30 p-30 bg-grey border-radius-10">
                     <h5 class="section-title style-1 mb-30">New products</h5>
                     @php
-                        $newProduct = App\Models\Product::where('product_status_id', 1)->where('product_vendor_status_id', 1)->where('category_id',$category->category_id)->latest()->get();
+                        $newProduct = App\Models\Product::where('product_status_id', 1)->where('product_vendor_status_id', 1)->where('sub_category_id',$sub_category->sub_category_id)->latest()->get();
                     @endphp
                     @foreach ($newProduct as $item)
 

@@ -52,4 +52,16 @@ class FrontendController extends Controller
        $product = Product::where('product_status_id', 1)->where('product_vendor_status_id', 1)->where('category_id',$category->category_id)->latest()->get();
        return view('categorywise_product', compact('product', 'categories', 'category'));
     }
+
+    /**
+     * Sub Categorywise Product
+     */
+    public function subCategorywiseProduct($slug)
+    {
+
+       $sub_category = SubCategory::where('sub_category_slug', $slug)->first();
+       $sub_categories = SubCategory::where('sub_category_status', 1)->orderBy('sub_category_name', 'ASC')->get();
+       $product = Product::where('product_status_id', 1)->where('product_vendor_status_id', 1)->where('sub_category_id',$sub_category->category_id)->latest()->get();
+       return view('sub_categorywise_product', compact('product', 'sub_categories', 'sub_category'));
+    }
 }
