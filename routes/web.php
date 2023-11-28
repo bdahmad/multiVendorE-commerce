@@ -204,6 +204,8 @@ Route::controller(FrontendController::class)->group(function(){
     Route::get('/find/subcategory/{id}', 'findSubcategory')->name('find.subcategory');
     Route::get('/product/details/{slug}', 'productDetails')->name('product.details');
     Route::get('/vendor/details/{slug}', 'vendorDetails')->name('vendor.details');
+    Route::get('/vendor/details/{slug}', 'vendorDetails')->name('vendor.details');
+    Route::get('/categorywise/product/{slug}', 'categorywiseProduct')->name('categorywise.product');
 
 });
 

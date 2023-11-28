@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SubCategory;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\ProductMultiImage;
@@ -39,5 +40,16 @@ class FrontendController extends Controller
        $vendor = User::where('slug', $slug)->first();
        $product = Product::where('product_status_id', 1)->where('product_vendor_status_id', 1)->where('vendor_id',$vendor->user_id)->latest()->get();
        return view('vendor_details', compact('vendor','product'));
+    }
+    /**
+     * Categorywise Product
+     */
+    public function categorywiseProduct($slug)
+    {
+
+       $category = Category::where('category_slug', $slug)->first();
+       $categories = Category::where('category_status', 1)->orderBy('category_name', 'ASC')->get();
+       $product = Product::where('product_status_id', 1)->where('product_vendor_status_id', 1)->where('category_id',$category->category_id)->latest()->get();
+       return view('categorywise_product', compact('product', 'categories', 'category'));
     }
 }

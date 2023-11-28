@@ -60,11 +60,11 @@
 
                             <div class="card-2 bg-9 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
                                 <figure class="img-hover-scale overflow-hidden">
-                                    <a href="shop-grid-right.html"><img
+                                    <a href="{{route('categorywise.product', $category->category_slug)}}"><img
                                             src="{{asset('uploads/category/'.$category->category_image)}}"
                                             alt="" /></a>
                                 </figure>
-                                <h6><a href="shop-grid-right.html">{{$category->category_name}}</a></h6>
+                                <h6><a href="{{route('categorywise.product', $category->category_slug)}}">{{$category->category_name}}</a></h6>
                                 @php
                                     $categoryise__product = App\Models\Product::where('category_id', $category->category_id)->count();
                                 @endphp
