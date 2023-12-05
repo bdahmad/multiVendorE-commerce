@@ -195,7 +195,7 @@
                             $categoryWiseProduct = App\Models\Product::where('product_status_id', 1)->where('product_vendor_status_id', 1)->where('category_id', $single_category->category_id)->count();
                         @endphp
                         <li>
-                            <a href="shop-grid-right.html"> <img src="{{asset('uploads/category/'.$single_category->category_image)}}" alt="" />{{$single_category->category_name}}</a><span class="count">{{$categoryWiseProduct}}</span>
+                            <a href="{{route('categorywise.product', $single_category->category_slug)}}"> <img src="{{asset('uploads/category/'.$single_category->category_image)}}" alt="" />{{$single_category->category_name}}</a><span class="count">{{$categoryWiseProduct}}</span>
                         </li>
                         @endforeach
 

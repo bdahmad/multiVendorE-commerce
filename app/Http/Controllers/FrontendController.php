@@ -61,7 +61,30 @@ class FrontendController extends Controller
 
        $sub_category = SubCategory::where('sub_category_slug', $slug)->first();
        $sub_categories = SubCategory::where('sub_category_status', 1)->orderBy('sub_category_name', 'ASC')->get();
-       $product = Product::where('product_status_id', 1)->where('product_vendor_status_id', 1)->where('sub_category_id',$sub_category->category_id)->latest()->get();
+       $product = Product::where('product_status_id', 1)->where('product_vendor_status_id', 1)->where('sub_category_id',$sub_category->sub_category_id)->latest()->get();
        return view('sub_categorywise_product', compact('product', 'sub_categories', 'sub_category'));
+    }
+
+
+    /**
+     *  Product Quick View
+     */
+    public function productQuickView($id)
+    {
+
+      $product = Product::with('categoryInfo', 'brandInfo', 'vendorInfo')->findOrFail($id);
+      $product_multi_img = ProductMultiImage::where('product_id', $id)->get();
+      $color = $product->product_color;
+      $product_color = explode(',', $color);
+      $size = $product->product_size;
+      $product_size = explode(',',$size);
+
+      return response()->json(array(
+        'product' => $product,
+        'product_color' => $product_color,
+        'product_size' => $product_size,
+        'product_size' => $product_size,
+        'product_multi_img' => $product_multi_img
+      ));
     }
 }

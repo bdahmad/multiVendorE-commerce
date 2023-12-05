@@ -208,6 +208,12 @@ Route::controller(FrontendController::class)->group(function(){
     Route::get('/categorywise/product/{slug}', 'categorywiseProduct')->name('categorywise.product');
     Route::get('/sub/categorywise/product/{slug}', 'subCategorywiseProduct')->name('sub.categorywise.product');
 
+
+    // product quick view
+    Route::get('/product/quick/view/{id}', 'productQuickView');
+
+
+
 });
 
 

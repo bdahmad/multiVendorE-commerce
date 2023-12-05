@@ -345,6 +345,71 @@
 
         });
     </script>
+
+    {{-- product quick view  --}}
+    <script>
+        function productView(id) {
+
+            $.ajax({
+                type: "GET",
+                url: "{{url('/product/quick/view')}}/"+id,
+                dataType: "json",
+                success: function (data) {
+                    // basic data
+                    $('#product_name').html(data.product.product_name);
+                    $('#vendor_shop_name').html(data.product.vendor_info.vendor_shop_name);
+                    $('#product_code').html(data.product.product_code);
+                    $('#brand').html(data.product.brand_info.brand_name);
+                    $('#category').html(data.product.category_info.category_name);
+
+                    // pricing
+                    if (data.product.product_discount_price == null) {
+                        $('#product_descount_price').text('');
+                        $('#discount').text('');
+                        $('#product_descount_price').text(data.product.product_sel_price);
+                    } else {
+
+                        $price = data.product.product_sel_price - data.product.product_discount_price;
+                        $discount = Math.round(($price / data.product.product_sel_price) * 100);
+
+                        $('#product_descount_price').text($price);
+                        $('#discount').text($discount + ' % off');
+                        $('#product_sel_price').text(data.product.product_sel_price);
+                    }
+
+                    // size
+                    $('select[name = "size"]').empty();
+                    $.each(data.product_size, function (indexInArray, valueOfElement) {
+                        $('select[name = "size"]').append('<option value = "'+valueOfElement+'">'+valueOfElement+'</option>');
+                        if (data.product_size == "") {
+                            $('#product_size_area').hide();
+                        } else {
+                            $('#product_size_area').show();
+                        }
+                    });
+
+
+                    // color
+                    $('select[name = "color"]').empty();
+                    $.each(data.product_color, function (indexInArray, valueOfElement) {
+                        $('select[name = "color"]').append('<option value = "'+valueOfElement+'">'+valueOfElement+'</option>');
+                        if (data.product_color == "") {
+                            $('#product_color_area').hide();
+                        } else {
+                            $('#product_color_area').show();
+                        }
+                    });
+
+                    // images
+                    // $.each(data.product_multi_img, function (indexInArray, valueOfElement) {
+                    //     $('#product-image-slider').append('<figure class="border-radius-10">
+                    //                 <img src="{{asset("uploads/product/multi_image/".' +valueOfElement.product_multi_image+ ')}}" alt="product image" />
+                    //             </figure>');
+                    // });
+                }
+            });
+         }
+    </script>
 </body>
 
 </html>

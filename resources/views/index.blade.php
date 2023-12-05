@@ -180,8 +180,8 @@
                                                 href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                             <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i
                                                     class="fi-rs-shuffle"></i></a>
-                                            <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
-                                                data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                            <a aria-label="Quick view" class="action-btn " id="{{$item->product_id}}" data-bs-toggle="modal"
+                                                data-bs-target="#quickViewModal" id="{{$item->product_id}}" onclick="productView(this.id)" ><i class="fi-rs-eye"></i></a>
                                         </div>
 
                                         @php
@@ -232,10 +232,21 @@
                                                     @endif
                                         </div>
                                         <div class="product-card-bottom">
+                                            @if ($item->product_discount_price != null)
+
                                             <div class="product-price">
                                                 <span>{{round($price)}}</span>
                                                 <span class="old-price">{{round($item->product_sel_price)}}</span>
                                             </div>
+                                            @else
+
+                                            <div class="product-price">
+                                                <span>{{round($item->product_sel_price)}}</span>
+                                            </div>
+
+                                            @endif
+
+
                                             <div class="add-cart">
                                                 <a class="add" href="shop-cart.html"><i
                                                         class="fi-rs-shopping-cart mr-5"></i>Add </a>
@@ -289,8 +300,9 @@
                                             href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                         <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i
                                                 class="fi-rs-shuffle"></i></a>
-                                        <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
-                                            data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                        <a aria-label="Quick view" class="action-btn " data-bs-toggle="modal"
+                                            data-bs-target="#quickViewModal" id="{{$item->product_id}}" onclick="productView(this.id)"
+                                            ><i class="fi-rs-eye"></i></a>
                                     </div>
 
                                     @if ($item->product_discount_price != null)
@@ -337,8 +349,19 @@
                                     </div>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
-                                            <span>{{round($price)}}</span>
-                                            <span class="old-price">{{round($item->product_sel_price)}}</span>
+                                            @if ($item->product_discount_price != null)
+
+                                            <div class="product-price">
+                                                <span>{{round($price)}}</span>
+                                                <span class="old-price">{{round($item->product_sel_price)}}</span>
+                                            </div>
+                                            @else
+
+                                            <div class="product-price">
+                                                <span>{{round($item->product_sel_price)}}</span>
+                                            </div>
+
+                                            @endif
                                         </div>
                                         <div class="add-cart">
                                             <a class="add" href="shop-cart.html"><i
@@ -419,8 +442,8 @@
                                                         href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                                     <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i
                                                             class="fi-rs-shuffle"></i></a>
-                                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
-                                                        data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                                    <a aria-label="Quick view" class="action-btn " data-bs-toggle="modal"
+                                                        data-bs-target="#quickViewModal" id="{{$item->product_id}}" onclick="productView(this.id)" ><i class="fi-rs-eye"></i></a>
                                                 </div>
 
                                                 @if ($item->product_discount_price != null)
@@ -455,8 +478,19 @@
                                                 </div>
 
                                                 <div class="product-price mt-10">
-                                                    <span>{{round($price)}}</span>
+                                                     @if ($item->product_discount_price != null)
+
+                                                    <div class="product-price">
+                                                        <span>{{round($price)}}</span>
                                                         <span class="old-price">{{round($item->product_sel_price)}}</span>
+                                                    </div>
+                                                    @else
+
+                                                    <div class="product-price">
+                                                        <span>{{round($item->product_sel_price)}}</span>
+                                                    </div>
+
+                                                    @endif
                                                 </div>
 
                                                 <div class="sold mt-15 mb-15">
@@ -538,8 +572,8 @@
                                                 href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                             <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i
                                                     class="fi-rs-shuffle"></i></a>
-                                            <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal"
-                                                data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                            <a aria-label="Quick view" class="action-btn " data-bs-toggle="modal"
+                                                data-bs-target="#quickViewModal" id="{{$item->product_id}}" onclick="productView(this.id)" ><i class="fi-rs-eye"></i></a>
                                         </div>
 
                                         @php
@@ -591,8 +625,19 @@
                                         </div>
                                         <div class="product-card-bottom">
                                             <div class="product-price">
-                                                <span>{{round($price)}}</span>
-                                                <span class="old-price">{{round($item->product_sel_price)}}</span>
+                                                @if ($item->product_discount_price != null)
+
+                                                <div class="product-price">
+                                                    <span>{{round($price)}}</span>
+                                                    <span class="old-price">{{round($item->product_sel_price)}}</span>
+                                                </div>
+                                                @else
+
+                                                <div class="product-price">
+                                                    <span>{{round($item->product_sel_price)}}</span>
+                                                </div>
+
+                                                @endif
                                             </div>
                                             <div class="add-cart">
                                                 <a class="add" href="shop-cart.html"><i
@@ -655,8 +700,19 @@
                                         <span class="font-small ml-5 text-muted"> (4.0)</span>
                                     </div>
                                     <div class="product-price">
-                                        <span>{{round($price)}}</span>
-                                        <span class="old-price">{{round($item->product_sel_price)}}</span>
+                                        @if ($item->product_discount_price != null)
+
+                                        <div class="product-price">
+                                            <span>{{round($price)}}</span>
+                                            <span class="old-price">{{round($item->product_sel_price)}}</span>
+                                        </div>
+                                        @else
+
+                                        <div class="product-price">
+                                            <span>{{round($item->product_sel_price)}}</span>
+                                        </div>
+
+                                        @endif
                                     </div>
                                 </div>
                             </article>
@@ -694,8 +750,19 @@
                                         <span class="font-small ml-5 text-muted"> (4.0)</span>
                                     </div>
                                     <div class="product-price">
-                                        <span>{{round($price)}}</span>
-                                        <span class="old-price">{{round($item->product_sel_price)}}</span>
+                                        @if ($item->product_discount_price != null)
+
+                                        <div class="product-price">
+                                            <span>{{round($price)}}</span>
+                                            <span class="old-price">{{round($item->product_sel_price)}}</span>
+                                        </div>
+                                        @else
+
+                                        <div class="product-price">
+                                            <span>{{round($item->product_sel_price)}}</span>
+                                        </div>
+
+                                        @endif
                                     </div>
                                 </div>
                             </article>
@@ -736,8 +803,19 @@
                                         <span class="font-small ml-5 text-muted"> (4.0)</span>
                                     </div>
                                     <div class="product-price">
-                                        <span>{{round($price)}}</span>
-                                        <span class="old-price">{{round($item->product_sel_price)}}</span>
+                                        @if ($item->product_discount_price != null)
+
+                                        <div class="product-price">
+                                            <span>{{round($price)}}</span>
+                                            <span class="old-price">{{round($item->product_sel_price)}}</span>
+                                        </div>
+                                        @else
+
+                                        <div class="product-price">
+                                            <span>{{round($item->product_sel_price)}}</span>
+                                        </div>
+
+                                        @endif
                                     </div>
                                 </div>
                             </article>
@@ -776,8 +854,19 @@
                                         <span class="font-small ml-5 text-muted"> (4.0)</span>
                                     </div>
                                     <div class="product-price">
-                                        <span>{{round($price)}}</span>
-                                        <span class="old-price">{{round($item->product_sel_price)}}</span>
+                                        @if ($item->product_discount_price != null)
+
+                                            <div class="product-price">
+                                                <span>{{round($price)}}</span>
+                                                <span class="old-price">{{round($item->product_sel_price)}}</span>
+                                            </div>
+                                            @else
+
+                                            <div class="product-price">
+                                                <span>{{round($item->product_sel_price)}}</span>
+                                            </div>
+
+                                            @endif
                                     </div>
                                 </div>
                             </article>

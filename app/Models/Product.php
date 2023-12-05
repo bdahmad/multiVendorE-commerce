@@ -20,9 +20,7 @@ class Product extends Model
         return $this->belongsTo('App\Models\User', 'brand_creator', 'user_id');
     }
 
-    // public function vendorInfo(){
-    //     return $this->belongsTo('App\Models\Product', 'vendor_id', 'user_id');
-    // }
+
     public function editorInfo(){
         return $this->belongsTo('App\Models\User', 'brand_editor', 'user_id');
     }
@@ -32,6 +30,9 @@ class Product extends Model
     }
     public function subcategoryInfo(){
         return $this->belongsTo('App\Models\SubCategory', 'sub_category_id', 'sub_category_id');
+    }
+    public function brandInfo(){
+        return $this->belongsTo('App\Models\Brand', 'brand_id', 'brand_id');
     }
     public function vendorInfo(){
         return $this->belongsTo('App\Models\User', 'vendor_id', 'user_id');
