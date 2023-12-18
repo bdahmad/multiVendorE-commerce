@@ -73,6 +73,7 @@ class BrandController extends Controller
 
             ]);
 
+
             if($insert){
                 $notification = array(
                     'message' => "Brand Added Successfully",

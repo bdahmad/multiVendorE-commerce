@@ -361,6 +361,9 @@
                     $('#product_code').html(data.product.product_code);
                     $('#brand').html(data.product.brand_info.brand_name);
                     $('#category').html(data.product.category_info.category_name);
+                    $('#product_quantity_type').html(data.product.product_quantity_type);
+                    $('#product_id').html(data.product.product_id);
+                    $('#quantity').val();
 
                     // pricing
                     if (data.product.product_discount_price == null) {
@@ -400,6 +403,8 @@
                         }
                     });
 
+
+
                     // images
                     // $.each(data.product_multi_img, function (indexInArray, valueOfElement) {
                     //     $('#product-image-slider').append('<figure class="border-radius-10">
@@ -409,6 +414,49 @@
                 }
             });
          }
+        //  product quick view with ajax end
+
+
+
+        // product add to cart start
+
+         function addToCart(){
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            var product_name = $('#product_name').text();
+            var product_id = $('#product_id').text();
+            var product_color = $('#product_color option:selected').text();
+            var product_size = $('#product_size option:selected').text();
+            var product_quantity = $('#quantity').val();
+            var product_discount_price = $('#product_descount_price').text();
+
+            $.ajax({
+                type: "POST",
+                url: "{{url('/product/add/to/cart')}}/"+product_id,
+                data: {
+                    product_name:product_name, product_color:product_color, product_size:product_size, product_quantity:product_quantity
+                },
+                dataType: "json",
+                success: function (data) {
+                    $('#close_modal').click();
+
+                    Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Successfully added on your cart",
+                    showConfirmButton: false,
+                    timer: 1500
+                    });
+                }
+            });
+         }
+
+        // product add to cart end
     </script>
 </body>
 

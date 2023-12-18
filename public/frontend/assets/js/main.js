@@ -1,5 +1,7 @@
 (function ($) {
     ("use strict");
+    import Swal from 'sweetalert2'
+
     // Page loading
     $(window).on("load", function () {
         $("#preloader-active").delay(450).fadeOut("slow");
@@ -477,7 +479,7 @@
     }
 
     /*-----------------------
-        Shop filter active 
+        Shop filter active
     ------------------------- */
     $(".shop-filter-toogle").on("click", function (e) {
         e.preventDefault();

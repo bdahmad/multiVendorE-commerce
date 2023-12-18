@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Products\ProductsController;
 use App\Http\Controllers\ProfileController;
@@ -212,7 +213,11 @@ Route::controller(FrontendController::class)->group(function(){
     // product quick view
     Route::get('/product/quick/view/{id}', 'productQuickView');
 
+});
 
+// all Cart route here
+Route::controller(CartController::class)->group(function(){
+    Route::post('/product/add/to/cart/{product_id}', 'productAddToCart');
 
 });
 

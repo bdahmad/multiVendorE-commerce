@@ -159,11 +159,12 @@ return [
         /*
          * Package Service Providers...
          */
-        // for image 
+        // for image
         Intervention\Image\ImageServiceProvider::class,
         // for barcode
         Milon\Barcode\BarcodeServiceProvider::class,
-
+        // for add to cart
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -191,6 +192,8 @@ return [
         // for barcode
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+        // for add to cart
+        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
     ])->toArray(),
 
 ];
